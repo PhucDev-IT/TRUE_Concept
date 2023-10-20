@@ -1,0 +1,882 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TRUE_CONCEPTModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="30" />
+          <Property Name="Password" Type="varchar" MaxLength="20" />
+          <Property Name="Decentralization" Type="nvarchar" MaxLength="10" />
+          <Property Name="Status" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="BaoCaoNhap">
+          <Key>
+            <PropertyRef Name="MaPhieuNhap" />
+          </Key>
+          <Property Name="MaPhieuNhap" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NgayNhap" Type="date" />
+          <Property Name="TongTien" Type="float" />
+          <Property Name="GiamGia" Type="float" />
+          <Property Name="ThanhTien" Type="float" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="IDCategory" />
+          </Key>
+          <Property Name="IDCategory" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameCategory" Type="nvarchar" MaxLength="100" />
+          <Property Name="ImgUrl" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="ChiTietDuAn">
+          <Key>
+            <PropertyRef Name="MaDuAn" />
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaDuAn" Type="int" Nullable="false" />
+          <Property Name="MaSP" Type="int" Nullable="false" />
+          <Property Name="SoLuong" Type="float" />
+        </EntityType>
+        <EntityType Name="ChiTietPhieuNhap">
+          <Key>
+            <PropertyRef Name="MaPhieuNhap" />
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="MaPhieuNhap" Type="int" Nullable="false" />
+          <Property Name="IDProduct" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="VAT" Type="float" />
+          <Property Name="Price" Type="float" />
+          <Property Name="TONGTIEN" Type="float" />
+        </EntityType>
+        <EntityType Name="ItemCart">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="IDProduct" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="float" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDOrder" Type="int" Nullable="false" />
+          <Property Name="IDProduct" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="Price" Type="float" />
+          <Property Name="VAT" Type="float" />
+          <Property Name="TotalMoney" Type="float" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCustomer" Type="int" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="TongTien" Type="float" />
+          <Property Name="Reduce" Type="float" />
+          <Property Name="ThanhTien" Type="float" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameProduct" Type="nvarchar" MaxLength="200" />
+          <Property Name="PriceOld" Type="float" />
+          <Property Name="NewPrice" Type="float" />
+          <Property Name="Unit" Type="nvarchar" MaxLength="20" />
+          <Property Name="Quantity" Type="float" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="Img_Url" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Status" Type="nvarchar" MaxLength="20" />
+          <Property Name="IDCategory" Type="int" />
+          <Property Name="VAT" Type="float" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameProject" Type="nvarchar" MaxLength="200" />
+          <Property Name="MoTaDuAn" Type="nvarchar(max)" />
+          <Property Name="KinhPhi" Type="float" />
+        </EntityType>
+        <EntityType Name="ThueDuAn">
+          <Key>
+            <PropertyRef Name="MaDuAn" />
+          </Key>
+          <Property Name="MaDuAn" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IDCustomer" Type="int" />
+          <Property Name="AddressCustomer" Type="nvarchar" MaxLength="1000" />
+          <Property Name="NgayThueDuAn" Type="date" />
+          <Property Name="NgayDuKienHoanThanh" Type="date" />
+          <Property Name="NganSachDuKien" Type="float" />
+          <Property Name="YeuCauThietKe" Type="nvarchar" MaxLength="500" />
+          <Property Name="KieuThietKe" Type="nvarchar" MaxLength="200" />
+          <Property Name="MoTaThem" Type="nvarchar" MaxLength="1000" />
+          <Property Name="PhiPhatSinh" Type="float" />
+          <Property Name="TongTien" Type="float" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="IDCustomer" />
+          </Key>
+          <Property Name="IDCustomer" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Address" Type="nvarchar" MaxLength="300" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="NumberPhone" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__ChiTietDu__MaDuA__45F365D3">
+          <End Role="ThueDuAn" Type="Self.ThueDuAn" Multiplicity="1" />
+          <End Role="ChiTietDuAn" Type="Self.ChiTietDuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThueDuAn">
+              <PropertyRef Name="MaDuAn" />
+            </Principal>
+            <Dependent Role="ChiTietDuAn">
+              <PropertyRef Name="MaDuAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietDuA__MaSP__46E78A0C">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ChiTietDuAn" Type="Self.ChiTietDuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChiTietDuAn">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietPh__IDPro__3F466844">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChiTietPhieuNhap">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietPh__MaPhi__3E52440B">
+          <End Role="BaoCaoNhap" Type="Self.BaoCaoNhap" Multiplicity="1" />
+          <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaoCaoNhap">
+              <PropertyRef Name="MaPhieuNhap" />
+            </Principal>
+            <Dependent Role="ChiTietPhieuNhap">
+              <PropertyRef Name="MaPhieuNhap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCart__ID__300424B4">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="ItemCart" Type="Self.ItemCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCart">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCart__IDProd__30F848ED">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ItemCart" Type="Self.ItemCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCart">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDOrd__37A5467C">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDPro__38996AB5">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDCustom__33D4B598">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDCustomer" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDCateg__2D27B809">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="IDCategory" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThueDuAn__IDCust__4222D4EF">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="ThueDuAn" Type="Self.ThueDuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDCustomer" />
+            </Principal>
+            <Dependent Role="ThueDuAn">
+              <PropertyRef Name="IDCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__IDCustome__286302EC">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IDCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TRUE_CONCEPTModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BaoCaoNhap" EntityType="Self.BaoCaoNhap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietDuAn" EntityType="Self.ChiTietDuAn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ChiTietPhieuNhap" EntityType="Self.ChiTietPhieuNhap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ItemCart" EntityType="Self.ItemCart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ThueDuAn" EntityType="Self.ThueDuAn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ChiTietDu__MaDuA__45F365D3" Association="Self.FK__ChiTietDu__MaDuA__45F365D3">
+            <End Role="ThueDuAn" EntitySet="ThueDuAn" />
+            <End Role="ChiTietDuAn" EntitySet="ChiTietDuAn" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietDuA__MaSP__46E78A0C" Association="Self.FK__ChiTietDuA__MaSP__46E78A0C">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ChiTietDuAn" EntitySet="ChiTietDuAn" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietPh__IDPro__3F466844" Association="Self.FK__ChiTietPh__IDPro__3F466844">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietPh__MaPhi__3E52440B" Association="Self.FK__ChiTietPh__MaPhi__3E52440B">
+            <End Role="BaoCaoNhap" EntitySet="BaoCaoNhap" />
+            <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCart__ID__300424B4" Association="Self.FK__ItemCart__ID__300424B4">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="ItemCart" EntitySet="ItemCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCart__IDProd__30F848ED" Association="Self.FK__ItemCart__IDProd__30F848ED">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="ItemCart" EntitySet="ItemCart" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__IDOrd__37A5467C" Association="Self.FK__OrderDeta__IDOrd__37A5467C">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__IDPro__38996AB5" Association="Self.FK__OrderDeta__IDPro__38996AB5">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDCustom__33D4B598" Association="Self.FK__Orders__IDCustom__33D4B598">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDCateg__2D27B809" Association="Self.FK__Product__IDCateg__2D27B809">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Product" EntitySet="Product" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThueDuAn__IDCust__4222D4EF" Association="Self.FK__ThueDuAn__IDCust__4222D4EF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ThueDuAn" EntitySet="ThueDuAn" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__IDCustome__286302EC" Association="Self.FK__Users__IDCustome__286302EC">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TRUE_CONCEPTModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Decentralization" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ItemCarts" Relationship="Self.FK__ItemCart__ID__300424B4" FromRole="Account" ToRole="ItemCart" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Users__IDCustome__286302EC" FromRole="Account" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="BaoCaoNhap">
+          <Key>
+            <PropertyRef Name="MaPhieuNhap" />
+          </Key>
+          <Property Name="MaPhieuNhap" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NgayNhap" Type="DateTime" Precision="0" />
+          <Property Name="TongTien" Type="Double" />
+          <Property Name="GiamGia" Type="Double" />
+          <Property Name="ThanhTien" Type="Double" />
+          <NavigationProperty Name="ChiTietPhieuNhaps" Relationship="Self.FK__ChiTietPh__MaPhi__3E52440B" FromRole="BaoCaoNhap" ToRole="ChiTietPhieuNhap" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="IDCategory" />
+          </Key>
+          <Property Name="IDCategory" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ImgUrl" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK__Product__IDCateg__2D27B809" FromRole="Category" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ChiTietDuAn">
+          <Key>
+            <PropertyRef Name="MaDuAn" />
+            <PropertyRef Name="MaSP" />
+          </Key>
+          <Property Name="MaDuAn" Type="Int32" Nullable="false" />
+          <Property Name="MaSP" Type="Int32" Nullable="false" />
+          <Property Name="SoLuong" Type="Double" />
+          <NavigationProperty Name="ThueDuAn" Relationship="Self.FK__ChiTietDu__MaDuA__45F365D3" FromRole="ChiTietDuAn" ToRole="ThueDuAn" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__ChiTietDuA__MaSP__46E78A0C" FromRole="ChiTietDuAn" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ChiTietPhieuNhap">
+          <Key>
+            <PropertyRef Name="MaPhieuNhap" />
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="MaPhieuNhap" Type="Int32" Nullable="false" />
+          <Property Name="IDProduct" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="VAT" Type="Double" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="TONGTIEN" Type="Double" />
+          <NavigationProperty Name="BaoCaoNhap" Relationship="Self.FK__ChiTietPh__MaPhi__3E52440B" FromRole="ChiTietPhieuNhap" ToRole="BaoCaoNhap" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__ChiTietPh__IDPro__3F466844" FromRole="ChiTietPhieuNhap" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="ItemCart">
+          <Key>
+            <PropertyRef Name="ID" />
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="IDProduct" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Double" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__ItemCart__ID__300424B4" FromRole="ItemCart" ToRole="Account" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__ItemCart__IDProd__30F848ED" FromRole="ItemCart" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+            <PropertyRef Name="IDProduct" />
+          </Key>
+          <Property Name="IDOrder" Type="Int32" Nullable="false" />
+          <Property Name="IDProduct" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="Price" Type="Double" />
+          <Property Name="VAT" Type="Double" />
+          <Property Name="TotalMoney" Type="Double" />
+          <NavigationProperty Name="Order" Relationship="Self.FK__OrderDeta__IDOrd__37A5467C" FromRole="OrderDetails" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK__OrderDeta__IDPro__38996AB5" FromRole="OrderDetails" ToRole="Product" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="IDOrder" />
+          </Key>
+          <Property Name="IDOrder" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCustomer" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="TongTien" Type="Double" />
+          <Property Name="Reduce" Type="Double" />
+          <Property Name="ThanhTien" Type="Double" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__IDOrd__37A5467C" FromRole="Orders" ToRole="OrderDetails" />
+          <NavigationProperty Name="User" Relationship="Self.FK__Orders__IDCustom__33D4B598" FromRole="Orders" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameProduct" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PriceOld" Type="Double" />
+          <Property Name="NewPrice" Type="Double" />
+          <Property Name="Unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Quantity" Type="Double" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Img_Url" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="IDCategory" Type="Int32" />
+          <Property Name="VAT" Type="Double" />
+          <NavigationProperty Name="Category" Relationship="Self.FK__Product__IDCateg__2D27B809" FromRole="Product" ToRole="Category" />
+          <NavigationProperty Name="ChiTietDuAns" Relationship="Self.FK__ChiTietDuA__MaSP__46E78A0C" FromRole="Product" ToRole="ChiTietDuAn" />
+          <NavigationProperty Name="ChiTietPhieuNhaps" Relationship="Self.FK__ChiTietPh__IDPro__3F466844" FromRole="Product" ToRole="ChiTietPhieuNhap" />
+          <NavigationProperty Name="ItemCarts" Relationship="Self.FK__ItemCart__IDProd__30F848ED" FromRole="Product" ToRole="ItemCart" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK__OrderDeta__IDPro__38996AB5" FromRole="Product" ToRole="OrderDetails" />
+        </EntityType>
+        <EntityType Name="Project">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameProject" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MoTaDuAn" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="KinhPhi" Type="Double" />
+        </EntityType>
+        <EntityType Name="ThueDuAn">
+          <Key>
+            <PropertyRef Name="MaDuAn" />
+          </Key>
+          <Property Name="MaDuAn" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDCustomer" Type="Int32" />
+          <Property Name="AddressCustomer" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="NgayThueDuAn" Type="DateTime" Precision="0" />
+          <Property Name="NgayDuKienHoanThanh" Type="DateTime" Precision="0" />
+          <Property Name="NganSachDuKien" Type="Double" />
+          <Property Name="YeuCauThietKe" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="KieuThietKe" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MoTaThem" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="PhiPhatSinh" Type="Double" />
+          <Property Name="TongTien" Type="Double" />
+          <NavigationProperty Name="ChiTietDuAns" Relationship="Self.FK__ChiTietDu__MaDuA__45F365D3" FromRole="ThueDuAn" ToRole="ChiTietDuAn" />
+          <NavigationProperty Name="User" Relationship="Self.FK__ThueDuAn__IDCust__4222D4EF" FromRole="ThueDuAn" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="IDCustomer" />
+          </Key>
+          <Property Name="IDCustomer" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="300" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NumberPhone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Users__IDCustome__286302EC" FromRole="Users" ToRole="Account" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK__Orders__IDCustom__33D4B598" FromRole="Users" ToRole="Orders" />
+          <NavigationProperty Name="ThueDuAns" Relationship="Self.FK__ThueDuAn__IDCust__4222D4EF" FromRole="Users" ToRole="ThueDuAn" />
+        </EntityType>
+        <Association Name="FK__ItemCart__ID__300424B4">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="ItemCart" Type="Self.ItemCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCart">
+              <PropertyRef Name="ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Users__IDCustome__286302EC">
+          <End Role="Account" Type="Self.Account" Multiplicity="1" />
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="IDCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietPh__MaPhi__3E52440B">
+          <End Role="BaoCaoNhap" Type="Self.BaoCaoNhap" Multiplicity="1" />
+          <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BaoCaoNhap">
+              <PropertyRef Name="MaPhieuNhap" />
+            </Principal>
+            <Dependent Role="ChiTietPhieuNhap">
+              <PropertyRef Name="MaPhieuNhap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Product__IDCateg__2D27B809">
+          <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Product" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="IDCategory" />
+            </Principal>
+            <Dependent Role="Product">
+              <PropertyRef Name="IDCategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietDu__MaDuA__45F365D3">
+          <End Role="ThueDuAn" Type="Self.ThueDuAn" Multiplicity="1" />
+          <End Role="ChiTietDuAn" Type="Self.ChiTietDuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ThueDuAn">
+              <PropertyRef Name="MaDuAn" />
+            </Principal>
+            <Dependent Role="ChiTietDuAn">
+              <PropertyRef Name="MaDuAn" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietDuA__MaSP__46E78A0C">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ChiTietDuAn" Type="Self.ChiTietDuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChiTietDuAn">
+              <PropertyRef Name="MaSP" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ChiTietPh__IDPro__3F466844">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ChiTietPhieuNhap">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ItemCart__IDProd__30F848ED">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="ItemCart" Type="Self.ItemCart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ItemCart">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDOrd__37A5467C">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="IDOrder" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="IDOrder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__OrderDeta__IDPro__38996AB5">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="IDProduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Orders__IDCustom__33D4B598">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDCustomer" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="IDCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThueDuAn__IDCust__4222D4EF">
+          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="ThueDuAn" Type="Self.ThueDuAn" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="IDCustomer" />
+            </Principal>
+            <Dependent Role="ThueDuAn">
+              <PropertyRef Name="IDCustomer" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="TRUE_CONCEPTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accounts" EntityType="Self.Account" />
+          <EntitySet Name="BaoCaoNhaps" EntityType="Self.BaoCaoNhap" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="ChiTietDuAns" EntityType="Self.ChiTietDuAn" />
+          <EntitySet Name="ChiTietPhieuNhaps" EntityType="Self.ChiTietPhieuNhap" />
+          <EntitySet Name="ItemCarts" EntityType="Self.ItemCart" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="Projects" EntityType="Self.Project" />
+          <EntitySet Name="ThueDuAns" EntityType="Self.ThueDuAn" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK__ItemCart__ID__300424B4" Association="Self.FK__ItemCart__ID__300424B4">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="ItemCart" EntitySet="ItemCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Users__IDCustome__286302EC" Association="Self.FK__Users__IDCustome__286302EC">
+            <End Role="Account" EntitySet="Accounts" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietPh__MaPhi__3E52440B" Association="Self.FK__ChiTietPh__MaPhi__3E52440B">
+            <End Role="BaoCaoNhap" EntitySet="BaoCaoNhaps" />
+            <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Product__IDCateg__2D27B809" Association="Self.FK__Product__IDCateg__2D27B809">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietDu__MaDuA__45F365D3" Association="Self.FK__ChiTietDu__MaDuA__45F365D3">
+            <End Role="ThueDuAn" EntitySet="ThueDuAns" />
+            <End Role="ChiTietDuAn" EntitySet="ChiTietDuAns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietDuA__MaSP__46E78A0C" Association="Self.FK__ChiTietDuA__MaSP__46E78A0C">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ChiTietDuAn" EntitySet="ChiTietDuAns" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ChiTietPh__IDPro__3F466844" Association="Self.FK__ChiTietPh__IDPro__3F466844">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ItemCart__IDProd__30F848ED" Association="Self.FK__ItemCart__IDProd__30F848ED">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ItemCart" EntitySet="ItemCarts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__IDOrd__37A5467C" Association="Self.FK__OrderDeta__IDOrd__37A5467C">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__OrderDeta__IDPro__38996AB5" Association="Self.FK__OrderDeta__IDPro__38996AB5">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Orders__IDCustom__33D4B598" Association="Self.FK__Orders__IDCustom__33D4B598">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThueDuAn__IDCust__4222D4EF" Association="Self.FK__ThueDuAn__IDCust__4222D4EF">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ThueDuAn" EntitySet="ThueDuAns" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="TRUE_CONCEPTModelStoreContainer" CdmEntityContainer="TRUE_CONCEPTEntities">
+          <EntitySetMapping Name="Accounts">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Decentralization" ColumnName="Decentralization" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BaoCaoNhaps">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.BaoCaoNhap">
+              <MappingFragment StoreEntitySet="BaoCaoNhap">
+                <ScalarProperty Name="MaPhieuNhap" ColumnName="MaPhieuNhap" />
+                <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="GiamGia" ColumnName="GiamGia" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.Category">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+                <ScalarProperty Name="NameCategory" ColumnName="NameCategory" />
+                <ScalarProperty Name="ImgUrl" ColumnName="ImgUrl" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietDuAns">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.ChiTietDuAn">
+              <MappingFragment StoreEntitySet="ChiTietDuAn">
+                <ScalarProperty Name="MaDuAn" ColumnName="MaDuAn" />
+                <ScalarProperty Name="MaSP" ColumnName="MaSP" />
+                <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ChiTietPhieuNhaps">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.ChiTietPhieuNhap">
+              <MappingFragment StoreEntitySet="ChiTietPhieuNhap">
+                <ScalarProperty Name="MaPhieuNhap" ColumnName="MaPhieuNhap" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemCarts">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.ItemCart">
+              <MappingFragment StoreEntitySet="ItemCart">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
+                <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
+                <ScalarProperty Name="IDCustomer" ColumnName="IDCustomer" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+                <ScalarProperty Name="Reduce" ColumnName="Reduce" />
+                <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.Product">
+              <MappingFragment StoreEntitySet="Product">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameProduct" ColumnName="NameProduct" />
+                <ScalarProperty Name="PriceOld" ColumnName="PriceOld" />
+                <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
+                <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Img_Url" ColumnName="Img_Url" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
+                <ScalarProperty Name="VAT" ColumnName="VAT" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Projects">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.Project">
+              <MappingFragment StoreEntitySet="Project">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NameProject" ColumnName="NameProject" />
+                <ScalarProperty Name="MoTaDuAn" ColumnName="MoTaDuAn" />
+                <ScalarProperty Name="KinhPhi" ColumnName="KinhPhi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ThueDuAns">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.ThueDuAn">
+              <MappingFragment StoreEntitySet="ThueDuAn">
+                <ScalarProperty Name="MaDuAn" ColumnName="MaDuAn" />
+                <ScalarProperty Name="IDCustomer" ColumnName="IDCustomer" />
+                <ScalarProperty Name="AddressCustomer" ColumnName="AddressCustomer" />
+                <ScalarProperty Name="NgayThueDuAn" ColumnName="NgayThueDuAn" />
+                <ScalarProperty Name="NgayDuKienHoanThanh" ColumnName="NgayDuKienHoanThanh" />
+                <ScalarProperty Name="NganSachDuKien" ColumnName="NganSachDuKien" />
+                <ScalarProperty Name="YeuCauThietKe" ColumnName="YeuCauThietKe" />
+                <ScalarProperty Name="KieuThietKe" ColumnName="KieuThietKe" />
+                <ScalarProperty Name="MoTaThem" ColumnName="MoTaThem" />
+                <ScalarProperty Name="PhiPhatSinh" ColumnName="PhiPhatSinh" />
+                <ScalarProperty Name="TongTien" ColumnName="TongTien" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="TRUE_CONCEPTModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="IDCustomer" ColumnName="IDCustomer" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="NumberPhone" ColumnName="NumberPhone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

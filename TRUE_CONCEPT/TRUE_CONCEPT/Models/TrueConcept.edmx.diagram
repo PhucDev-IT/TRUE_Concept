@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ca6c9f19fbf441ac86c8cfe0b1b00525" Name="Diagram1">
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.Account" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.BaoCaoNhap" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.Category" Width="1.5" PointX="0.75" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.ChiTietDuAn" Width="1.5" PointX="5.25" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.ChiTietPhieuNhap" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.ItemCart" Width="1.5" PointX="5.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.OrderDetail" Width="1.5" PointX="8.25" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.Order" Width="1.5" PointX="6" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.Product" Width="1.5" PointX="3" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.Project" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.ThueDuAn" Width="1.5" PointX="3" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.User" Width="1.5" PointX="0.75" PointY="12.75" IsExpanded="true" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__ItemCart__ID__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__Users__IDCustome__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__ChiTietPh__MaPhi__3E52440B" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__Product__IDCateg__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__ChiTietDu__MaDuA__45F365D3" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__ChiTietDuA__MaSP__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__ChiTietPh__IDPro__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__ItemCart__IDProd__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__OrderDeta__IDOrd__37A5467C" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__OrderDeta__IDPro__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__Orders__IDCustom__33D4B598" ManuallyRouted="false" />
+        <AssociationConnector Association="TRUE_CONCEPTModel.FK__ThueDuAn__IDCust__4222D4EF" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
