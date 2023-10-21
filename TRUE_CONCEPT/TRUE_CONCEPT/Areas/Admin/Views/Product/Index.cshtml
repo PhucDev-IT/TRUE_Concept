@@ -1,0 +1,94 @@
+﻿@model IEnumerable<TRUE_CONCEPT.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
+}
+
+<head>
+    <link href="~/Areas/Admin/Content/css/ProductManager.css" rel="stylesheet" />
+</head>
+<p class="btn_Create_Product">
+    @Html.ActionLink("Thêm sản phẩm", "Add", null, new { @class = "no-underline" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Img_Url)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NameProduct)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PriceOld)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NewPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Unit)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VAT)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Category.NameCategory)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+<tr>
+    <td>
+        <img class="img_product" src="@Html.DisplayFor(modelItem => item.Img_Url)" />
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.NameProduct)
+    </td>
+    <td>
+        @{
+            // Loại bỏ hai số 0 sau dấu phẩy
+            string formattedPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", item.PriceOld);
+            formattedPrice = formattedPrice.Replace(",00 ₫", " ₫");
+        }
+        <span class="item__price">@formattedPrice</span>
+    </td>
+    <td>
+        @{
+            // Loại bỏ hai số 0 sau dấu phẩy
+            string formattedNewPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", item.NewPrice);
+            formattedNewPrice = formattedNewPrice.Replace(",00 ₫", " ₫");
+        }
+        <span class="item__price">@formattedNewPrice</span>
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Unit)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Quantity)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Description)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.VAT)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Category.NameCategory)
+    </td>
+    <td>
+        @Html.ActionLink("Sửa", "Update", new { id = item.ID }) |
+        @Html.ActionLink("Chi tiết", "Details", new { id = item.ID }) |
+        @Html.ActionLink("Xóa", "Delete", new { id = item.ID })
+    </td>
+</tr>
+    }
+
+</table>

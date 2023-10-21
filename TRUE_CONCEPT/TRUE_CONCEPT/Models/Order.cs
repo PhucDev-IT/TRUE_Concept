@@ -22,10 +22,12 @@ namespace TRUE_CONCEPT.Models
     
         public int IDOrder { get; set; }
         public Nullable<int> IDCustomer { get; set; }
+        public string nameCustomer { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<double> TongTien { get; set; }
         public Nullable<double> Reduce { get; set; }
         public Nullable<double> ThanhTien { get; set; }
+        public string Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }

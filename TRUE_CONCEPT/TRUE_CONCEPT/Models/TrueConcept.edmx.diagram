@@ -29,6 +29,7 @@
         <AssociationConnector Association="TRUE_CONCEPTModel.FK__OrderDeta__IDPro__38996AB5" ManuallyRouted="false" />
         <AssociationConnector Association="TRUE_CONCEPTModel.FK__Orders__IDCustom__33D4B598" ManuallyRouted="false" />
         <AssociationConnector Association="TRUE_CONCEPTModel.FK__ThueDuAn__IDCust__4222D4EF" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="TRUE_CONCEPTModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

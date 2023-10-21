@@ -1,0 +1,14 @@
+﻿table, th, td {
+    border: 1px solid black;
+}
+th {
+    font-weight: 600;
+}
+th,td {
+    text-align: center;
+}
+
+    td .item__price {
+        color: red;
+        font-weight: 500;
+    }

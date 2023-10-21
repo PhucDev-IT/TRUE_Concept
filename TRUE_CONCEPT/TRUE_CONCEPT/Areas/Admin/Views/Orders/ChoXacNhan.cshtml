@@ -1,0 +1,110 @@
+﻿@model IEnumerable<TRUE_CONCEPT.Models.Order>
+
+@{
+    ViewBag.Title = "ChoXacNhan";
+    Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
+}
+<head>
+    <link href="~/Areas/Admin/Content/css/orders.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/Areas/Admin/Content/assets/extra-libs/jvector/jquery-jvectormap-2.0.2.min.js"></script>
+
+</head>
+<h2>ChoXacNhan</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IDOrder)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ThanhTien)
+        </th>
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr id="trow_@item.IDOrder">
+            <td>
+                @Html.DisplayFor(modelItem => item.IDOrder)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nameCustomer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ThanhTien)
+            </td>
+
+            <td>
+                <a href="#" id="btn-confirm-order" data-id="@item.IDOrder">Xác nhận</a> |
+                @Html.ActionLink("Chi tiết", "Details", new { idOrder = item.IDOrder }) |
+                <a href="#" id="btn-cancel-order" data-id="@item.IDOrder">Từ chối</a>
+            </td>
+        </tr>
+    }
+
+</table>
+<script>
+    //Xác nhận  hóa đơn đang chờ
+$(document).ready(function () {
+    $('body').on('click', '#btn-confirm-order', function () {
+        var id = $(this).data('id'); // Lấy ID sản phẩm từ thuộc tính data
+        $.ajax({
+            url: '@Url.Action("ConfirmOrder", "Orders")',
+            type: 'POST', // Sử dụng phương thức POST để truyền ID sản phẩm
+            data: { idOrder: id }, // Truyền ID sản phẩm
+            success: function (data) {
+                if (data.success) {
+                    $('#trow_' + id).remove();
+                    alert('Đơn hàng đã được xác nhận.');
+                }
+            },
+            error: function () {
+                alert("Có lỗi xảy ra!")
+            },
+        });
+    });
+});
+
+
+//Không chấp nhận bán hàng
+@*$(document).ready(function () {
+    $('body').on('click', '#btn-cancel-order', function () {
+        var confirm = confirm("Bạn chắc chắn muốn  hủy đơn  hàng này?");
+        if (!confirm) return;
+        var id = $(this).data('id'); // Lấy ID sản phẩm từ thuộc tính data
+        $.ajax({
+            url: '@Url.Action("ConfirmOrder", "Orders")',
+            type: 'POST', // Sử dụng phương thức POST để truyền ID sản phẩm
+            data: { idOrder: id }, // Truyền ID sản phẩm
+            success: function (data) {
+                if (data.success) {
+                    $('#trow_' + id).remove();
+                    alert('Đơn hàng đã hủy.');
+                }
+            },
+            error: function () {
+                alert("Có lỗi xảy ra!")
+            },
+        });
+    });
+});*@
+</script>
+@*<script src="~/Areas/Admin/Content/js/pages/Orders/handle-event.js"></script>*@
+
+
+

@@ -1,0 +1,35 @@
+﻿
+
+table, th, td {
+    border: 1px solid black;
+}
+
+th,td {
+    text-align: center;
+}
+
+    td .item__price {
+        color: red;
+        font-weight: 600;
+    }
+
+.img_product {
+    width: 120px;
+    height: 120px;
+}
+
+.btn_Create_Product {
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    background-color: #fcba03;
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-underline {
+    text-decoration: none;
+}
