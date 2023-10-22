@@ -152,6 +152,19 @@ CREATE INDEX Category_Index ON Category(IDCategory)
 CREATE INDEX User_Index ON Users(IDCustomer)
 CREATE INDEX ThueDuAn_Index ON ThueDuAn(MaDuAn,IDCustomer)
 GO
+
+-------------------------   PROCEDURE-----------------------------------
+CREATE PROC usp_CancelInvoice
+@IDOrder INT , @IDUser INT
+AS
+BEGIN
+	DELETE FROM OrderDetails WHERE IDOrder = @IDOrder
+	DELETE FROM Orders WHERE  IDOrder =   @IDOrder AND IDCustomer = @IDUser
+END
+
+
+
+GO
 -----------------------------THÊM DỮ LIỆU --------------------------------
 INSERT INTO Category(NameCategory)
 	VALUES (N'Sofa'),
@@ -211,9 +224,10 @@ VALUES(5),(6),(2),(5),(5)
 
 INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
 VALUES(1,2,3,(SELECT NewPrice FROM Product where ID=3),0.2,62322)
-
 INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
 VALUES(1,4,3,(SELECT NewPrice*3 FROM Product where ID=4),0.2,94345)
+INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
+VALUES(1,3,3,(SELECT NewPrice*3 FROM Product where ID=4),0.2,94345)
 INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
 VALUES(2,2,3,(SELECT NewPrice*3 FROM Product where ID=2),0.2,622432)
 INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)

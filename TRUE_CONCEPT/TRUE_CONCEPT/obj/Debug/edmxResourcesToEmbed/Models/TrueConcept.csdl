@@ -363,6 +363,10 @@
       <End Role="ThueDuAn" EntitySet="ThueDuAns" />
     </AssociationSet>
     <EntitySet Name="sysdiagrams" EntityType="TRUE_CONCEPTModel.sysdiagram" />
+    <FunctionImport Name="usp_CancelInvoice">
+      <Parameter Name="IDOrder" Mode="In" Type="Int32" />
+      <Parameter Name="IDUser" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <EntityType Name="sysdiagram">
     <Key>

@@ -287,6 +287,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="usp_CancelInvoice" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="IDOrder" Type="int" Mode="In" />
+    <Parameter Name="IDUser" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="TRUE_CONCEPTModelStoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="BaoCaoNhap" EntityType="Self.BaoCaoNhap" Schema="dbo" store:Type="Tables" />

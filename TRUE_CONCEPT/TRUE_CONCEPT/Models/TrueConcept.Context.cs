@@ -12,6 +12,8 @@ namespace TRUE_CONCEPT.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
+    using System.Data.Entity.Core.Objects;
+    using System.Linq;
     
     public partial class TRUE_CONCEPTEntities : DbContext
     {
@@ -38,5 +40,18 @@ namespace TRUE_CONCEPT.Models
         public virtual DbSet<ThueDuAn> ThueDuAns { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+    
+        public virtual int usp_CancelInvoice(Nullable<int> iDOrder, Nullable<int> iDUser)
+        {
+            var iDOrderParameter = iDOrder.HasValue ?
+                new ObjectParameter("IDOrder", iDOrder) :
+                new ObjectParameter("IDOrder", typeof(int));
+    
+            var iDUserParameter = iDUser.HasValue ?
+                new ObjectParameter("IDUser", iDUser) :
+                new ObjectParameter("IDUser", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_CancelInvoice", iDOrderParameter, iDUserParameter);
+        }
     }
 }

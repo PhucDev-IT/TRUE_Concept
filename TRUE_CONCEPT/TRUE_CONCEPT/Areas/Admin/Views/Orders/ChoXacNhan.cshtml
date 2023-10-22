@@ -52,7 +52,7 @@
             <td>
                 <a href="#" id="btn-confirm-order" data-id="@item.IDOrder">Xác nhận</a> |
                 @Html.ActionLink("Chi tiết", "Details", new { idOrder = item.IDOrder }) |
-                <a href="#" id="btn-cancel-order" data-id="@item.IDOrder">Từ chối</a>
+                <a href="#" id="btn-cancel-order" data-idOrder="@item.IDOrder" data-idCustomer="@item.IDCustomer">Từ chối</a>
             </td>
         </tr>
     }
@@ -82,15 +82,17 @@ $(document).ready(function () {
 
 
 //Không chấp nhận bán hàng
-@*$(document).ready(function () {
+$(document).ready(function () {
     $('body').on('click', '#btn-cancel-order', function () {
         var confirm = confirm("Bạn chắc chắn muốn  hủy đơn  hàng này?");
         if (!confirm) return;
-        var id = $(this).data('id'); // Lấy ID sản phẩm từ thuộc tính data
+        var idO = $(this).data('idOrder'); 
+        var idC = $(this).data('idCustomer'); // Lấy ID  từ thuộc tính data
+
         $.ajax({
-            url: '@Url.Action("ConfirmOrder", "Orders")',
+            url: '@Url.Action("CancelOrder", "Orders")',
             type: 'POST', // Sử dụng phương thức POST để truyền ID sản phẩm
-            data: { idOrder: id }, // Truyền ID sản phẩm
+            data: { idOrder: idO, idCustomer: idC }, // Truyền ID sản phẩm
             success: function (data) {
                 if (data.success) {
                     $('#trow_' + id).remove();
@@ -102,7 +104,7 @@ $(document).ready(function () {
             },
         });
     });
-});*@
+});
 </script>
 @*<script src="~/Areas/Admin/Content/js/pages/Orders/handle-event.js"></script>*@
 

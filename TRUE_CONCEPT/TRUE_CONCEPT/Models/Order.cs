@@ -22,7 +22,8 @@ namespace TRUE_CONCEPT.Models
     
         public int IDOrder { get; set; }
         public Nullable<int> IDCustomer { get; set; }
-        public string nameCustomer { get; set; }
+
+        public string  nameCustomer { get; set; }
         public Nullable<System.DateTime> OrderDate { get; set; }
         public Nullable<double> TongTien { get; set; }
         public Nullable<double> Reduce { get; set; }
