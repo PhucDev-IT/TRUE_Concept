@@ -28,7 +28,6 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                             IDCustomer = orders.IDCustomer,
                             nameCustomer = user.FullName,
                             OrderDate = orders.OrderDate,
-        
                             thanhTien = orders.ThanhTien
                         };
 
@@ -49,7 +48,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult ConfirmOrder(int? idOrder)
         {
-            Console.WriteLine("Hellllo");
+        
                 Order obj = db.Orders.SingleOrDefault(x => x.IDOrder == idOrder);
                 obj.Status = "Xác nhận";
                 db.SaveChanges();

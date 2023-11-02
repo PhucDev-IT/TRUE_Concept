@@ -31,7 +31,6 @@ CREATE TABLE Category
 (
 	IDCategory INT PRIMARY KEY IDENTITY,
 	NameCategory NVARCHAR(100) NOT NULL,
-	ImgUrl NVARCHAR(1000)
 )
 GO
 
@@ -64,7 +63,7 @@ CREATE TABLE Orders
 	IDCustomer INT FOREIGN KEY REFERENCES Users(IDCustomer),
 	OrderDate DATETIME DEFAULT GETDATE(),
 	Status NVARCHAR(20) DEFAULT N'Chờ',
-	ThanhTien FLOAT
+	ThanhTien FLOAT DEFAULT 0
 )
 GO
 CREATE TABLE OrderDetails
@@ -129,9 +128,8 @@ CREATE TABLE Project
 	KinhPhi FLOAT
 )
 
-------------------INDEX----------------------
-CREATE INDEX Category_Index ON Category(IDCategory)
-GO
+go
+
 
 -------------------------- TRIGGER -------------------------
 --Cập nhật thành tiền của Hóa đơn
@@ -239,6 +237,5 @@ VALUES(5,4,12,(SELECT NewPrice*12 FROM Product where ID=4),0.2,3223)
 
 
 
-
-
-	
+	select * from orderDetails
+	select * from orders

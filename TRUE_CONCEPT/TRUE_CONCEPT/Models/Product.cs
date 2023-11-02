@@ -28,7 +28,7 @@ namespace TRUE_CONCEPT.Models
         public Nullable<double> PriceOld { get; set; }
         public Nullable<double> NewPrice { get; set; }
         public string Unit { get; set; }
-        public Nullable<double> Quantity { get; set; }
+        public double Quantity { get; set; }
         public string Description { get; set; }
         public string Img_Url { get; set; }
         public string Status { get; set; }

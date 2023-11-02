@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -15,50 +16,80 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
         /// Sẽ dùng để hiển thị trong combox chọn danh mục của sản phẩm
         /// </summary>
         private List<Category> listCategory;
-
+    
         public ProductController()
         {
             db = DbMangager.GetInstance();
+          
         }
 
         // GET: Admin/Product
-        public ActionResult Index()
+        public ActionResult Index(string inputSearch)
         {
-            return View(db.Products.ToList());
+
+            List<Product> list;
+            if (inputSearch == null)
+            {
+                list = db.Products.ToList();
+            }
+            else
+            {
+                list = db.Products.Where(x => x.NameProduct.Contains(inputSearch)).ToList();
+            }
+
+       
+             listCategory = db.Categories.ToList();
+
+          
+            ViewData["Categories"] = new SelectList(listCategory, "IDCategory", "NameCategory");
+            return View(list);
         }
 
       
         public ActionResult Add()
         {
-            if (listCategory == null)
-            {
-                listCategory = db.Categories.ToList();
-            }
-            ViewData["IDCategory"] = new SelectList(listCategory, "IDCategory", "NameCategory");
+            listCategory = db.Categories.ToList();
+            ViewData["Categories"] = new SelectList(listCategory, "IDCategory", "NameCategory");
             return View();
         }
         [HttpPost]
         public ActionResult Add(Product model)
         {
+            
             try
             {
-                db.Products.Add(model);
-                db.SaveChanges();
+                model.Img_Url = "/Assets/Image/404-error-not-found.png"; // Đặt giá trị mặc định cho Img_Url
+                var f = Request.Files["fImgProduct"];
+                if (f != null && f.ContentLength > 0)
+                {
+                    if (IsImageFile(f)) // Hàm kiểm tra xem có phải là tệp hình ảnh hợp lệ
+                    {
+                        string folderName = Server.MapPath("~TRUE_CONCEPT/Assets/Uploads");
+                        string fileName = f.FileName;
+                        f.SaveAs(Path.Combine(folderName, fileName));
+                        model.Img_Url = "/Assets/Uploads/" + fileName;
+                    }
+                }
+
+                 // db.Products.Add(model);
+                 // db.SaveChanges();
                 return RedirectToAction("Index");
             }catch(Exception e)
             {
+                if (listCategory == null)
+                {
+                    listCategory = db.Categories.ToList();
+                }
+                ViewData["Categories"] = new SelectList(listCategory, "IDCategory", "NameCategory");
                 Console.WriteLine("Error Add: " + e.ToString());
-                return View();
+                return View(model);
             }
         }
 
         public ActionResult Update(int? id)
         {
-            if (listCategory == null)
-            {
-                listCategory = db.Categories.ToList();
-            }
-            ViewData["IDCategory"] = new SelectList(listCategory, "IDCategory", "NameCategory");
+            var categories = db.Categories.ToList();
+            ViewData["Categories"] = new SelectList(categories, "IDCategory", "NameCategory");
             if (id != null)
             {
                 Product product = db.Products.Find(id);
@@ -119,6 +150,15 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
             {
                 return View();
             }
+        }
+
+        private bool IsImageFile(HttpPostedFileBase file)
+        {
+            // Kiểm tra định dạng tệp hình ảnh ở đây
+            // Ví dụ: kiểm tra phần mở rộng của tệp
+            string[] allowedExtensions = { ".jpg", ".jpeg", ".png", ".gif" };
+            string fileExtension = Path.GetExtension(file.FileName).ToLower();
+            return allowedExtensions.Contains(fileExtension);
         }
 
 

@@ -478,11 +478,12 @@
     <Content Include="Areas\Admin\Content\js\pandalocker.min.js" />
     <Content Include="Areas\Admin\Content\js\sidebarmenu.js" />
     <Content Include="Areas\Admin\Content\js\sidebarmenu.min.js" />
+    <Content Include="Assets\Image\404-error-not-found.png" />
     <Content Include="Global.asax" />
     <Content Include="Models\TrueConcept.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>TrueConcept.Context.cs</LastGenOutput>
       <DependentUpon>TrueConcept.edmx</DependentUpon>
+      <LastGenOutput>TrueConcept.Context.cs</LastGenOutput>
     </Content>
     <Content Include="Models\TrueConcept.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -511,6 +512,8 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryMetaData.cs" />
+    <Compile Include="Models\CategoryProduct.cs" />
     <Compile Include="Models\ChiTietDuAn.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
@@ -521,25 +524,29 @@
     <Compile Include="Models\ItemCart.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MetaData\Category.cs" />
+    <Compile Include="Models\MetaData\Order.cs" />
+    <Compile Include="Models\MetaData\Product.cs" />
+    <Compile Include="Models\MetaData\ThueDuAn.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderMetaData.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ProductMetaData.cs" />
     <Compile Include="Models\Project.cs">
-      <DependentUpon>TrueConcept.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThueDuAn.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ThueDuAnInforView.cs" />
+    <Compile Include="Models\ThueDuAnMetaData.cs" />
     <Compile Include="Models\TrueConcept.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -562,13 +569,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
-    <EntityDeploy Include="Models\TrueConcept.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TrueConcept.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\TrueConcept.edmx.diagram">
-      <DependentUpon>TrueConcept.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Content\css\fonts\Gilmer-Bold.eot" />
     <Content Include="Areas\Admin\Content\css\fonts\Gilmer-Bold.otf" />
@@ -852,6 +852,13 @@
     <Content Include="Areas\Admin\Views\Category\Delete.cshtml" />
     <Content Include="Areas\Admin\Views\ThueDuAn\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\ChoXacNhan.cshtml" />
+    <EntityDeploy Include="Models\TrueConcept.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TrueConcept.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TrueConcept.edmx.diagram">
+      <DependentUpon>TrueConcept.edmx</DependentUpon>
+    </Content>
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -863,7 +870,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Oders\" />
+    <Folder Include="Assets\Uploads\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
   <ItemGroup>

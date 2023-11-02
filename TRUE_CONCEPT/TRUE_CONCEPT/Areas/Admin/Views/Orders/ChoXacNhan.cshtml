@@ -46,7 +46,13 @@
                 @Html.DisplayFor(modelItem => item.OrderDate)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.ThanhTien)
+                @{
+                    // Loại bỏ hai số 0 sau dấu phẩy
+                    string formattedNewPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", item.ThanhTien);
+                    formattedNewPrice = formattedNewPrice.Replace(",00 ₫", " ₫");
+                }
+                <span class="item__price">@formattedNewPrice</span>
+           
             </td>
 
             <td>

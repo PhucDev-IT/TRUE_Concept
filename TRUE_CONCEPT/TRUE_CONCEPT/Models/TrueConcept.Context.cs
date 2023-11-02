@@ -39,7 +39,6 @@ namespace TRUE_CONCEPT.Models
         public virtual DbSet<Project> Projects { get; set; }
         public virtual DbSet<ThueDuAn> ThueDuAns { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     
         public virtual int usp_CancelInvoice(Nullable<int> iDOrder, Nullable<int> iDUser)
         {
