@@ -443,6 +443,7 @@
     <Content Include="Areas\Admin\Content\css\icons\themify-icons\ie7\ie7.css" />
     <Content Include="Areas\Admin\Content\css\icons\themify-icons\ie7\ie7.js" />
     <Content Include="Areas\Admin\Content\css\icons\themify-icons\themify-icons.css" />
+    <Content Include="Areas\Admin\Content\css\nhap_hang.css" />
     <Content Include="Areas\Admin\Content\css\orders.css" />
     <Content Include="Areas\Admin\Content\css\pandalocker.min.css" />
     <Content Include="Areas\Admin\Content\css\ProductManager.css" />
@@ -497,6 +498,7 @@
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\NhapHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
     <Compile Include="Areas\Admin\Controllers\ProductController.cs" />
     <Compile Include="Areas\Admin\Controllers\ThueDuAnController.cs" />
@@ -509,6 +511,7 @@
     <Compile Include="Models\BaoCaoNhap.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\BaoCaoNhapMetaData.cs" />
     <Compile Include="Models\Category.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
@@ -524,8 +527,12 @@
     <Compile Include="Models\ItemCart.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\MetaData\BaoCaoNhap.cs" />
     <Compile Include="Models\MetaData\Category.cs" />
+    <Compile Include="Models\MetaData\ChiTietPhieuNhap.cs" />
+    <Compile Include="Models\ChiTietPhieuNhapMetaData.cs" />
     <Compile Include="Models\MetaData\Order.cs" />
+    <Compile Include="Models\MetaData\OrderDetail.cs" />
     <Compile Include="Models\MetaData\Product.cs" />
     <Compile Include="Models\MetaData\ThueDuAn.cs" />
     <Compile Include="Models\Order.cs">
@@ -534,11 +541,13 @@
     <Compile Include="Models\OrderDetail.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderDetailMetaData.cs" />
     <Compile Include="Models\OrderMetaData.cs" />
     <Compile Include="Models\Product.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ProductMetaData.cs" />
+    <Compile Include="Models\ProductViewModel.cs" />
     <Compile Include="Models\Project.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
@@ -859,6 +868,8 @@
     <Content Include="Models\TrueConcept.edmx.diagram">
       <DependentUpon>TrueConcept.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\Admin\Views\NhapHang\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\NhapHang\Add.cshtml" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

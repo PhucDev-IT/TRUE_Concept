@@ -6,9 +6,8 @@ using System.Web;
 
 namespace TRUE_CONCEPT.Models
 {
-    [MetadataTypeAttribute(typeof(Models.MetaData.Order))]
-    public partial class Order
+    [MetadataType(typeof(Models.MetaData.OrderDetail))]
+    public partial class OrderDetailMetaData
     {
-
     }
 }

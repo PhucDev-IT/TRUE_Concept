@@ -1,0 +1,248 @@
+﻿@model TRUE_CONCEPT.Models.BaoCaoNhap
+
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
+
+    var productList = TRUE_CONCEPT.Models.DbMangager.GetInstance().Products.Select(p => new TRUE_CONCEPT.Models.ProductViewModel
+    {
+        ID = p.ID,
+        NameProduct = p.NameProduct,
+        Price = p.NewPrice,
+        Img_Url = p.Img_Url
+    }).ToList();
+
+    List<TRUE_CONCEPT.Models.ChiTietPhieuNhap> list = new List<TRUE_CONCEPT.Models.ChiTietPhieuNhap>();
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/Areas/Admin/Content/css/nhap_hang.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>Add</h2>
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <h4>BaoCaoNhap</h4>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.NgayNhap, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.NgayNhap, new { htmlAttributes = new { @class = "form-control", type = "Date", id = "inputDate" } })
+                    @Html.ValidationMessageFor(model => model.NgayNhap, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.TongTien, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.TongTien, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", id = "tongTien", } })
+                    @Html.ValidationMessageFor(model => model.TongTien, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.GiamGia, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.GiamGia, new { htmlAttributes = new { @class = "form-control", id = "giamGia" } })
+                    @Html.ValidationMessageFor(model => model.GiamGia, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ThanhTien, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ThanhTien, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", id = "thanhTien", } })
+                    @Html.ValidationMessageFor(model => model.ThanhTien, "", new { @class = "text-danger" })
+                </div>
+            </div>
+         
+
+
+            <div class="container-goods" >
+
+                <table style="width:98.6%;box-sizing:border-box">
+                    <tr>
+                        <th class="tbSelect">Chọn</th>
+                        <th class="tbl-img">Ảnh</th>
+                        <th class="tbl-idSp">Mã sản phẩm</th>
+                        <th class="tbl-nameP">Tên sản phẩm</th>
+                        <th class="tbl-quantity">Số lượng nhập</th>
+                        <th class="tbl-price">Đơn giá</th>
+                    </tr>
+                </table>
+
+                @*Hàng có sẵn*@
+                <div class="available_container" style="overflow-y:auto; height:400px">
+                    <table class="table" style="width:100%;">
+                       
+
+                        @foreach (var item in productList)
+                        {
+                            <tr>
+                                <td class="tbSelect">
+                                    <input type="checkbox" onclick="addProductToReport(this)" data-id="@item.ID" data-price="@item.Price" />
+                                </td>
+                                <td class="tbl-img">
+                                    <img src="@item.Img_Url" style="width:60px; height:60px;" />
+                                </td>
+                                <td class="tbl-idSp">
+                                    @item.ID
+                                </td>
+                                <td class="tbl-nameP">
+                                    @item.NameProduct
+                                </td>
+                                <td  class="tbl-quantity">
+                                    <input type="number"  min="1" value="1" oninput="onChangNumber(this)" onchange="onChangNumber(this)" data-id="@item.ID" />
+                                </td>
+                                <td class="tbl-price">
+                                    <input type="number" min="1" value="@item.Price" data-id="@item.ID" onchange="onChangePrice(this)" />
+                                </td>
+                            </tr>
+                        }
+
+                    </table>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" id="AddPhieuNhap" class="btn btn-default" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+</body>
+</html>
+
+<script>
+
+    var selectedProducts = [];
+    function addProductToReport(checkbox) {
+        var id = $(checkbox).data('id');
+        var price = $(checkbox).data('price');
+  
+        var quantityInput = document.querySelector('.tbl-quantity input[data-id="' + id + '"]');
+        var quantity = parseInt(quantityInput.value, 10)||0;
+   
+        if (checkbox.checked) {
+            // Thêm sản phẩm vào danh sách nếu được chọn
+            selectedProducts.push({
+                MaPhieuNhap: null,
+                IDProduct: id,
+                Price: price,
+                Quantity: quantity,
+                VAT: 0,
+                MaPhieuNhap: 0,
+                TONGTIEN: 0,
+            });
+        } else {
+            // Loại bỏ sản phẩm khỏi danh sách nếu bỏ chọn
+            //B1: Tìm vị trí của id đó trong mảng
+            //B2: Nếu index >= 0 thì tiến hành spice (xóa), taị vị trí, và chỉ xóa 1 phần tử
+            var indexToRemove = selectedProducts.findIndex(product => product.IDProduct === id);
+            if (indexToRemove !== -1) {
+                selectedProducts.splice(indexToRemove, 1);
+            }
+        }
+      
+        calculateTotalMoney();
+
+    }
+
+    function calculateTotalMoney() {
+
+        var totalMoney = 0;
+
+        for (var i = 0; i < selectedProducts.length; i++) {
+            totalMoney += (selectedProducts[i].Quantity * selectedProducts[i].Price);
+        }
+
+        document.getElementById("tongTien").value = totalMoney;
+        document.getElementById("thanhTien").value = totalMoney;
+    }
+
+    // Lắng nghe sự kiện khi giá trị thay đổi
+    function onChangNumber(input) {
+        var productId = $(input).data('id');
+        var quantityInput = document.querySelector('.tbl-quantity input[data-id="' + productId + '"]');
+        var quantity = parseInt(quantityInput.value, 10)||0;
+
+        for (var i = 0; i < selectedProducts.length; i++) {
+            if (selectedProducts[i].IDProduct == productId) {
+                selectedProducts[i].Quantity = quantity;
+                break;
+            }
+        }
+      
+        calculateTotalMoney();
+    }
+
+
+     // JavaScript để xử lý sự kiện khi nhấn nút Create
+    document.getElementById("AddPhieuNhap").addEventListener("click", function () {
+        // Thu thập dữ liệu từ các trường input
+        var customData = {
+            MaPhieuNhap: 7,
+            NgayNhap: document.getElementById("inputDate").value,
+            TongTien: document.getElementById("tongTien").value,
+            GiamGia: document.getElementById("giamGia").value,
+            ThanhTien: document.getElementById("thanhTien").value,
+            ChiTietPhieuNhaps: selectedProducts
+        };
+
+        // Sử dụng AJAX để gửi dữ liệu lên server
+        $.ajax({
+            url: '@Url.Action("Add", "NhapHang")',
+            type: 'POST',
+            data: JSON.stringify(customData),
+            contentType: 'application/json; charset=utf-8',
+            success: function (result) {
+                alert('ok');
+            },
+            error: function () {
+                alert('fail');
+            }
+        });
+    });
+
+
+    //---------- ĐỊNH DẠNG TIỀN TỆ ---------------------
+    function formatCurrency(number) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+    }
+    
+    function onChangePrice(input) {
+        var productId = $(input).data('id');
+        var priceInput = document.querySelector('.tbl-price input[data-id="' + productId + '"]');
+        var price = parseFloat(priceInput.value, 10) || 0;
+      
+        
+        for (var i = 0; i < selectedProducts.length; i++) {
+            if (selectedProducts[i].IDProduct == productId) {
+                selectedProducts[i].Price = price;
+                break;
+            }
+        }
+
+        calculateTotalMoney();
+    }
+
+</script>

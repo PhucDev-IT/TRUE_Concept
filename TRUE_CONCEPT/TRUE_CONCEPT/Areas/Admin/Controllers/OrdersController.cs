@@ -59,8 +59,9 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
         [HttpPost]
         public ActionResult CancelOrder(int idOrder, int idCustomer)
         {
+            Console.WriteLine("hello");
             db.usp_CancelInvoice(idOrder, idCustomer);
-            return Json(new { success = true });
+            return RedirectToAction("ChoXacNhan");
         }
     }
 }

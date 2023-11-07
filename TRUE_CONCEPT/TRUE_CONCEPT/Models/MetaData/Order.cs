@@ -16,7 +16,6 @@ namespace TRUE_CONCEPT.Models.MetaData
         [DisplayName("Họ tên")]
         public string nameCustomer { get; set; }
         [DisplayName("Ngày đặt hàng")]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public Nullable<System.DateTime> OrderDate { get; set; }
         [DisplayName("Trạng thái")]
         public string Status { get; set; }
