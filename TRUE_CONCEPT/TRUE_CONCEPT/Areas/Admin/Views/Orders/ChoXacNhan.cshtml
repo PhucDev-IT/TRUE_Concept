@@ -37,28 +37,24 @@
     {
         <tr id="trow_@item.IDOrder">
             <td>
-                @Html.DisplayFor(modelItem => item.IDOrder)
+                #@Html.DisplayFor(modelItem => item.IDOrder)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.nameCustomer)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.OrderDate)
+
+                @Html.FormatValue(item.OrderDate, "{0:dd/MM/yyyy}")
             </td>
             <td>
-                @{
-                    // Loại bỏ hai số 0 sau dấu phẩy
-                    string formattedNewPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", item.ThanhTien);
-                    formattedNewPrice = formattedNewPrice.Replace(",00 ₫", " ₫");
-                }
-                <span class="item__price">@formattedNewPrice</span>
-           
+                @Html.FormatValue(item.ThanhTien, "{0:#,###}")
             </td>
 
             <td>
                 <a href="#" id="btn-confirm-order" data-id="@item.IDOrder">Xác nhận</a> |
                 @Html.ActionLink("Chi tiết", "Details", new { idOrder = item.IDOrder }) |
-                <a href="#" id="btn-cancel-order" data-idOrder="@item.IDOrder" data-idCustomer="@item.IDCustomer">Từ chối</a>
+                <a href="#" onclick="cancelInvoice(this)" data-ido="@item.IDOrder" data-idc="@item.IDCustomer">Hủy</a>
+
             </td>
         </tr>
     }
@@ -86,33 +82,32 @@ $(document).ready(function () {
     });
 });
 
+    //Hủy hóa đơn
 
-//Không chấp nhận bán hàng
-$(document).ready(function () {
-    $('body').on('click', '#btn-cancel-order', function () {
-        var confirm = confirm("Bạn chắc chắn muốn  hủy đơn  hàng này?");
-        if (!confirm) return;
-        var idO = $(this).data('idOrder'); 
-        var idC = $(this).data('idCustomer'); // Lấy ID  từ thuộc tính data
+    function cancelInvoice(data) {
+        var ido = $(data).data('ido'); // Lấy ID đơn hàng từ thuộc tính data
+        var idc = $(data).data('idc');
 
         $.ajax({
             url: '@Url.Action("CancelOrder", "Orders")',
-            type: 'POST', // Sử dụng phương thức POST để truyền ID sản phẩm
-            data: { idOrder: idO, idCustomer: idC }, // Truyền ID sản phẩm
+            type: 'POST', // Sử dụng phương thức POST để truyền ID đơn hàng
+            data: { idOrder: ido, idCustomer: idc },
             success: function (data) {
-                if (data.success) {
-                    $('#trow_' + id).remove();
-                    alert('Đơn hàng đã hủy.');
-                }
+
+              $('#trow_' + idO).remove();
+              alert('Đơn hàng đã bị hủy.');
+
             },
             error: function () {
-                alert("Có lỗi xảy ra!")
+                alert("Có lỗi xảy ra khi hủy đơn hàng.")
             },
         });
-    });
-});
+    }
+
+
+
 </script>
-@*<script src="~/Areas/Admin/Content/js/pages/Orders/handle-event.js"></script>*@
+
 
 
 

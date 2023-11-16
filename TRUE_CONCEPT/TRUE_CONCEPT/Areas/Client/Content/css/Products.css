@@ -1,0 +1,184 @@
+﻿.AllPage-product .grid-wide-product {
+margin: auto;
+max-width: 1200px;
+width: 100%;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage {
+margin-top: 80px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Category-Product {
+box-sizing: border-box;
+padding-right: 50px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Category-Product h1 {
+font-size: 18px;
+line-height: 45px;
+font-family: "Nunito Sans", sans-serif;
+font-weight: 700;
+border-bottom: 1px rgb(217, 217, 217) solid;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Category-Product ul .Product-type {
+display: flex;
+list-style: none;
+margin: 15px 0px;
+font-family: "Nunito Sans", sans-serif;
+font-weight: 400;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Category-Product ul .Product-type i {
+align-self: center;
+margin-right: 5px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Category-Product ul .Product-type .linkProduct-type {
+text-decoration: none;
+color: rgb(0, 0, 0);
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-Policies {
+display: flex;
+padding: 20px 0;
+border-top: 1px rgb(217, 217, 217) solid;
+border-bottom: 1px rgb(217, 217, 217) dashed;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-Policies .Policy-Item {
+display: flex;
+justify-content: center;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-Policies .Policy-Item i {
+font-size: 25px;
+margin-right: 5px;
+align-self: center;
+color: rgb(237, 27, 36);
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-Policies .Policy-Item .content-policy-item {
+font-family: "Nunito Sans", sans-serif;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-Policies .Policy-Item .content-policy-item h3 {
+font-size: 15px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-Policies .Policy-Item .content-policy-item p {
+font-size: 10px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .function-bar {
+margin-top: 30px;
+margin-bottom: 30px;
+display: flex;
+background-color: rgb(242, 242, 242);
+padding: 15px;
+align-items: center;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .function-bar .FunctionTab {
+border: 1px rgb(204, 204, 204) solid;
+box-sizing: border-box;
+background-color: rgb(254, 254, 254);
+padding: 5px;
+margin: 0 10px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .function-bar .FunctionTab .funcTab-name {
+display: flex;
+background-color: rgb(254, 254, 254);
+justify-content: space-between;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .function-bar .Number_of_TabSP ul {
+display: flex;
+justify-content: center;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .function-bar .Number_of_TabSP ul li {
+list-style: none;
+margin: 0 5px;
+background-color: rgb(254, 254, 254);
+width: 100%;
+height: 100%;
+padding: 5px 0;
+display: flex;
+justify-content: center;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product {
+font-family: "Nunito Sans", sans-serif;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+row-gap: 5px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card {
+box-sizing: border-box;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card {
+box-sizing: border-box;
+padding: 15px;
+box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.1), 0 2px 6px 2px rgba(60, 64, 67, 0.15);
+margin: 5px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card .imgProduct_Wrapper {
+width: 100%;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card .imgProduct_Wrapper img {
+width: 100%;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card .old-price {
+color: rgb(102, 102, 102);
+text-decoration: line-through;
+font-size: 15px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card .new-price {
+color: rgb(0, 0, 0);
+font-size: 22px;
+font-weight: 700;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card .status-cartIcon {
+display: flex;
+justify-content: space-between;
+align-items: center;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card .status-cartIcon .tick-title {
+display: flex;
+align-items: center;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card .status-cartIcon .tick-title i {
+color: rgb(44, 192, 103);
+font-size: 16px;
+margin-right: 5px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card .status-cartIcon .tick-title p {
+color: rgb(44, 192, 103);
+font-size: 16px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card .status-cartIcon .icon-AddtoCart {
+background-color: rgb(36, 58, 118);
+padding: 8px;
+border-radius: 50%;
+width: 20px;
+height: 20px;
+}
+
+.AllPage-product .grid-wide-product .Block1-ProductPage .Right-Side-Block1 .List-product .product-card .addPadding-product-card .status-cartIcon .icon-AddtoCart i {
+color: rgb(254, 254, 254);
+}
+/*# sourceMappingURL=SanPham.css.map */

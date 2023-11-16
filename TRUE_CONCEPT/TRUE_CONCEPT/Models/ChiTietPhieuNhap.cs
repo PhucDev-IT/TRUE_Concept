@@ -17,7 +17,6 @@ namespace TRUE_CONCEPT.Models
         public int MaPhieuNhap { get; set; }
         public int IDProduct { get; set; }
         public Nullable<double> Quantity { get; set; }
-        public Nullable<double> VAT { get; set; }
         public Nullable<double> Price { get; set; }
         public Nullable<double> TONGTIEN { get; set; }
     

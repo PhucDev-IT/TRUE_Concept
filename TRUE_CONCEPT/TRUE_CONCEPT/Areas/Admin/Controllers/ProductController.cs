@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using TRUE_CONCEPT.Models;
@@ -10,80 +11,70 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private TRUE_CONCEPTEntities db;
+        private List<ChiTietPhieuNhap> listPhieuNhaps = new List<ChiTietPhieuNhap>();
+ 
 
-        /// <summary>
-        /// Mục tiêu: Để lưu trữ tránh việc phải truy vấn kết nối CSDL quá nhiều gây chậm chương trình
-        /// Sẽ dùng để hiển thị trong combox chọn danh mục của sản phẩm
-        /// </summary>
-        private List<Category> listCategory;
-    
         public ProductController()
         {
             db = DbMangager.GetInstance();
-          
+
         }
 
         // GET: Admin/Product
-        public ActionResult Index(string inputSearch)
+        [HttpGet]
+        public async Task<ActionResult> Index(string inputSearch = "", int searchCategoryId = 0)
         {
-
             List<Product> list;
-            if (inputSearch == null)
-            {
-                list = db.Products.ToList();
-            }
-            else
+            if (searchCategoryId == 0)
             {
                 list = db.Products.Where(x => x.NameProduct.Contains(inputSearch)).ToList();
             }
-
-       
-             listCategory = db.Categories.ToList();
+            else
+            {
+                list = db.Products.Where(x => x.NameProduct.Contains(inputSearch) && x.IDCategory == searchCategoryId).ToList();
+            }
 
           
-            ViewData["Categories"] = new SelectList(listCategory, "IDCategory", "NameCategory");
+            ViewData["Categories"] = new SelectList(db.Categories.ToList(), "IDCategory", "NameCategory");
             return View(list);
         }
 
-      
+
         public ActionResult Add()
         {
-            listCategory = db.Categories.ToList();
-            ViewData["Categories"] = new SelectList(listCategory, "IDCategory", "NameCategory");
+            ViewData["Categories"] = new SelectList(db.Categories.ToList(), "IDCategory", "NameCategory");
+        
             return View();
         }
         [HttpPost]
         public ActionResult Add(Product model)
         {
-            
-            try
+            if (ModelState.IsValid)
             {
-                model.Img_Url = "/Assets/Image/404-error-not-found.png"; // Đặt giá trị mặc định cho Img_Url
-                var f = Request.Files["fImgProduct"];
-                if (f != null && f.ContentLength > 0)
+                try
                 {
-                    if (IsImageFile(f)) // Hàm kiểm tra xem có phải là tệp hình ảnh hợp lệ
+                    model.Img_Url = "/Assets/Image/404-error-not-found.png"; // Đặt giá trị mặc định cho Img_Url
+                    var f = Request.Files["fImage"];
+                    if (f != null && f.ContentLength > 0)
                     {
-                        string folderName = Server.MapPath("~TRUE_CONCEPT/Assets/Uploads");
                         string fileName = f.FileName;
-                        f.SaveAs(Path.Combine(folderName, fileName));
+                        string folderName = Server.MapPath("~/Assets/Uploads/" + fileName);
+                        f.SaveAs(folderName);
                         model.Img_Url = "/Assets/Uploads/" + fileName;
                     }
-                }
 
-                 // db.Products.Add(model);
-                 // db.SaveChanges();
-                return RedirectToAction("Index");
-            }catch(Exception e)
-            {
-                if (listCategory == null)
-                {
-                    listCategory = db.Categories.ToList();
+                    model.CreateAt = DateTime.Now;
+                    db.Products.Add(model);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
                 }
-                ViewData["Categories"] = new SelectList(listCategory, "IDCategory", "NameCategory");
-                Console.WriteLine("Error Add: " + e.ToString());
-                return View(model);
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error Add: " + e.ToString());
+                }
             }
+            ViewData["Categories"] = new SelectList(db.Categories.ToList(), "IDCategory", "NameCategory");
+            return View(model);
         }
 
         public ActionResult Update(int? id)
@@ -112,11 +103,12 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                 obj.Img_Url = product.Img_Url;
                 obj.Status = product.Status;
                 obj.IDCategory = product.IDCategory;
-                obj.VAT = product.VAT;
+  
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Error Update: " + e.ToString());
                 return View();
@@ -161,7 +153,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
             return allowedExtensions.Contains(fileExtension);
         }
 
-
+       
 
     }
 }

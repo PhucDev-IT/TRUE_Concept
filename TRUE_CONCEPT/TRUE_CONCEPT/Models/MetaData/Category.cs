@@ -14,5 +14,7 @@ namespace TRUE_CONCEPT.Models.MetaData
 
         [DisplayName("Tên danh mục")]
         public string NameCategory { get; set; }
+
+        public int QuantityProduct { get; set; }
     }
 }

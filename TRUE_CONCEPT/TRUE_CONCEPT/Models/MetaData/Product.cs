@@ -40,9 +40,6 @@ namespace TRUE_CONCEPT.Models.MetaData
         [DisplayName("Danh mục")]
         public Nullable<int> IDCategory { get; set; }
 
-        [DisplayName("Thuế")]
-        public Nullable<double> VAT { get; set; }
-
         public virtual Category Category { get; set; }
  
     }

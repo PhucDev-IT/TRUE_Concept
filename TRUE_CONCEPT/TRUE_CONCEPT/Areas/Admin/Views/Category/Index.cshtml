@@ -5,31 +5,44 @@
     Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="" />
+   
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NameCategory)
+            </th>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NameCategory)
-        </th>
-     
-        <th></th>
-    </tr>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NameCategory)
-        </td>
-       
-        <td>
-            @Html.ActionLink("Sửa", "Update", new { id=item.IDCategory }) |      
-            @Html.ActionLink("Xóa", "Delete", new { id=item.IDCategory })
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameCategory)
+                </td>
 
-</table>
+                <td>
+                    @Html.ActionLink("Sửa", "Update", new { id = item.IDCategory }) |
+                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDCategory })
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</body>
+</html>
+

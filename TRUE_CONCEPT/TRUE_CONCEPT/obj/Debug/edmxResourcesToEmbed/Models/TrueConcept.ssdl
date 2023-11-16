@@ -44,7 +44,6 @@
     <Property Name="MaPhieuNhap" Type="int" Nullable="false" />
     <Property Name="IDProduct" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="float" />
-    <Property Name="VAT" Type="float" />
     <Property Name="Price" Type="float" />
     <Property Name="TONGTIEN" Type="float" />
   </EntityType>
@@ -88,12 +87,12 @@
     <Property Name="PriceOld" Type="float" />
     <Property Name="NewPrice" Type="float" />
     <Property Name="Unit" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreateAt" Type="date" />
     <Property Name="Quantity" Type="float" Nullable="false" />
     <Property Name="Description" Type="nvarchar(max)" />
     <Property Name="Img_Url" Type="nvarchar" MaxLength="1000" Nullable="false" />
     <Property Name="Status" Type="nvarchar" MaxLength="20" />
     <Property Name="IDCategory" Type="int" />
-    <Property Name="VAT" Type="float" />
   </EntityType>
   <EntityType Name="Project">
     <Key>

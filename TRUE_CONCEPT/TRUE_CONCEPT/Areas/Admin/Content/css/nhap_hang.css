@@ -1,0 +1,22 @@
+﻿.tbSelect{
+    width:5%;
+}
+.tbl-img{
+    width:15%;
+}
+.tbl-idSp {
+
+}
+
+.tbl-nameP {
+}
+
+.tbl-quantity {
+}
+
+.tbl-price {
+}
+
+table, th, td {
+    border: 1px solid black;
+}

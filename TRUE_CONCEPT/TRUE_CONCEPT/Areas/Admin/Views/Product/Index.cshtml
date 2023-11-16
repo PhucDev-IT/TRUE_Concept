@@ -3,6 +3,10 @@
 @{
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
+    var categories = (IEnumerable<SelectListItem>)ViewData["Categories"];
+    var allCategoryItem = new SelectListItem { Text = "Tất cả", Value = "0" }; // Thay "0" bằng giá trị phù hợp nếu cần
+    categories = new[] { allCategoryItem }.Concat(categories);
+
 }
 
 <!DOCTYPE html>
@@ -17,122 +21,106 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1 class="title-QLSP">Quản lý sản phẩm</h1>
-    <hr />
-    <div class="All-product">
-        <div class="Function_bar">
-            <div class="nav-item d-none d-md-block col-5">
-                <a class="nav-link" href="javascript:void(0)">
-                    <form asp-action="Index" class="search_bar">
-                        <div class="customize-input">
-                            <input name="inputSearch" class="form-control border-0 bg-white"
-                                   type="search" placeholder="Search" aria-label="Search">
-                            <i id="icon_search" class="form-control-icon" data-feather="search"></i>
-                        </div>
-                    </form>
-                </a>
-            </div>
+    <div class="row my-3">
+        <h1 class="title-QLSP">Quản lý sản phẩm</h1>
+        <hr />
+    </div>
+    @using (Html.BeginForm("Index", "Product", FormMethod.Get))
+    {
+        <div class="row my-3">
+            <form asp-action="Index" class="search_bar">
+                <div class="customize-input">
+                    <input name="inputSearch" class="form-control border-0 bg-white"
+                           type="search" placeholder="Search" aria-label="Search">
+                    <i id="icon_search" class="form-control-icon" data-feather="search"></i>
+                </div>
+            </form>
             <div class="Btn-bar col-6">
                 <p class="btn-function btn_Create_Product">
                     @Html.ActionLink("Thêm sản phẩm", "Add", null, new { @class = "no-underline" })
                 </p>
-                
+                <div class="col-lg-3">
+                    @Html.DropDownList("searchCategoryId", categories, new { @class = "form-select" })
+                </div>
+
+            </div>
+            <div class="col-auto mt-lg-0 mt-2">
+                <button type="submit" class="btn btn-primary">Tìm kiếm</button>
             </div>
         </div>
+    }
 
-        <table class="table table-sp">
-            <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Img_Url)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NameProduct)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.PriceOld)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NewPrice)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Unit)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Quantity)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Description)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.VAT)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Category.NameCategory)
-                </th>
-                <th></th>
+
+    <table class="table table-sp">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Img_Url)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NameProduct)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PriceOld)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NewPrice)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Unit)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Quantity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Category.NameCategory)
+            </th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr class="allow-overflow">
+                <td>
+                    <img class="img_product" src="@Html.DisplayFor(modelItem => item.Img_Url)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NameProduct)
+                </td>
+                <td>
+                    <span class="item__price"> @Html.FormatValue(item.PriceOld, "{0:#,###}") đ</span>
+                </td>
+                <td>
+                    <span class="item__price"> @Html.FormatValue(item.NewPrice, "{0:#,###}") đ</span>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Unit)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.NameCategory)
+                </td>
+                <td>
+                    <p class="btn-function btn_Alter_Product">
+                        @Html.ActionLink("Sửa", "Update", new { id = item.ID }, new { @class = "no-underline" })
+                    </p>
+                    <p class="btn-function btn_Delete_Product">
+                        @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "no-underline" })
+                    </p>
+                </td>
             </tr>
-            @foreach (var item in Model)
-            {
-                <tr class="allow-overflow">
-                    <td>
-                        <img class="img_product" src="@Html.DisplayFor(modelItem => item.Img_Url)" />
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.NameProduct)
-                    </td>
-                    <td>
-                        @{
-                            // Loại bỏ hai số 0 sau dấu phẩy
-                            string formattedPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", item.PriceOld);
-                            formattedPrice = formattedPrice.Replace(",00 ₫", " ₫");
-                        }
-                        <span class="item__price">@formattedPrice</span>
-                    </td>
-                    <td>
-                        @{
-                            // Loại bỏ hai số 0 sau dấu phẩy
-                            string formattedNewPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", item.NewPrice);
-                            formattedNewPrice = formattedNewPrice.Replace(",00 ₫", " ₫");
-                        }
-                        <span class="item__price">@formattedNewPrice</span>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Unit)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Quantity)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Description)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.VAT)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Category.NameCategory)
-                    </td>
-                    <td>
-                        <p class="btn-function btn_Alter_Product">
-                            @Html.ActionLink("Sửa sản phẩm", "Update", new { id = item.ID }, new { @class = "no-underline" })
-                        </p>
-                        <p class="btn-function btn_Delete_Product">
-                            @Html.ActionLink("Xóa sản phẩm", "Delete", new { id = item.ID }, new { @class = "no-underline" })
-                        </p>
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+        }
+    </table>
 
 
 </body>
 </html>
 
-    <script>
-        $(function () {
-            $("#icon_search").click(function () {
-                $('Form').submit();
-            })
-        });
-    </script>
- 
+<script>
+    $(function () {
+        $("#icon_search").click(function () {
+            $('Form').submit();
+        })
+    });
+</script>

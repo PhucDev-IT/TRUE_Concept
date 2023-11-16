@@ -22,8 +22,9 @@ namespace TRUE_CONCEPT.Models
     
         public int MaDuAn { get; set; }
         public Nullable<int> IDCustomer { get; set; }
-        public string AddressCustomer { get; set; }
+
         public string nameCustomer { get; set; }
+        public string AddressCustomer { get; set; }
         public Nullable<System.DateTime> NgayThueDuAn { get; set; }
         public Nullable<System.DateTime> NgayDuKienHoanThanh { get; set; }
         public Nullable<double> NganSachDuKien { get; set; }
