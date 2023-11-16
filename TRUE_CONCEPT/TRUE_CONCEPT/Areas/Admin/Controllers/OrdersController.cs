@@ -18,7 +18,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
         public ActionResult ChoXacNhan()
         {
             var query = from orders in db.Orders
-                        where orders.Status == "Chờ"
+                        where orders.Status == "Chờ xác nhận"
                         orderby orders.OrderDate ascending
                         join user in db.Users
                         on orders.IDCustomer equals user.IDCustomer
@@ -57,11 +57,47 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult CancelOrder(int idOrder, int idCustomer)
+        public ActionResult CancelOrder(int? idOrder, int? idCustomer)
         {
-            Console.WriteLine("hello");
-            db.usp_CancelInvoice(idOrder, idCustomer);
-            return RedirectToAction("ChoXacNhan");
+            if(idOrder!=null && idCustomer != null)
+            {
+                db.usp_CancelInvoice(idOrder, idCustomer);
+                return Json(new { success = true });
+            }
+            return Json(new { success = false });
         }
+
+        public ActionResult Details(int? idOrder)
+        {
+            if (idOrder != null)
+            {
+                try
+                {
+                    Order order = db.Orders.Find(idOrder);
+
+                    var query = from o in db.OrderDetails
+                                where o.IDOrder == idOrder
+                                join p in db.Products
+                                on o.IDProduct equals p.ID
+                                select new ProductViewModel
+                                {
+                                    ID = o.IDProduct,
+                                    NameProduct = p.NameProduct,
+                                    Price = o.Price,
+                                    Img_Url = p.Img_Url,
+                                    Quantity = (double)o.Quantity,
+                                    TotalMoney = (double)o.TotalMoney
+                                };
+
+                    ViewBag.ProductList = query.ToList();
+                    // System.Diagnostics.Debug.WriteLine("Size: "+ orderDetails.Count);
+                    return View(order);
+                }
+                catch { }
+            }
+            return View();
+            
+        }
+       
     }
 }

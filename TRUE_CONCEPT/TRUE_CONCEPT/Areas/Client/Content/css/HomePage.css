@@ -1,0 +1,427 @@
+﻿
+.Top-Service {
+background-color: #282d32;
+padding: 50px 0;
+}
+
+.Top-Service .grid-wide-topser {
+width: 100%;
+max-width: 1200px;
+margin: auto;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .title {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .title p {
+color: rgb(198, 164, 126);
+font-family: "Nunito", sans-serif;
+font-weight: 600;
+letter-spacing: 2px;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .title h1 {
+color: rgb(255, 255, 255);
+font-family: "Nunito", sans-serif;
+font-weight: 700;
+letter-spacing: 1px;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .All-imgServices {
+width: 100%;
+display: flex;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .All-imgServices .Item_service:nth-child(odd) {
+margin-top: 30px;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .All-imgServices .Item_service {
+position: relative;
+height: 450px;
+box-sizing: border-box;
+z-index: 0;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .All-imgServices .Item_service::after {
+content: "";
+height: 100%;
+width: 100%;
+background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0));
+position: absolute;
+z-index: 2;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .All-imgServices .Item_service img {
+width: 100%;
+height: 450px;
+position: absolute;
+z-index: 1;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .All-imgServices .Item_service .content-imgService {
+width: 80%;
+position: absolute;
+z-index: 3;
+bottom: 5%;
+color: rgb(255, 255, 255);
+left: 50%;
+transform: translateX(-50%);
+font-family: "Nunito", sans-serif;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .All-imgServices .Item_service .content-imgService h2 {
+margin-bottom: 10px;
+font-weight: 700;
+}
+
+.Top-Service .grid-wide-topser .content-Topservices .All-imgServices .Item_service .content-imgService p {
+font-size: 16px;
+line-height: 25px;
+font-weight: 400;
+}
+
+.About_block {
+background-color: #212529;
+padding: 80px 0 200px 0;
+}
+
+.About_block .grid-wide-about-block {
+max-width: 1200px;
+width: 100%;
+margin: auto;
+}
+
+.About_block .grid-wide-about-block .d-flex {
+font-family: "Nunito", sans-serif;
+color: rgb(255, 255, 255);
+}
+
+.About_block .grid-wide-about-block .d-flex .img_about {
+height: 100%;
+position: relative;
+}
+
+.About_block .grid-wide-about-block .d-flex .img_about .ImgChild-about {
+position: absolute;
+}
+
+.About_block .grid-wide-about-block .d-flex .img_about .ImgChild-about:nth-child(1) {
+top: 0;
+right: 10%;
+}
+
+.About_block .grid-wide-about-block .d-flex .img_about .ImgChild-about:nth-child(even) {
+top: 20%;
+left: 0%;
+transform: translate(10%, 50%);
+}
+
+.About_block .grid-wide-about-block .d-flex .content-about p {
+color: rgb(198, 164, 126);
+letter-spacing: 2px;
+font-size: 15px;
+font-weight: 700;
+margin-bottom: 10px;
+}
+
+.About_block .grid-wide-about-block .d-flex .content-about h1 {
+font-size: 40px;
+}
+
+.About_block .grid-wide-about-block .d-flex .content-about h1 span {
+color: rgb(198, 164, 126);
+font-size: 40px;
+}
+
+.About_block .grid-wide-about-block .d-flex .content-about .text-abt {
+margin-top: 20px;
+}
+
+.About_block .grid-wide-about-block .d-flex .content-about .text-abt p {
+color: rgb(222, 222, 222);
+font-size: 15px;
+font-weight: 400;
+letter-spacing: normal;
+line-height: 22.5px;
+}
+
+.About_block .grid-wide-about-block .d-flex .content-about .btn-DownloadPDF {
+width: 50%;
+display: flex;
+background-color: rgb(52, 57, 63);
+}
+
+.About_block .grid-wide-about-block .d-flex .content-about .btn-DownloadPDF .IconPDF {
+width: 60px;
+height: 60px;
+display: flex;
+border-right: 1px #212529 solid;
+}
+
+.About_block .grid-wide-about-block .d-flex .content-about .btn-DownloadPDF .IconPDF i {
+color: rgb(198, 164, 126);
+font-size: 30px;
+margin: auto;
+}
+
+.About_block .grid-wide-about-block .d-flex .content-about .btn-DownloadPDF h2 {
+margin: auto;
+font-size: 15px;
+font-weight: 600;
+line-height: 60px;
+color: rgb(222, 222, 222);
+}
+
+.Process-block {
+background-color: #282d32;
+padding: 50px 0;
+}
+
+.Process-block .grid-wide-process {
+max-width: 1200px;
+width: 100%;
+margin: auto;
+}
+
+.Process-block .grid-wide-process .content-process-wrapper {
+color: rgb(255, 255, 255);
+padding: 0 0px 0 25px;
+font-family: "Nunito", sans-serif;
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .title-process {
+text-align: center;
+margin-bottom: 25px;
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .title-process p {
+font-size: 15px;
+line-height: 18px;
+letter-spacing: 2px;
+font-weight: 600;
+color: rgb(198, 164, 126);
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .title-process h1 {
+font-size: 32px;
+font-weight: 700;
+line-height: 43px;
+margin-top: 7px;
+margin-bottom: 16px;
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .List-card-process {
+display: flex;
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .List-card-process .Card-process {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+margin: 0 10px;
+background-color: rgb(33, 37, 41);
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .List-card-process .Card-process .circle {
+width: -moz-fit-content;
+width: fit-content;
+height: -moz-fit-content;
+height: fit-content;
+margin: 40px 0 30px 0;
+padding: 8px;
+border: 2px rgb(198, 164, 126) dashed;
+border-radius: 50%;
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .List-card-process .Card-process .circle h1 {
+width: 100px;
+height: 100px;
+border-radius: 50%;
+background-color: rgb(40, 45, 50);
+font-size: 32px;
+font-weight: 500;
+display: flex;
+align-items: center;
+justify-content: center;
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .List-card-process .Card-process .title-card {
+font-size: 22px;
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .List-card-process .Card-process .YellowLine {
+width: 60px;
+height: 2px;
+background-color: rgb(198, 164, 126);
+margin: 10px 0 20px 0;
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .List-card-process .Card-process p {
+color: rgb(222, 222, 222);
+text-align: center;
+padding: 0 20px;
+font-weight: 500;
+font-size: 15px;
+line-height: 22.5px;
+}
+
+.Process-block .grid-wide-process .content-process-wrapper .List-card-process .Card-process a {
+color: rgb(198, 164, 126);
+text-decoration: none;
+font-weight: 500;
+margin: 20px 0 40px 0;
+}
+
+.All-News-Wrapper {
+background-color: #212529;
+color: rgb(255, 255, 255);
+padding: 77px 0 42px 0;
+}
+
+.All-News-Wrapper .grid-wide-News {
+max-width: 1200px;
+width: 100%;
+margin: auto;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock {
+font-family: "Nunito", sans-serif;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .Title-News-block {
+text-align: center;
+margin-bottom: 40px;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .Title-News-block p {
+font-size: 15px;
+font-weight: 600;
+color: rgb(198, 164, 126);
+margin-bottom: 15px;
+letter-spacing: 2px;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .Title-News-block h1 {
+font-size: 32px;
+font-weight: 700;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews {
+display: flex;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card {
+width: 33.3333333333%;
+padding: 0 15px;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .relativeBox {
+width: 100%;
+height: 230px;
+position: relative;
+margin: 0 0 30px 0;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .relativeBox .img-News {
+overflow: hidden;
+width: 100%;
+height: 100%;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .relativeBox .img-News img {
+width: 100%;
+height: 100%;
+transition: all 0.6s ease;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .relativeBox .img-News:hover img {
+transform: scale(1.1) rotate(2deg);
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .relativeBox .DateBox {
+position: absolute;
+bottom: 0;
+right: 20px;
+background-color: rgb(198, 164, 126);
+padding: 8px 18px;
+transform: translateY(50%);
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .relativeBox .DateBox h2 {
+font-size: 28px;
+font-weight: 600;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .relativeBox .DateBox p {
+font-size: 16px;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .author-comment {
+display: flex;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .author-comment .author {
+display: flex;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .author-comment .author i {
+color: rgb(198, 164, 126);
+margin-right: 10px;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .author-comment .comment {
+display: flex;
+margin-left: 20px;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .author-comment .comment i {
+color: rgb(198, 164, 126);
+margin-right: 10px;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .author-comment .comment .amount-of-comments {
+margin: 0 5px 0 0;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .Title-News {
+font-size: 18px;
+font-weight: 700;
+color: rgb(255, 255, 255);
+line-height: 22.5px;
+margin-top: 10px;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .Featured-content {
+color: rgb(207, 207, 207);
+font-size: 15px;
+font-weight: 400;
+line-height: 22.5px;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .yellowLine-news {
+width: 180px;
+height: 3px;
+background-color: rgb(198, 164, 126);
+margin-top: 10px;
+margin-bottom: 15px;
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .linkPost {
+margin-bottom: 30px;
+margin-top: 20px;
+color: rgb(198, 164, 126);
+}
+
+.All-News-Wrapper .grid-wide-News .contentOfNewBlock .ListOfNews .News-card .linkPost a {
+color: rgb(198, 164, 126);
+text-decoration: none;
+}
+
+.Location iframe {
+width: 100%;
+height: 450px;
+}

@@ -63,6 +63,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                         model.Img_Url = "/Assets/Uploads/" + fileName;
                     }
 
+                    model.CreateAt = DateTime.Now;
                     db.Products.Add(model);
                     db.SaveChanges();
                     return RedirectToAction("Index");
@@ -102,7 +103,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                 obj.Img_Url = product.Img_Url;
                 obj.Status = product.Status;
                 obj.IDCategory = product.IDCategory;
-                obj.VAT = product.VAT;
+  
 
                 db.SaveChanges();
                 return RedirectToAction("Index");

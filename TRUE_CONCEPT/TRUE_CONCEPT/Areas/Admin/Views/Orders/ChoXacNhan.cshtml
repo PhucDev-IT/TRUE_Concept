@@ -43,8 +43,8 @@
                 @Html.DisplayFor(modelItem => item.nameCustomer)
             </td>
             <td>
-             
-                @Html.FormatValue(item.OrderDate,"{0:dd/MM/yyyy}")
+
+                @Html.FormatValue(item.OrderDate, "{0:dd/MM/yyyy}")
             </td>
             <td>
                 @Html.FormatValue(item.ThanhTien, "{0:#,###}")
@@ -53,7 +53,7 @@
             <td>
                 <a href="#" id="btn-confirm-order" data-id="@item.IDOrder">Xác nhận</a> |
                 @Html.ActionLink("Chi tiết", "Details", new { idOrder = item.IDOrder }) |
-                <a href="#" id="btn-cancel-order" data-idO="@item.IDOrder" data-idC="@item.IDCustomer">Hủy</a> 
+                <a href="#" onclick="cancelInvoice(this)" data-ido="@item.IDOrder" data-idc="@item.IDCustomer">Hủy</a>
 
             </td>
         </tr>
@@ -83,33 +83,31 @@ $(document).ready(function () {
 });
 
     //Hủy hóa đơn
-$(document).ready(function () {
-    $('body').on('click', '#btn-cancel-order', function () {
-        var idO = $(this).data('idO'); // Lấy ID đơn hàng từ thuộc tính data
-        var idC = $(this).data('idC');
+
+    function cancelInvoice(data) {
+        var ido = $(data).data('ido'); // Lấy ID đơn hàng từ thuộc tính data
+        var idc = $(data).data('idc');
 
         $.ajax({
             url: '@Url.Action("CancelOrder", "Orders")',
             type: 'POST', // Sử dụng phương thức POST để truyền ID đơn hàng
-            data: { idOrder: idO, idCustomer: idC },
+            data: { idOrder: ido, idCustomer: idc },
             success: function (data) {
-                if (data.success) {
-                    $('#trow_' + idO).remove();
-                    alert('Đơn hàng đã bị hủy.');
-                } else {
-                    alert('Không thể hủy đơn hàng.');
-                }
+
+              $('#trow_' + idO).remove();
+              alert('Đơn hàng đã bị hủy.');
+
             },
             error: function () {
                 alert("Có lỗi xảy ra khi hủy đơn hàng.")
             },
         });
-    });
-});
+    }
+
 
 
 </script>
-@*<script src="~/Areas/Admin/Content/js/pages/Orders/handle-event.js"></script>*@
+
 
 
 

@@ -1,0 +1,131 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- CHANGE THE DIRECTORY OF CSS FILE WHEN MOVE THIS FILE TO SOLUTION IN VISUAL STUDIO !!! -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/Areas/Client/Content/css/layout-client.css">
+
+    <!-- FONT(ONLY USE THIS WAY IN VSCODE)-->
+    @*<style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito+Sans:opsz@6..12&family=Open+Sans&family=Roboto&display=swap');
+        </style>*@
+    <link href="~/Areas/Client/Content/css/FontMaps.css" rel="stylesheet" />
+
+    <!-- BOOSTRAP CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap-grid.min.css" integrity="sha512-ZuRTqfQ3jNAKvJskDAU/hxbX1w25g41bANOVd1Co6GahIe2XjM6uVZ9dh0Nt3KFCOA061amfF2VeL60aJXdwwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- FONTAWESOME CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+<body>
+    <!-- HEADER -->
+    <div class="header-client container-fluid">
+        <div class="grid-wide">
+            <div class="navbar">
+                <div class="logo-header">
+                    <img src="~/Areas/Client/Content/ImgHomePage/SOUL-CONCEPT-LOGO-NEW.png" alt="">
+                </div>
+                <ul class="navigation">
+                    <li class="nav-item"><a href="">Trang chủ</a> </li>
+                    <li class="nav-item"><a href="">Về chúng tôi</a> </li>
+                    <li class="nav-item"><a href="">Sản phẩm</a> </li>
+                    <li class="nav-item"><a href="">Thê dự án</a> </li>
+                    <li class="nav-item"><a href="">Blog</a> </li>
+                    <li class="nav-item"><a href="">Liên hệ</a> </li>
+                </ul>
+                <div class="search-cart">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                </div>
+                <div class="login-regis">
+                    <div class="Login-header d-flex">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        <h3>Đăng nhập</h3>
+                    </div>
+                    <div class="Signin-header d-flex">
+                        <i class="fa-regular fa-address-card"></i>
+                        <h3>Đăng kí</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+    <!-- FOOTER -->
+
+    <div class="Footer-client container-fluid">
+        <div class="grid-wide">
+            <div class="ListFooter container">
+                <div class="col-3 About_FT">
+                    <img src="~/Areas/Client/Content/ImgHomePage/SOUL-CONCEPT-LOGO-NEW.png" alt="">
+                    <p>Consectetur Adipisicing Elit Sed Do Eiumpor Incididunt Ut Labore Et Dolore Magna Aliqua Uet Enim Ad Minim Veniam, Euis Nostrud Exercitation Ullamco Laris.</p>
+                    <a href="">READ MORE</a>
+                </div>
+                <div class="col-3 OpenHours_FT">
+                    <h1>Open Hours</h1>
+                    <ul class="List_OpenHours">
+                        <li class="ActiveDay">Monday - 09:00 To 18:00</li>
+                        <li class="ActiveDay">Tuesday - 09:00 To 18:00</li>
+                        <li class="ActiveDay">Wednesday - 09:00 To 18:00</li>
+                        <li class="ActiveDay">Thursday - 09:00 To 18:00</li>
+                        <li class="ActiveDay">Friday - 09:00 To 18:00</li>
+                    </ul>
+                </div>
+                <div class="col-3 OurDesign_FT">
+                    <h1>Our Design</h1>
+                    <ul class="List-imgDesign">
+                        <li class="imgDesignFT"><img src="~/Areas/Client/Content/ImgHomePage/Ds_Ft1.jpg" alt=""></li>
+                        <li class="imgDesignFT"><img src="~/Areas/Client/Content/ImgHomePage/Ds_Ft2.jpg" alt=""></li>
+                        <li class="imgDesignFT"><img src="~/Areas/Client/Content/ImgHomePage/Ds_Ft3.jpg" alt=""></li>
+                        <li class="imgDesignFT"><img src="~/Areas/Client/Content/ImgHomePage/Ds_Ft4.jpg" alt=""></li>
+                        <li class="imgDesignFT"><img src="~/Areas/Client/Content/ImgHomePage/Ds_Ft5.jpg" alt=""></li>
+                        <li class="imgDesignFT"><img src="~/Areas/Client/Content/ImgHomePage/Ds_Ft6.jpg" alt=""></li>
+                    </ul>
+                </div>
+                <div class="col-3 Contact_FT">
+                    <h1>Contact Us</h1>
+                    <ul class="ListContact">
+                        <li class="ContactLink">
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p>18 Cherry Hill Avenue Niagara Falls,California, NY 14304</p>
+                        </li>
+                        <li class="ContactLink">
+                            <i class="fa-solid fa-phone-volume"></i>
+                            <p>+4 (81) 1800-1245-1246</p>
+                        </li>
+                        <li class="ContactLink">
+                            <i class="fa-regular fa-envelope"></i>
+                            <p>inlandshop@example.com inlandinterior@example.com</p>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- COPYRIGHT -->
+    <div class="copyright">
+        <div class="d-flex">
+            <p>Copyright</p>
+            <i class="fa-regular fa-copyright"></i>
+            <p>2023</p>
+            <p class="brandName">Soul Concept</p>
+            <p>. All Right Reserved.</p>
+        </div>
+    </div>
+</body>
+</html>
+

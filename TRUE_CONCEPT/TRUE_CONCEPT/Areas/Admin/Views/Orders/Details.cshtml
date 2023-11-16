@@ -1,0 +1,104 @@
+﻿@model TRUE_CONCEPT.Models.Order
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Order</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IDCustomer)
+        </dt>
+
+        <dd>
+            #@Html.DisplayFor(model => model.IDCustomer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.User.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.User.FullName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.OrderDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrderDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ThanhTien)
+        </dt>
+
+        <dd>
+            @Html.FormatValue(Model.ThanhTien, "{0:#,###}") VNĐ
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+
+
+
+    </dl>
+
+    <div class="container-goods">
+
+        <table class="table" style="width:100%;">
+            <tr>
+                <th class="tbl-idSp">Mã sản phẩm</th>
+                <th class="tbl-img">Ảnh</th>
+                <th class="tbl-nameP">Tên sản phẩm</th>
+                <th class="tbl-quantity">Số lượng</th>
+                <th class="tbl-price">Đơn giá</th>
+                <th class="tbl-price">Tổng tiền</th>
+
+            </tr>
+
+            @foreach (var item in ViewBag.ProductList)
+            {
+                <tr>
+                    <td class="tbl-idSp">
+                        #@item.ID
+                    </td>
+
+                    <td class="tbl-img">
+                        <img src="@item.Img_Url" style="width:60px; height:60px;" />
+                    </td>
+
+                    <td class="tbl-nameP">
+                        @item.NameProduct
+                    </td>
+                    <td class="tbl-quantity">
+                        @item.Quantity
+                    </td>
+                    <td class="tbl-price">
+                        @Html.FormatValue(item.Price, "{0:#,###}")
+                    </td>
+                    <td class="tbl-price">
+                        @Html.FormatValue(item.TotalMoney, "{0:#,###}")
+                  
+                    </td>
+                </tr>
+            }
+
+        </table>
+
+
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.IDOrder }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>

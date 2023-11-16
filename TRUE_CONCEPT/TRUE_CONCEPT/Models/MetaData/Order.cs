@@ -21,5 +21,6 @@ namespace TRUE_CONCEPT.Models.MetaData
         public string Status { get; set; }
         [DisplayName("Thành tiền")]
         public Nullable<double> ThanhTien { get; set; }
+
     }
 }

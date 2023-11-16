@@ -50,7 +50,6 @@
     <Property Name="MaPhieuNhap" Type="Int32" Nullable="false" />
     <Property Name="IDProduct" Type="Int32" Nullable="false" />
     <Property Name="Quantity" Type="Double" />
-    <Property Name="VAT" Type="Double" />
     <Property Name="Price" Type="Double" />
     <Property Name="TONGTIEN" Type="Double" />
     <NavigationProperty Name="BaoCaoNhap" Relationship="Self.FK__ChiTietPh__MaPhi__4222D4EF" FromRole="ChiTietPhieuNhap" ToRole="BaoCaoNhap" />
@@ -102,12 +101,12 @@
     <Property Name="PriceOld" Type="Double" />
     <Property Name="NewPrice" Type="Double" />
     <Property Name="Unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="CreateAt" Type="DateTime" Precision="0" />
     <Property Name="Quantity" Type="Double" Nullable="false" />
     <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="Img_Url" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="IDCategory" Type="Int32" />
-    <Property Name="VAT" Type="Double" />
     <NavigationProperty Name="Category" Relationship="Self.FK__Product__IDCateg__2F10007B" FromRole="Product" ToRole="Category" />
     <NavigationProperty Name="ChiTietDuAns" Relationship="Self.FK__ChiTietDuA__MaSP__4AB81AF0" FromRole="Product" ToRole="ChiTietDuAn" />
     <NavigationProperty Name="ChiTietPhieuNhaps" Relationship="Self.FK__ChiTietPh__IDPro__4316F928" FromRole="Product" ToRole="ChiTietPhieuNhap" />

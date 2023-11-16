@@ -1,0 +1,274 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Client/Views/Shared/layout-client.cshtml";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- CHANGE THE DIRECTORY OF CSS FILE WHEN MOVE THIS FILE TO SOLUTION IN VISUAL STUDIO !!! -->
+    <!-- CSS -->
+    <link href="~/Areas/Client/Content/css/layout-client.css" rel="stylesheet">
+
+    <link href="~/Areas/Client/Content/css/HomePage.css" rel="stylesheet" />
+    <!-- FONT(ONLY USE THIS WAY IN VSCODE)-->
+    @*<style>
+            @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito+Sans:opsz@6..12&family=Open+Sans&family=Roboto&display=swap');
+        </style>*@
+    <!-- FONT (FOR VS)-->
+    <link href="~/Areas/Client/Content/css/FontMaps.css" rel="stylesheet" />
+    <!-- OR -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito+Sans:opsz@6..12&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
+
+    <!-- BOOSTRAP CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap-grid.min.css" integrity="sha512-ZuRTqfQ3jNAKvJskDAU/hxbX1w25g41bANOVd1Co6GahIe2XjM6uVZ9dh0Nt3KFCOA061amfF2VeL60aJXdwwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- FONTAWESOME CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+
+</head>
+<body>
+    <!-- Top service -->
+    <div class="Top-Service container-fluid">
+        <div class="grid-wide-topser">
+            <div class="content-Topservices">
+                <div class="title">
+                    <p>TOP SERVICES</p>
+                    <h1>Our Specializations</h1>
+                </div>
+                <div class="All-imgServices">
+                    <div class="Item_service col-3">
+                        <img src="~/Areas/Client/Content/ImgHomePage/service1.jpg" alt="">
+                        <div class="content-imgService">
+                            <h2>Floor Plan</h2>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                    <div class="Item_service col-3">
+                        <img src="~/Areas/Client/Content/ImgHomePage/service2.jpg" alt="">
+                        <div class="content-imgService">
+                            <h2>Interior Design</h2>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                    <div class="Item_service col-3">
+                        <img src="~/Areas/Client/Content/ImgHomePage/service3.jpg" alt="">
+                        <div class="content-imgService">
+                            <h2>Architecture Design</h2>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+                    <div class="Item_service col-3">
+                        <img src="~/Areas/Client/Content/ImgHomePage/service4.jpg" alt="">
+                        <div class="content-imgService">
+                            <h2>Construction</h2>
+                            <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Top Service -->
+    <!-- About -->
+    <div class="About_block container-fluid">
+        <div class="grid-wide-about-block">
+            <div class="d-flex">
+                <div class="img_about col-6">
+                    <div class="ImgChild-about">
+                        <img src="~/Areas/Client/Content/ImgHomePage/ing_about01.jpg" alt="">
+                    </div>
+                    <div class="ImgChild-about">
+                        <img src="~/Areas/Client/Content/ImgHomePage/ing_about02.jpg" alt="">
+                    </div>
+                </div>
+                <div class="content-about col-6">
+                    <p>ABOUT US</p>
+                    <h1>A Small Efficient <br><span>Interior Designing</span>Team</h1>
+                    <div class="text-abt">
+                        <p>Tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis nostruercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehei voluptate velit esse cillum dolore eu fugiat nulla pariatur Duis aute irure dolor in reprehei voluptate veliet esse cillum dolore eu fugiat nulla pariatur..</p>
+                        <p>Ut enim ad minim veniam quis nostruercitation ullamco laboris nisi ut aliquip ex ea commonsequat Duis aute irure dolor reprehei voluptate esseu fugiat nulla pariatur.</p>
+                    </div>
+                    <div class="btn-DownloadPDF">
+                        <div class="IconPDF">
+                            <i class="fa-regular fa-file-pdf"></i>
+                        </div>
+                        <h2>DOWNLOAD PRICING TABLE</h2>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- END About -->
+    <!-- Process Block -->
+    <div class="Process-block container-fluid">
+        <div class="grid-wide-process">
+            <div class="content-process-wrapper">
+                <div class="title-process">
+                    <p>OUR PROCESS</p>
+                    <h1>See How It Works</h1>
+                </div>
+                <div class="List-card-process">
+                    <div class="Card-process">
+                        <div class="circle">
+                            <h1>01</h1>
+                        </div>
+                        <h2 class="title-card">Concept design</h2>
+                        <div class="YellowLine"></div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                        <a href="">READ MORE</a>
+                    </div>
+                    <div class="Card-process">
+                        <div class="circle">
+                            <h1>02</h1>
+                        </div>
+                        <h2 class="title-card">Estimation</h2>
+                        <div class="YellowLine"></div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                        <a href="">READ MORE</a>
+                    </div>
+                    <div class="Card-process">
+                        <div class="circle">
+                            <h1>03</h1>
+                        </div>
+                        <h2 class="title-card">Implementation</h2>
+                        <div class="YellowLine"></div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                        <a href="">READ MORE</a>
+                    </div>
+                    <div class="Card-process">
+                        <div class="circle">
+                            <h1>04</h1>
+                        </div>
+                        <h2 class="title-card">Handover</h2>
+                        <div class="YellowLine"></div>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit</p>
+                        <a href="">READ MORE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Process Block -->
+    <!-- NEWS -->
+    <div class="All-News-Wrapper container-fluid">
+        <div class="grid-wide-News">
+            <div class="contentOfNewBlock">
+                <div class="Title-News-block">
+                    <p>OUR BLOG</p>
+                    <h1>Recent News</h1>
+                </div>
+                <div class="ListOfNews">
+                    <div class="News-card">
+                        <div class="relativeBox">
+                            <div class="img-News">
+                                <img src="~/Areas/Client/Content/ImgHomePage/imgNews1.jpg" alt="">
+                            </div>
+                            <div class="DateBox">
+                                <h2>27</h2>
+                                <p>JAN</p>
+                            </div>
+                        </div>
+                        <div class="author-comment">
+                            <div class="author">
+                                <i class="fa-regular fa-user"></i>
+                                <p>Alexandria</p>
+                            </div>
+                            <div class="comment">
+                                <i class="fa-regular fa-comment"></i>
+                                <p class="amount-of-comments">172</p>
+                                <p>Comments</p>
+                            </div>
+                        </div>
+                        <h2 class="Title-News">Capturing The Essence Of Monthly Web Development.</h2>
+                        <div class="yellowLine-news"></div>
+                        <p class="Featured-content">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</p>
+                        <div class="linkPost">
+                            <a href="">READ MORE</a>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+
+
+                    </div>
+                    <div class="News-card">
+                        <div class="relativeBox">
+                            <div class="img-News">
+                                <img src="~/Areas/Client/Content/ImgHomePage/imgNews2.jpg" alt="">
+                            </div>
+                            <div class="DateBox">
+                                <h2>27</h2>
+                                <p>JAN</p>
+                            </div>
+                        </div>
+
+
+                        <div class="author-comment">
+                            <div class="author">
+                                <i class="fa-regular fa-user"></i>
+                                <p>Alexandria</p>
+                            </div>
+                            <div class="comment">
+                                <i class="fa-regular fa-comment"></i>
+                                <p class="amount-of-comments">270</p>
+                                <p>Comments</p>
+                            </div>
+                        </div>
+
+                        <h2 class="Title-News">Historic Courtyards For Selling A Home In The World.</h2>
+                        <div class="yellowLine-news"></div>
+                        <p class="Featured-content">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</p>
+                        <div class="linkPost">
+                            <a href="">READ MORE</a>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                    <div class="News-card">
+                        <div class="relativeBox">
+                            <div class="img-News">
+                                <img src="~/Areas/Client/Content/ImgHomePage/imgNews3.jpg" alt="">
+                            </div>
+                            <div class="DateBox">
+                                <h2>27</h2>
+                                <p>JAN</p>
+                            </div>
+                        </div>
+                        <div class="author-comment">
+                            <div class="author">
+                                <i class="fa-regular fa-user"></i>
+                                <p>Alexandria</p>
+                            </div>
+                            <div class="comment">
+                                <i class="fa-regular fa-comment"></i>
+                                <p class="amount-of-comments">912</p>
+                                <p>Comments</p>
+                            </div>
+                        </div>
+
+                        <h2 class="Title-News">The World's Tallest Wooden Sky Scraper Estate Ideas To Sell A</h2>
+                        <div class="yellowLine-news"></div>
+                        <p class="Featured-content">Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim</p>
+                        <div class="linkPost">
+                            <a href="">READ MORE</a>
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END NEWS -->
+    <!-- EVERYTHING IS CONSTRUCTING ! -->
+</body>
+</html>

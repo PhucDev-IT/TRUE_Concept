@@ -20,27 +20,21 @@
         <th>
             @Html.DisplayNameFor(model => model.User.FullName)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AddressCustomer)
-        </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.NgayThueDuAn)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.NgayDuKienHoanThanh)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.NganSachDuKien)
-        </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.YeuCauThietKe)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.KieuThietKe)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.MoTaThem)
-        </th>
+      
 
         <th></th>
     </tr>
@@ -53,32 +47,21 @@
     <td>
         @Html.DisplayFor(modelItem => item.nameCustomer)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.AddressCustomer)
-    </td>
+   
     <td>
         @Html.DisplayFor(modelItem => item.NgayThueDuAn)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.NgayDuKienHoanThanh)
     </td>
-    <td>
-        @{
-            // Loại bỏ hai số 0 sau dấu phẩy
-            string formattedPrice = string.Format(new System.Globalization.CultureInfo("vi-VN"), "{0:C}", item.NganSachDuKien);
-            formattedPrice = formattedPrice.Replace(",00 ₫", " ₫");
-        }
-        <span class="item__price">@formattedPrice</span>
-    </td>
+   
     <td>
         @Html.DisplayFor(modelItem => item.YeuCauThietKe)
     </td>
     <td>
         @Html.DisplayFor(modelItem => item.KieuThietKe)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.MoTaThem)
-    </td>
+   
 
 
     <td>

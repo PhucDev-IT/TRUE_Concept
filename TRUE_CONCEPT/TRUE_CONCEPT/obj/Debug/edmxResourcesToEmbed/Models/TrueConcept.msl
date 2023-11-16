@@ -46,7 +46,6 @@
           <ScalarProperty Name="MaPhieuNhap" ColumnName="MaPhieuNhap" />
           <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-          <ScalarProperty Name="VAT" ColumnName="VAT" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
         </MappingFragment>
@@ -92,12 +91,12 @@
           <ScalarProperty Name="PriceOld" ColumnName="PriceOld" />
           <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
           <ScalarProperty Name="Unit" ColumnName="Unit" />
+          <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Description" ColumnName="Description" />
           <ScalarProperty Name="Img_Url" ColumnName="Img_Url" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
-          <ScalarProperty Name="VAT" ColumnName="VAT" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

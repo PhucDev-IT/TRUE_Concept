@@ -49,7 +49,6 @@
           <Property Name="MaPhieuNhap" Type="int" Nullable="false" />
           <Property Name="IDProduct" Type="int" Nullable="false" />
           <Property Name="Quantity" Type="float" />
-          <Property Name="VAT" Type="float" />
           <Property Name="Price" Type="float" />
           <Property Name="TONGTIEN" Type="float" />
         </EntityType>
@@ -93,12 +92,12 @@
           <Property Name="PriceOld" Type="float" />
           <Property Name="NewPrice" Type="float" />
           <Property Name="Unit" Type="nvarchar" MaxLength="20" />
+          <Property Name="CreateAt" Type="date" />
           <Property Name="Quantity" Type="float" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
           <Property Name="Img_Url" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="Status" Type="nvarchar" MaxLength="20" />
           <Property Name="IDCategory" Type="int" />
-          <Property Name="VAT" Type="float" />
         </EntityType>
         <EntityType Name="Project">
           <Key>
@@ -400,7 +399,6 @@
           <Property Name="MaPhieuNhap" Type="Int32" Nullable="false" />
           <Property Name="IDProduct" Type="Int32" Nullable="false" />
           <Property Name="Quantity" Type="Double" />
-          <Property Name="VAT" Type="Double" />
           <Property Name="Price" Type="Double" />
           <Property Name="TONGTIEN" Type="Double" />
           <NavigationProperty Name="BaoCaoNhap" Relationship="Self.FK__ChiTietPh__MaPhi__4222D4EF" FromRole="ChiTietPhieuNhap" ToRole="BaoCaoNhap" />
@@ -452,12 +450,12 @@
           <Property Name="PriceOld" Type="Double" />
           <Property Name="NewPrice" Type="Double" />
           <Property Name="Unit" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="CreateAt" Type="DateTime" Precision="0" />
           <Property Name="Quantity" Type="Double" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Img_Url" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="Status" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="IDCategory" Type="Int32" />
-          <Property Name="VAT" Type="Double" />
           <NavigationProperty Name="Category" Relationship="Self.FK__Product__IDCateg__2F10007B" FromRole="Product" ToRole="Category" />
           <NavigationProperty Name="ChiTietDuAns" Relationship="Self.FK__ChiTietDuA__MaSP__4AB81AF0" FromRole="Product" ToRole="ChiTietDuAn" />
           <NavigationProperty Name="ChiTietPhieuNhaps" Relationship="Self.FK__ChiTietPh__IDPro__4316F928" FromRole="Product" ToRole="ChiTietPhieuNhap" />
@@ -765,7 +763,6 @@
                 <ScalarProperty Name="MaPhieuNhap" ColumnName="MaPhieuNhap" />
                 <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
-                <ScalarProperty Name="VAT" ColumnName="VAT" />
                 <ScalarProperty Name="Price" ColumnName="Price" />
                 <ScalarProperty Name="TONGTIEN" ColumnName="TONGTIEN" />
               </MappingFragment>
@@ -811,12 +808,12 @@
                 <ScalarProperty Name="PriceOld" ColumnName="PriceOld" />
                 <ScalarProperty Name="NewPrice" ColumnName="NewPrice" />
                 <ScalarProperty Name="Unit" ColumnName="Unit" />
+                <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
                 <ScalarProperty Name="Quantity" ColumnName="Quantity" />
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Img_Url" ColumnName="Img_Url" />
                 <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
-                <ScalarProperty Name="VAT" ColumnName="VAT" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

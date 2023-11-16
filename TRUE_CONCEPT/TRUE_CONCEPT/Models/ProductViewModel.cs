@@ -23,6 +23,8 @@ namespace TRUE_CONCEPT.Models
         public string Img_Url { get; set; }
 
         [DisplayName("Số lượng")]
-        public string Quantity { get; set; }
+        public double Quantity { get; set; }
+
+        public double TotalMoney { get; set; }
     }
 }

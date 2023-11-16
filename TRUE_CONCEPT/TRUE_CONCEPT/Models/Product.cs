@@ -28,12 +28,12 @@ namespace TRUE_CONCEPT.Models
         public Nullable<double> PriceOld { get; set; }
         public Nullable<double> NewPrice { get; set; }
         public string Unit { get; set; }
+        public Nullable<System.DateTime> CreateAt { get; set; }
         public double Quantity { get; set; }
         public string Description { get; set; }
         public string Img_Url { get; set; }
         public string Status { get; set; }
         public Nullable<int> IDCategory { get; set; }
-        public Nullable<double> VAT { get; set; }
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

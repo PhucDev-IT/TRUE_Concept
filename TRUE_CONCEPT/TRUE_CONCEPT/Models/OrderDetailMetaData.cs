@@ -7,7 +7,7 @@ using System.Web;
 namespace TRUE_CONCEPT.Models
 {
     [MetadataType(typeof(Models.MetaData.OrderDetail))]
-    public partial class OrderDetailMetaData
+    public partial class OrderDetail
     {
     }
 }

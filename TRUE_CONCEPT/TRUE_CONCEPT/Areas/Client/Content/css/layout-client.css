@@ -1,0 +1,195 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+}
+
+.header-client {
+    background-color: rgb(40, 45, 50);
+    color: rgb(237, 226, 214);
+}
+
+.header-client .grid-wide {
+    width: 100%;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.header-client .grid-wide .navbar {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-client .grid-wide .navbar .logo-header img {
+    width: 220px;
+    height: 47px;
+}
+
+.header-client .grid-wide .navbar .navigation {
+    display: flex;
+    list-style: none;
+    justify-content: center;
+    margin: 0;
+}
+
+.header-client .grid-wide .navbar .navigation .nav-item {
+    padding: 0 5px;
+}
+
+.header-client .grid-wide .navbar .navigation .nav-item a {
+    color: rgb(237, 226, 214);
+    font-size: 18px;
+    text-decoration: none;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+}
+
+.header-client .grid-wide .navbar .search-cart {
+    display: flex;
+}
+
+.header-client .grid-wide .navbar .search-cart i {
+    padding: 0 15px;
+    border-right: 1px rgb(94, 94, 94) solid;
+}
+
+.header-client .grid-wide .navbar .login-regis {
+    display: flex;
+    align-items: center;
+}
+
+.header-client .grid-wide .navbar .login-regis .Login-header {
+    display: flex;
+    align-items: center;
+}
+
+.header-client .grid-wide .navbar .login-regis .Login-header h3 {
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    margin-left: 8px;
+}
+
+.header-client .grid-wide .navbar .login-regis .Signin-header {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+
+.header-client .grid-wide .navbar .login-regis .Signin-header h3 {
+    font-size: 14px;
+    font-family: 'Nunito', sans-serif;
+    margin-left: 8px;
+}
+
+.Footer-client {
+    background-color: rgb(40, 45, 50);
+    color: rgb(237, 226, 214);
+    padding: 0;
+    font-family: 'Nunito', sans-serif;
+    margin: auto;
+    padding: 80px 0px;
+}
+
+.Footer-client .grid-wide .ListFooter {
+    display: flex;
+    padding: 0;
+}
+
+.Footer-client .grid-wide .ListFooter .col-3 h1 {
+    margin-bottom: 25px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 25px;
+    color: rgb(255, 255, 255);
+}
+
+.Footer-client .grid-wide .ListFooter .col-3 h1::before {
+    content: "";
+    width: 100px;
+    height: 6px;
+    background-color: rgb(198, 164, 126);
+}
+
+.Footer-client .grid-wide .ListFooter .About_FT {
+    padding-right: 30px;
+    box-sizing: border-box;
+}
+
+.Footer-client .grid-wide .ListFooter .About_FT img {
+    width: 220px;
+    height: 47px;
+    margin-bottom: 25px;
+}
+
+
+.Footer-client .grid-wide .ListFooter .About_FT p {
+    margin-bottom: 20px;
+}
+
+.Footer-client .grid-wide .ListFooter .About_FT a {
+    color: rgb(198, 164, 126);
+    text-decoration: none;
+}
+
+.Footer-client .grid-wide .ListFooter .OpenHours_FT .List_OpenHours li {
+    margin-bottom: 10px;
+    list-style: none;
+}
+
+.Footer-client .grid-wide .ListFooter .OurDesign_FT .List-imgDesign {
+    display: flex;
+    flex-wrap: wrap;
+    grid-gap: 15px;
+    padding-left: 0;
+}
+
+.Footer-client .grid-wide .ListFooter .OurDesign_FT .List-imgDesign .imgDesignFT {
+    width: 70px;
+    height: 70px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.Footer-client .grid-wide .ListFooter .OurDesign_FT .List-imgDesign .imgDesignFT img {
+    width: 100%;
+    height: 100%;
+}
+
+.Footer-client .grid-wide .ListFooter .Contact_FT .ListContact {
+    padding: 0;
+}
+
+.Footer-client .grid-wide .ListFooter .Contact_FT .ListContact .ContactLink {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.Footer-client .grid-wide .ListFooter .Contact_FT .ListContact .ContactLink i {
+    align-self: center;
+    justify-self: center;
+    margin-right: 20px;
+    color: rgb(198, 164, 126);
+}
+
+.copyright {
+    background-color: rgb(55, 58, 61);
+    color: rgb(237, 226, 214);
+    width: 100%;
+    display: flex;
+    padding: 15px 0;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 500;
+}
+
+.copyright .d-flex i {
+    align-self: center;
+    margin: 0 5px;
+}
+
+.copyright .d-flex .brandName {
+    color: rgb(198, 164, 126);
+    margin-left: 5px;
+}
+/*# sourceMappingURL=LayoutClient.css.map */

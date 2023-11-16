@@ -12,7 +12,7 @@
         Img_Url = p.Img_Url
     }).ToList();
 
-    List<TRUE_CONCEPT.Models.ChiTietPhieuNhap> list = new List<TRUE_CONCEPT.Models.ChiTietPhieuNhap>();
+   
 
 }
 
@@ -55,7 +55,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.GiamGia, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.GiamGia, new { htmlAttributes = new { @class = "form-control", id = "giamGia" } })
+                    @Html.EditorFor(model => model.GiamGia, new { htmlAttributes = new { @class = "form-control", id = "giamGia" , type="number" , min="0", onchange= "onChangeReduce()" } })
                     @Html.ValidationMessageFor(model => model.GiamGia, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -135,6 +135,8 @@
 <script>
 
     var selectedProducts = [];
+
+
     function addProductToReport(checkbox) {
         var id = $(checkbox).data('id');
         var price = $(checkbox).data('price');
@@ -176,7 +178,9 @@
         }
 
         document.getElementById("tongTien").value = totalMoney;
-        document.getElementById("thanhTien").value = totalMoney;
+        var sum = totalMoney - $("#giamGia").val();
+       
+        document.getElementById("thanhTien").value = sum>0?sum:0;
     }
 
     // Lắng nghe sự kiện khi giá trị thay đổi
@@ -215,10 +219,10 @@
             data: JSON.stringify(customData),
             contentType: 'application/json; charset=utf-8',
             success: function (result) {
-                alert('ok');
+                
             },
             error: function () {
-                alert('fail');
+                
             }
         });
     });
@@ -243,6 +247,12 @@
         }
 
         calculateTotalMoney();
+    }
+
+    //Xử lý sự kiện thay đổi giảm giá
+
+    function onChangeReduce() {
+        calculateTotalMoney();   
     }
 
 </script>

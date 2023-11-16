@@ -5,48 +5,70 @@
     Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
 }
 
-<h2>Index</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhập hàng</title>
+    <link rel="stylesheet" href="~/Areas/Admin/Content/css/nhap_hang.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Add")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.MaPhieuNhap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NgayNhap)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TongTien)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GiamGia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ThanhTien)
+            </th>
+            <th></th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Add")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayNhap)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TongTien)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.GiamGia)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ThanhTien)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    #@Html.DisplayFor(modelItem => item.MaPhieuNhap)
+                </td>
+                <td>
+                    @Html.FormatValue(item.NgayNhap, "{0:dd/MM/yyyy}")
+                </td>
+                <td>
+                    @Html.FormatValue(item.TongTien, "{0:#,###}") đ
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GiamGia)
+                </td>
+                <td>
+                    @Html.FormatValue(item.ThanhTien, "{0:#,###}") đ
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.MaPhieuNhap }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.MaPhieuNhap }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.MaPhieuNhap })
+                </td>
+            </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayNhap)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TongTien)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.GiamGia)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ThanhTien)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.MaPhieuNhap }) |
-            @Html.ActionLink("Details", "Details", new { id=item.MaPhieuNhap }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MaPhieuNhap })
-        </td>
-    </tr>
-}
+    </table>
 
-</table>
+</body>
+</html>
+
+ 
