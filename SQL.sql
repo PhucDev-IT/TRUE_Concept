@@ -10,7 +10,7 @@ CREATE TABLE Account
 (
 	ID INT PRIMARY KEY IDENTITY,
 	UserName VARCHAR(30) UNIQUE,
-	Password VARCHAR(20) NOT NULL,
+	Password VARCHAR(200) NOT NULL,
 	Decentralization NVARCHAR(10) DEFAULT N'Client',
 	Status VARCHAR(10) DEFAULT 'ON'
 )	
@@ -41,13 +41,21 @@ CREATE TABLE Product
 	PriceOld FLOAT,
 	NewPrice FLOAT,
 	Unit NVARCHAR(20),
-	CreateAt DATE,
+	CreateAt DATE DEFAULT GETDATE(),
 	Quantity FLOAT NOT NULL,
 	Description NVARCHAR(MAX),
-	Img_Url NVARCHAR(1000) NOT NULL,
+	ImgDemo NVARCHAR(1000) NOT NULL,
 	Status NVARCHAR(20) DEFAULT N'ON',
 	IDCategory INT FOREIGN KEY REFERENCES Category(IDCategory),
 
+)
+GO
+
+CREATE TABLE IMAGES
+(
+	ID INT PRIMARY KEY IDENTITY,
+	IdProduct INT FOREIGN KEY REFERENCES Product(ID),
+	Img_Url NVARCHAR(1000) NOT NULL, 
 )
 GO
 CREATE TABLE ItemCart
@@ -173,7 +181,7 @@ INSERT INTO Category(NameCategory)
 			(N'Bàn làm việc')
 
 GO
-INSERT INTO Product (NameProduct,PriceOld,NewPrice,Unit,Quantity,Description,Img_Url,IDCategory,CreateAt)
+INSERT INTO Product (NameProduct,PriceOld,NewPrice,Unit,Quantity,Description,ImgDemo,IDCategory,CreateAt)
 VALUES(N'Bàn giám đốc hiện đại 1m6 BTPM01', 5000000,3400000 ,N'Bàn',23 ,N'Kích thước mặt bàn: Dài 1600 – Rộng 800- Cao 750(mm),
 Kích thước tủ phụ: Dài 1600 – Rộng 400 -Cao 650 (mm)
 Chất liệu: Gỗ công nghiệp MFC dán melamin chống xước
@@ -241,3 +249,6 @@ INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
 VALUES(5,4,12,(SELECT NewPrice*12 FROM Product where ID=4),0.2,3223)
 
 
+select * from account
+select * from users
+select * from product

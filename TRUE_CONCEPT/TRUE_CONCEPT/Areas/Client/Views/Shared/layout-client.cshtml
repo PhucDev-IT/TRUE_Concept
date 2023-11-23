@@ -1,5 +1,6 @@
 ﻿@{
     Layout = null;
+    int numberCart =(int)Session["numberCart"];
 }
 
 
@@ -19,7 +20,7 @@
             @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Nunito+Sans:opsz@6..12&family=Open+Sans&family=Roboto&display=swap');
         </style>*@
     <link href="~/Areas/Client/Content/css/FontMaps.css" rel="stylesheet" />
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- BOOSTRAP CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap-grid.min.css" integrity="sha512-ZuRTqfQ3jNAKvJskDAU/hxbX1w25g41bANOVd1Co6GahIe2XjM6uVZ9dh0Nt3KFCOA061amfF2VeL60aJXdwwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -34,28 +35,29 @@
         <div class="grid-wide">
             <div class="navbar">
                 <div class="logo-header">
-                    <img src="~/Areas/Client/Content/ImgHomePage/SOUL-CONCEPT-LOGO-NEW.png" alt="">
+                    <a href="/Client/TrangChu/Index"><img src="~/Areas/Client/Content/ImgHomePage/SOUL-CONCEPT-LOGO-NEW.png" alt=""></a>
                 </div>
                 <ul class="navigation">
-                    <li class="nav-item"><a href="">Trang chủ</a> </li>
+                    <li class="nav-item"><a href="/Client/TrangChu/Index">Trang chủ</a> </li>
                     <li class="nav-item"><a href="">Về chúng tôi</a> </li>
-                    <li class="nav-item"><a href="">Sản phẩm</a> </li>
+                    <li class="nav-item"><a href="/Client/Products/Index">Sản phẩm</a> </li>
                     <li class="nav-item"><a href="">Thê dự án</a> </li>
                     <li class="nav-item"><a href="">Blog</a> </li>
                     <li class="nav-item"><a href="">Liên hệ</a> </li>
                 </ul>
                 <div class="search-cart">
                     <i class="fa-solid fa-magnifying-glass"></i>
-                    <i class="fa-solid fa-cart-shopping"></i>
+                    <a href="/Client/Carts/Index"><i class="fa-solid fa-cart-shopping"></i></a>
+                    <span>@Session["numberCart"]</span>
                 </div>
                 <div class="login-regis">
                     <div class="Login-header d-flex">
                         <i class="fa-solid fa-right-to-bracket"></i>
-                        <h3>Đăng nhập</h3>
+                        <a href="/Authentication/Login/Index">Đăng nhập</a>
                     </div>
                     <div class="Signin-header d-flex">
                         <i class="fa-regular fa-address-card"></i>
-                        <h3>Đăng kí</h3>
+                        <a href="/Authentication/SignUp/Index">Đăng ký</a>
                     </div>
                 </div>
             </div>

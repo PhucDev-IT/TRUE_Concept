@@ -1,4 +1,6 @@
-﻿
+﻿@model TRUE_CONCEPT.Models.ViewModel.SignUpViewModel
+
+
 @{
     Layout = null;
 }
@@ -21,39 +23,36 @@
     <div class="main">
         <!-- Sign up form -->
         <section class="signup">
-            <div class="header-worker">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-            </div>
             <div class="container">
                 <div class="signup-content">
                     <div class="signup-form">
                         <h2 class="form-title">Sign up</h2>
-                        <form method="POST" class="register-form" id="register-form">
+                        <form action="@Url.Action("Index", "SignUp", new { area = "Authentication" })" method="POST" class="register-form" id="register-form">
+                            @Html.ValidationSummary(false,"", new { @class = "text-danger" })
                             <div class="form-group">
                                 <label for="name"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                                <input type="text" name="name" id="name" placeholder="Your Name" required />
+                                @Html.TextBoxFor(a => a.FullName, new { @class = "form-control", placeholder = "Họ tên" })
 
                             </div>
+                           
                             <div class="form-group">
                                 <label for="email"><i class="zmdi zmdi-email"></i></label>
-                                <input type="email" name="email" id="email" placeholder="Your Email" required />
+                                @Html.TextBoxFor(a => a.Email, new { @class = "form-control", placeholder = "Email" , type="Email"})
                             </div>
                             <div class="form-group">
                                 <label for="pass"><i class="zmdi zmdi-lock"></i></label>
-                                <input type="password" name="pass" id="pass" placeholder="Password" required />
+                                @Html.TextBoxFor(a => a.Password, new { @class = "form-control", placeholder = "Mật khẩu" , type="password"})
                             </div>
                             <div class="form-group">
                                 <label for="re-pass"><i class="zmdi zmdi-lock-outline"></i></label>
-                                <input type="password" name="re_pass" id="re_pass" placeholder="Repeat your password" required />
+                                @Html.TextBoxFor(a => a.RePassword, new { @class = "form-control", placeholder = "Nhập lại mật khẩu", type = "password" })
                             </div>
                             <div class="form-group">
-                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term"  />
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
                                 <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
                             </div>
                             <div class="form-group form-button">
-                                <input  type="submit" name="signup" id="signup" class="form-submit" value="Đăng ký" />
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Đăng ký" />
                             </div>
                         </form>
                     </div>
@@ -63,186 +62,11 @@
                     </div>
                 </div>
             </div>
-            @*xÁC MINH EMAIL*@
-            <div class="container verify_container">
-                <div class="verify-content">
-                    <div class="verify-form">
-                        <h2 class="form-title">Xác minh địa chỉ Email</h2>
-                        <p>Chúng tôi đã gửi mã xác minh đến địa chỉ Email: <span>abcxyz@gmail.com</span></p>
-                        <p>Vui lòng nhập mã xác minh của bạn để tiếp tục đăng ký tài khoản thành viên</p>
-                        <div class="form-group">
-                            <input type="text" name="digital1" id="digital1" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
-                            <input type="text" name="digital2" id="digital2" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
-                            <input type="text" name="digital3" id="digital3" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
-                            <input type="text" name="digital4" id="digital4" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
-                            <input type="text" name="digital5" id="digital5" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
-                            <input type="text" name="digital6" id="digital6" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
-                        </div>
-                        <div>
-                            <p>Gửi lại mã xác minh:</p>
-                            <span id="countdown" />
-                            <span id="reSendingEmail" style="display: none;" onclick="runningTime()">Gửi lại</span>
-                        </div>
-                        <input type="submit" value="Xác minh" id="btnVerify" />
-                    </div>
-                </div>
-            </div>
+      
         </section>
-
     </div>
 
-    <!-- JS -->
-    <script src="~/Areas/Authentication/Content/vendor//jquery/jquery.min.js"></script>
-    <script src="~/Areas/Authentication/Content/js/main.js"></script>
+
 </body><!-- This templates was made by Colorlib (https://colorlib.com) -->
 </html>
 
-<script>
-    document.getElementById("signup").addEventListener("click", function () {
-        var FullName = document.getElementById("name").value;
-        var email = document.getElementById("email").value;
-        var Password = document.getElementById("pass").value;
-        var RePass = document.getElementById("re_pass").value;
-        var isCheckbox = document.getElementById("agree-term");
-
-        if (!isCheckbox.checked) {
-            alert('Vui lòng chấp nhận điều khoản của chúng tôi');
-        }
-        else {
-            if (FullName == "" || email == "" || Password == "" || RePass == "") {
-                alert('Vui lòng nhập đầy đủ thông tin');
-            } else if (Password != RePass) {
-                alert('Mật khẩu không khớp')
-            } else {
-                checkEmail(email);
-            }
-
-        }
-    });
-
-
-    function checkEmail(email) {
- 
-         // Sử dụng AJAX để gửi dữ liệu lên server
-        $.ajax({
-            url: '@Url.Action("CheckEmail", "SignUp")',
-            type: 'POST',
-            data: { email },
-            contentType: 'application/json; charset=utf-8',
-            success: function (result) {
-              
-                alert('Email đã được sử dụng');
-               
-            },
-            error: function () {
-                alert('Lỗi');
-            }
-        });
-    }
-
-    // Bắt đầu thời gian đếm ngược (120 giây)
-    var countdown = 120;
-
-    function runningTime() {
-        document.getElementById("countdown").style.display = "inline";
-        document.getElementById("reSendingEmail").style.display = "none";
-        var x = setInterval(function () {
-            // Hiển thị thời gian đếm ngược
-            document.getElementById("countdown").innerHTML = countdown + " giây ";
-
-            // Giảm thời gian đếm ngược
-            countdown--;
-
-            // Khi hết thời gian, hiển thị thông báo
-            if (countdown < 0) {
-                clearInterval(x);
-                document.getElementById("countdown").style.display = "none";
-                document.getElementById("reSendingEmail").style.display = "inline"; // Nút có thể click
-            }
-        }, 1000); // Cập nhật mỗi giây
-    }
-
-    //Gửi EMAIL
-    var VerificationCode = '';
-
-    function generateRandomNumber() {
-
-        let randomString = '';
-        for (let i = 0; i < 6; i++) {
-            randomString += Math.floor(Math.random() * 10); // Thêm một số ngẫu nhiên từ 0 đến 9 vào chuỗi
-        }
-        return randomString;
-    }
-
-    function sendEmail() {
-        alert('không co gi');
-        VerificationCode = generateRandomNumber();
-        var FullName = document.getElementById("name").value;
-        var email = document.getElementById("email").value;
-         $.ajax({
-             url: '/SignUp/VerifyEmail',
-        type: 'POST',
-        dataType: 'json',
-        data: {
-            email: email,
-            FullName: FullName,
-            VerificationCode: VerificationCode
-        },
-        success: function (data) {
-            if (data.success) {
-                runningTime();
-            } else {
-                alert('failed');
-            }
-        },
-             error: function () {
-                 alert('lỗi');
-        }
-    });
-    }
-
-
-    //ĐĂNG KÝ TÀI KHOẢN
-    function registerAccount() {
-
-        var FullName = document.getElementById("name").value;
-        var email = document.getElementById("email").value;
-        var Password = document.getElementById("pass").value;
-
-         $.ajax({
-            url: '@Url.Action("Register", "SignUp")',
-            type: 'POST',
-             data: { FullName, email, Password},
-            contentType: 'application/json; charset=utf-8',
-             success: function (result) {
-                 alert('ok')
-            },
-             error: function () {
-                 alert('Có lỗi xảy ra');
-            }
-        });
-     }
-
-    //Xác minh code
-    $('#btnVerify').click(function () {
-        var digital1 = document.getElementById("digital1").value;
-        var digital2 = document.getElementById("digital2").value;
-        var digital3 = document.getElementById("digital3").value;
-        var digital4 = document.getElementById("digital4").value;
-        var digital5 = document.getElementById("digital5").value;
-        var digital6 = document.getElementById("digital6").value;
-        var result = '';
-        if (digital1 == "" || digital2 == "" || digital3 == "" || digital4 == "" || digital5 == "" || digital6 == "") {
-            alert('Chưa nhập đủ số');
-        } else {
-            result = digital1 + digital2 + digital3 + digital4 + digital5 + digital6;
-            if (result == VerificationCode) {
-                alert('ok lém');
-            } else {
-                alert('Mã xác minh không chính xác');
-            }
-        }
-    })
-
-
-</script>

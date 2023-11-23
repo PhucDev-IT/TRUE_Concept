@@ -4,9 +4,44 @@
     ViewBag.Title = "Add";
     Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
 }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Thêm sản phẩm</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-<h2 class="title-addProduct">Thêm sản phẩm</h2>
-    @using (Html.BeginForm("Add", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    <style>
+        .img-container {
+            width: 60px;
+            height: 60px;
+            border: 1px dashed black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 5px;
+            float: left;
+            background-size: cover; /* Hiển thị ảnh vừa với kích thước div */
+            background-position: center; /* Đặt vị trí ảnh ở giữa */
+            position: relative
+        }
+
+        #icon-remove {
+            position: absolute;
+            top: 0;
+            right: 0;
+           
+            z-index: 2;
+        }
+    </style>
+
+</head>
+<body>
+    <h2 class="title-addProduct">Thêm sản phẩm</h2>
+    @using (Html.BeginForm(null,null,FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         @Html.AntiForgeryToken();
         <div class="All-Add-Product">
@@ -17,7 +52,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.NameProduct, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.NameProduct, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.NameProduct, new { htmlAttributes = new { @class = "form-control" ,id="NameProduct"} })
                         @Html.ValidationMessageFor(model => model.NameProduct, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -25,7 +60,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.PriceOld, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.PriceOld, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.PriceOld, new { htmlAttributes = new { @class = "form-control", id= "PriceOld" } })
                         @Html.ValidationMessageFor(model => model.PriceOld, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -33,7 +68,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.NewPrice, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.NewPrice, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.NewPrice, new { htmlAttributes = new { @class = "form-control", id = "NewPrice" } })
                         @Html.ValidationMessageFor(model => model.NewPrice, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -41,7 +76,7 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control",id= "Unit" } })
                         @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -49,24 +84,24 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control",id= "Quantity" } })
                         @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
                     @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control",id= "Description" } })
                         @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Img_Url, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.ImgDemo, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @*  @Html.EditorFor(model => model.Img_Url, new { htmlAttributes = new { @class = "form-control"} })*@
-                        <input type="file" name="fImage" class="form-control" />
-                        @Html.ValidationMessageFor(model => model.Img_Url, "", new { @class = "text-danger" })
+                        @*  @Html.EditorFor(model => model.ImgDemo, new { htmlAttributes = new { @class = "form-control"} })*@
+                        <input type="file" id="ImgDemo" name="fImage" class="form-control" />
+                        @Html.ValidationMessageFor(model => model.ImgDemo, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -74,15 +109,31 @@
                     @Html.LabelFor(model => model.IDCategory, "IDCategory", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
 
-                        @Html.DropDownListFor(model => model.IDCategory, (IEnumerable<SelectListItem>)ViewData["Categories"], "Chọn danh mục", new { @class = "form-control" })
+                        @Html.DropDownListFor(model => model.IDCategory, (IEnumerable<SelectListItem>)ViewData["Categories"], null, new { @class = "form-control",id= "IDCategory" })
 
                         @Html.ValidationMessageFor(model => model.IDCategory, "", new { @class = "text-danger" })
                     </div>
-                </div>      
+                </div>
+
+
+                <div class="form-group">
+                    <span>Demo</span>
+                    <div class="col-md-10">
+                        @for (int i = 1; i <= 5; i++)
+                        {
+                        <div class="img-container" id="image_@i" onclick="chooseFile(@i)">
+                            <input class="img" type="file" id="imageInput_@i" name="fImage_@i" style="display: none;" accept="image/*" onchange="displayImage(this,@i)">
+                            @i/5                         
+                        </div>
+                            
+                        }
+
+                    </div>
+                </div>
 
                 <div class="form-group">
                     <div class="btn-add-product">
-                        <input type="submit" value="Thêm sản phẩm" class="btn btn-default" />
+                        <input type="submit" id="submitProduct" onclick="addProduct()" value="Thêm sản phẩm" class="btn btn-default" />
                     </div>
                 </div>
             </div>
@@ -90,9 +141,73 @@
         </div>
     }
 
-
     <div class="back-to-list">
         <i class="fa-solid fa-caret-left"></i>
         @Html.ActionLink("Back to List", "Index")
     </div>
+</body>
+</html>
 
+<script>
+    let imagePaths = []; // Mảng để lưu trữ đường dẫn ảnh
+
+    function chooseFile(index) {
+        document.getElementById('imageInput_' + index).click();
+    }
+
+    function displayImage(input, index) {
+        const imageContainer = document.getElementById('image_' + index);
+
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+
+            reader.onload = function (e) {
+                imageContainer.style.backgroundImage = `url('${e.target.result}')`;
+                imageContainer.textContent = ''; // Xóa văn bản mặc định trong thẻ div
+
+                imagePaths.push(e.target.result); // Lưu đường dẫn vào mảng
+                console.log(imagePaths);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function deleteImage(index) {
+        // Xóa ảnh khỏi giao diện
+        const imageContainer = document.getElementById('image_' + index);
+        imageContainer.style.backgroundImage = '';
+        imageContainer.textContent = index+'/5';
+
+        // Xóa đường dẫn khỏi mảng
+        delete imagePaths[index];
+    }
+
+    //Thêm sản phẩm
+    function addProduct () {
+        var customData = {
+            NameProduct: document.getElementById("NameProduct").value,
+            PriceOld: document.getElementById("PriceOld").value,
+            NewPrice: document.getElementById("NewPrice").value,
+            Unit: document.getElementById("Unit").value,
+            Quantity: document.getElementById("Quantity").value,
+            Description: document.getElementById("Description").value,
+            ImgDemo: document.getElementById("ImgDemo").value,
+            IDCategory: document.getElementById("IDCategory").value,
+            PreviewImages: imagePaths
+        };
+
+              $.ajax({
+            url: '/Product/Add', // Đường dẫn đến action xử lý gửi email ở server
+            type: 'POST',
+                  data: JSON.stringify(customData),
+                  success: function (response) {
+                      alert('Thêm thành công');
+        },
+        error: function (error) {
+            // Xử lý lỗi nếu có
+            alert('Có lỗi xảy ra khi gửi email');
+        }
+    });
+    }
+
+</script>

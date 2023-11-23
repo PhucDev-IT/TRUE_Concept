@@ -145,8 +145,8 @@ D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\bin\System.Web.Webpages.
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\bin\System.Web.Helpers.xml
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\bin\System.Web.Mvc.xml
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.csproj.AssemblyReference.cache
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.csproj.CoreCompileInputs.cache
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.csproj.CopyComplete
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.dll
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.pdb
+D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.csproj.AssemblyReference.cache

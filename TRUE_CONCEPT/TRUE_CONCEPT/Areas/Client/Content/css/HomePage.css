@@ -1,4 +1,138 @@
 ﻿
+.Banner {
+padding: 0px;
+}
+
+.Banner .control-wide-banner {
+max-width: 1400px;
+margin: auto;
+width: 100%;
+}
+
+.Banner .control-wide-banner .d-flex .infor-column-banner {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+background-color: rgb(40, 45, 50);
+font-family: "Nunito Sans", sans-serif;
+}
+
+.Banner .control-wide-banner .d-flex .infor-column-banner .icon-contact {
+display: flex;
+flex-direction: column;
+justify-content: space-between;
+align-items: center;
+color: rgb(237, 226, 214);
+}
+
+.Banner .control-wide-banner .d-flex .infor-column-banner .icon-contact i {
+margin: 5px 0px;
+}
+
+.Banner .control-wide-banner .d-flex .infor-column-banner .phone {
+writing-mode: vertical-rl;
+align-self: center;
+transform: rotate(180deg);
+display: flex;
+align-items: center;
+}
+
+.Banner .control-wide-banner .d-flex .infor-column-banner .phone a {
+color: rgb(198, 164, 126);
+font-weight: 500;
+text-decoration: none;
+}
+
+.Banner .control-wide-banner .d-flex .infor-column-banner .Email {
+writing-mode: vertical-rl;
+transform: rotate(180deg);
+display: flex;
+align-items: center;
+}
+
+.Banner .control-wide-banner .d-flex .infor-column-banner .Email a {
+color: rgb(198, 164, 126);
+font-weight: 500;
+text-decoration: none;
+}
+
+.Banner .control-wide-banner .d-flex .infor-column-banner .mini-Line {
+width: 40px;
+height: 1px;
+background-color: rgb(97, 97, 97);
+}
+
+.Banner .control-wide-banner .d-flex .title-banner {
+font-family: "Nunito Sans", sans-serif;
+background-color: rgb(33, 37, 41);
+display: flex;
+align-items: center;
+}
+
+.Banner .control-wide-banner .d-flex .title-banner .Align-Title-Banner {
+margin: auto 30px auto 40px;
+}
+
+.Banner .control-wide-banner .d-flex .title-banner .Align-Title-Banner .title-spacing {
+color: rgb(198, 164, 126);
+font-size: 11px;
+font-weight: 500;
+letter-spacing: 5.6px;
+}
+
+.Banner .control-wide-banner .d-flex .title-banner .Align-Title-Banner h1 {
+font-size: 46px;
+font-weight: 800;
+letter-spacing: 1px;
+color: rgb(237, 226, 214);
+}
+
+.Banner .control-wide-banner .d-flex .title-banner .Align-Title-Banner h2 {
+color: rgb(237, 226, 214);
+font-size: 38px;
+letter-spacing: 1px;
+}
+
+.Banner .control-wide-banner .d-flex .title-banner .Align-Title-Banner h2 span {
+color: rgb(198, 164, 126);
+margin: 0 0 0 10px;
+letter-spacing: 1px;
+}
+
+.Banner .control-wide-banner .d-flex .title-banner .Align-Title-Banner p {
+margin-top: 10px;
+color: rgb(237, 226, 214);
+font-size: 12px;
+line-height: 22px;
+}
+
+.Banner .control-wide-banner .d-flex .title-banner .Align-Title-Banner .btn-banner {
+margin-top: 30px;
+}
+
+.Banner .control-wide-banner .d-flex .title-banner .Align-Title-Banner .btn-banner a {
+padding: 10px 20px;
+color: rgb(237, 226, 214);
+background-color: rgb(198, 164, 126);
+text-decoration: none;
+transition: all 0.3s ease;
+}
+
+.Banner .control-wide-banner .d-flex .title-banner .Align-Title-Banner .btn-banner:hover a {
+background-color: rgb(52, 57, 63);
+color: rgb(198, 164, 126);
+}
+
+.Banner .control-wide-banner .d-flex .img-Banner {
+background-color: rgb(33, 37, 41);
+}
+
+.Banner .control-wide-banner .d-flex .img-Banner img {
+width: 100%;
+height: 100%;
+height: auto;
+}
 .Top-Service {
 background-color: #282d32;
 padding: 50px 0;

@@ -1,0 +1,250 @@
+﻿@model TRUE_CONCEPT.Models.Product
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Client/Views/Shared/layout-client.cshtml";
+
+    var RecommentProducts = TRUE_CONCEPT.Models.DbMangager.GetInstance().Products.Where(x => x.IDCategory == Model.IDCategory).Take(8).ToList();
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- CHANGE THE DIRECTORY OF CSS FILE WHEN MOVE THIS FILE TO SOLUTION IN VISUAL STUDIO !!! -->
+    <!-- CSS -->
+    <link rel="stylesheet" href="~/Areas/Client/Content/css/HomePage.css">
+    <link rel="stylesheet" href="~/Areas/Client/Content/css/layout-client.css">
+    <link rel="stylesheet" href="~/Areas/Client/Content/css/Products.css">
+    <link href="~/Areas/Client/Content/css/Detail_Product.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- BOOSTRAP CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap-grid.min.css" integrity="sha512-ZuRTqfQ3jNAKvJskDAU/hxbX1w25g41bANOVd1Co6GahIe2XjM6uVZ9dh0Nt3KFCOA061amfF2VeL60aJXdwwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.min.js" integrity="sha512-WW8/jxkELe2CAiE4LvQfwm1rajOS8PHasCCx+knHG0gBHt8EXxS6T6tJRTGuDQVnluuAvMxWF4j8SNFDKceLFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- FONTAWESOME CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+</head>
+<body>
+    <div id="isCurrentUser" style="display:none">@ViewBag.isCurrentUser</div>
+    <span id="idProduct" style="display:none" >@Model.ID</span>
+    <!-- BODY PAGE -->
+    <div class="ALL-ProductDetail-Block container-fluid">
+        <div class="Grid-wide-product-block">
+            <div class="main-block-product">
+                <div class="ProductName">
+                    <h1>@Model.NameProduct</h1>
+                </div>
+                <div class="Product-Detail-Body">
+                    <div class="Product-detail-img col-4">
+                        <img src="@Model.ImgDemo" alt="">
+                    </div>
+                    <div class="Product-detail-content col-5">
+                        <div class="des-product">
+                            <h5>Thông tin mô tả</h5>
+                            <p>@Model.Description</p>
+
+                        </div>
+                        <div class="product-info-price">
+                            <div class="Price-Product">
+                                <h2>@Html.FormatValue(Model.NewPrice, "{0:#,###}")đ</h2>
+                                <h4>@Html.FormatValue(Model.PriceOld, "{0:#,###}")đ</h4>
+                                @{ var tietkiem = Model.PriceOld - Model.NewPrice; }
+                                <p>Tiết kiệm hơn @Html.FormatValue(tietkiem, "{0:#,###}")đ</p>
+
+
+                                @*HIỂN THỊ SỐ LƯỢNG TỒN*@
+                                <p>Còn lại: </p><span id="quantity-current">@Model.Quantity</span>
+                         
+                            </div>
+                            <div class="VAT-baohanh">
+                                <p>Giá đã có VAT</p>
+                                <p>Bảo hành 12 tháng</p>
+                            </div>
+                        </div>
+                        <div class="box-number-quantity-detail">
+                            <div class="number-order">
+                                <p>Số lượng: </p>
+                                <div class="alter-number-order">
+                                    <div id="reduce"><i class="fa-solid fa-minus"></i></div>
+                                    <div id="quantity" class="solgSP"><p>1</p></div>
+                                    <div id="increase"><i class="fa-solid fa-plus"></i></div>
+                                </div>
+                            </div>
+                       
+                            <div id="Add-to-cart" class="Add-to-cart">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <p>Thêm vào giỏ hàng</p>
+                            </div>
+                        </div>
+
+                        <div class="btn-order">
+                            <span>
+                                <h3>ĐẶT MUA NGAY</h3>
+                                <p>Giao nhanh tận nơi, miễn phí toàn quốc</p>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="Product-detail-static-content col-3">
+                        <div class="Static-block">
+                            <div class="header-static-block">
+                                <div class="">YÊN TÂM MUA HÀNG</div>
+                            </div>
+                            <ul class="list-static-block">
+                                <li>Bảo hành tận nơi sử dụng</li>
+                                <li>Bảo hành tận nơi sử dụng</li>
+                                <li>Bảo hành tận nơi sử dụng</li>
+                                <li>Bảo hành tận nơi sử dụng</li>
+                                <li>Bảo hành tận nơi sử dụng</li>
+                                <li>Bảo hành tận nơi sử dụng</li>
+                                <li>Bảo hành tận nơi sử dụng</li>
+                                <li>Bảo hành tận nơi sử dụng</li>
+                            </ul>
+                        </div>
+                        <div class="Static-block">
+                            <div class="header-static-block">
+                                <div class="">MIỄN PHÍ GIAO HÀNG</div>
+                            </div>
+                            <ul class="list-static-block">
+                                <li>Chính sách miễn phí giao hàng</li>
+                                <li>Chính sách miễn phí giao hàng</li>
+                                <li>Chính sách miễn phí giao hàng</li>
+                                <li>Chính sách miễn phí giao hàng</li>
+                                <li>Chính sách miễn phí giao hàng</li>
+                                <li>Chính sách miễn phí giao hàng</li>
+                                <li>Chính sách miễn phí giao hàng</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="Recommend-Product">
+                    <div class="Header-recommend-product">
+                        <h1>Các sản phẩm được đề xuất</h1>
+                        <a href="http://127.0.0.1:5501/SanPham.html">Xem thêm các sản phẩm khác</a>
+                    </div>
+                    <div class="List-product">
+                        <!-- đặt vào trong vòng lặp ---- > reder ra list product-->
+                        @foreach (var item in RecommentProducts)
+                        {
+                            <a href="@Url.Action("Index","Detail_products",new { idProduct = item.ID})" class="product-card col-3">
+                                <div class="addPadding-product-card">
+                                    <div class="imgProduct_Wrapper"><img src="@item.ImgDemo" alt=""></div>
+                                    <div class="Fix-height-ProductName">
+                                        <h5 class="product-name">@item.NameProduct</h5>
+                                    </div>
+                                    <p class="old-price">@Html.FormatValue(item.PriceOld, "{0:#,###}")đ</p>
+                                    <p class="new-price">@Html.FormatValue(item.NewPrice, "{0:#,###}")đ</p>
+                                    <div class="status-cartIcon">
+                                        @if (item.Quantity > 0)
+                                        {
+                                            <div class="tick-title">
+                                                <i class="fa-solid fa-check"></i>
+                                                <p>Còn hàng</p>
+                                            </div>
+                                        
+                                                <div class="icon-AddtoCart">
+                                                    <i class="fa-solid fa-cart-shopping"></i>
+                                                </div>
+                                            
+                                        }
+                                        else
+                                        {
+                                            <div class="tick-title icon2">
+                                                <i class="fa-solid fa-xmark" style="color: #ff0a0a;"></i>
+                                                <p>Tạm hết</p>
+                                            </div>
+                                        }
+
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                      
+                    </div>
+                </div>
+                <div class="container-fluid Block2-ProductPage">
+                    <div class="Block-feel-the-product">
+
+                    </div>
+                    <div class="block-DK-get-Email">
+                        <div class="DK-get-Email">
+                            <h1>ĐĂNG KÝ NHẬN EMAIL THÔNG BÁO KHUYẾN MẠI HOẶC ĐỂ ĐƯỢC TƯ VẤN MIỄN PHÍ</h1>
+                            <div class="input-submitBtn">
+                                <input type="text" placeholder="Nhập email hoặc số điện thoại của bạn">
+                                <div class="btnSubmit"><a href="">GỬI</a></div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+    var isLogin = document.getElementById('isCurrentUser').innerText;
+  
+
+    var quantity = 1; // Khai báo biến quantity ở ngoài hàm để trở thành biến toàn cục
+
+    $('#reduce').click(function () {
+        if (quantity >= 2) {
+            quantity--;
+            document.getElementById("quantity").innerHTML = quantity;
+        }
+    });
+
+  
+    $('#increase').click(function () {      
+           quantity++;
+            document.getElementById("quantity").innerHTML = quantity;
+    });
+
+    //Nhấn thêm vào giỏ hàng
+    $('#Add-to-cart').click(function () {
+
+   
+        if (isLogin === 'False') {
+            alert('chưa login')
+            return;
+        }
+        var quantity_current = document.getElementById("quantity-current").innerText;
+
+        if (quantity > quantity_current) {
+            alert('Số lượng hàng còn lại không đủ');
+        } else {
+            var itemCart = {
+                ID: null,
+                IDProduct: document.getElementById('idProduct').innerText,
+                Quantity: quantity
+            };
+
+         
+            $.ajax({
+                url: '/Detail_products/AddToCart', 
+                type: 'POST',
+                data: JSON.stringify(itemCart),
+                contentType: 'application/json; charset=utf-8',
+                success: function (result) {
+                    if (result == true) {
+                        alert('Thêm vào giỏ hàng thành công!');
+                    } else {
+                        alert('Thêm vào giỏ hàng thất bại!');
+                    }
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra khi thêm vào giỏ hàng!');
+                }
+            });
+        }
+    });
+
+</script>

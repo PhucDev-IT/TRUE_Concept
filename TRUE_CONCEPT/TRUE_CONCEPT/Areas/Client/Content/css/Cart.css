@@ -1,0 +1,173 @@
+﻿/*Shopping cart table style*/
+.shopping-cart {
+}
+
+    .shopping-cart button:hover {
+        background: #f7544a;
+        color: #fff;
+    }
+
+.shop-table {
+    position: relative;
+    width: 100%;
+    border-collapse: separate;
+}
+
+    .shop-table th {
+        font-size: 16px;
+        padding: 5px;
+        text-align: center;
+    }
+
+    .shop-table tbody td {
+        text-align: center;
+        border: 1px solid #E1E1E1;
+        vertical-align: middle;
+        padding: 10px;
+        border-left: none;
+    }
+
+    .shop-table tbody tr td:first-child {
+        border-left: 1px solid #E1E1E1;
+        -webkit-border-radius: 10px 0 0 10px;
+        border-radius: 10px 0 0 10px;
+    }
+
+    .shop-table tbody tr td:last-child {
+        -webkit-border-radius: 0 10px 10px 0;
+        border-radius: 0 10px 10px 0;
+    }
+
+    .shop-table tr {
+        width: 100%;
+        display: table;
+        margin-bottom: 15px;
+    }
+
+    .shop-table th:first-child,
+    .shop-table td:first-child {
+        width: 15%;
+    }
+
+    .shop-table th:nth-child(2),
+    .shop-table td:nth-child(2) {
+        width: 45%;
+    }
+
+    .shop-table th:nth-child(3),
+    .shop-table td:nth-child(3),
+    .shop-table th:nth-child(4),
+    .shop-table td:nth-child(4),
+    .shop-table th:nth-child(5),
+    .shop-table td:nth-child(5),
+    .shop-table th:nth-child(6),
+    .shop-table td:nth-child(6) {
+        width: 10%;
+    }
+
+    .shop-table img {
+        max-height: 130px;
+    }
+
+.shop-details {
+    position: relative;
+    text-align: left;
+    padding: 0 10px;
+}
+
+    .shop-details .productname {
+        text-align: left;
+        font-weight: 400;
+    }
+
+    .shop-details .color-choser {
+        position: relative;
+    }
+
+    .shop-details .text {
+        float: left;
+        padding: 2px 15px 5px 0;
+    }
+
+    .shop-details .color-choser li {
+        display: inline-block;
+        margin: 0 5px 5px 0;
+    }
+
+        .shop-details .color-choser li a {
+            float: left;
+            width: 16px;
+            height: 16px;
+            font-size: 0;
+            -webkit-border-radius: 3px;
+            border-radius: 3px;
+        }
+
+.pcode {
+    padding-left: 15px;
+    color: #f7544a;
+}
+
+.shippingbox {
+    margin: 15px 0;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border: 1px solid #E1E1E1;
+    padding: 30px;
+    float: left;
+    width: 100%;
+}
+
+    .shippingbox h5 {
+        margin-bottom: 20px;
+    }
+
+    .shippingbox label {
+        position: relative;
+        margin-bottom: 8px;
+        width: 100%;
+    }
+
+    .shippingbox select,
+    .shippingbox input {
+        margin-bottom: 20px;
+        margin-left: 0;
+        width: 100%;
+    }
+
+.subtotal,
+.grandtotal {
+    float: left;
+    position: relative;
+    width: 100%;
+}
+
+    .subtotal h5 {
+        float: left;
+        width: 45%;
+        text-align: right;
+        font-weight: 400;
+    }
+
+    .subtotal span {
+        float: right;
+        width: 45%;
+        font-weight: 500;
+        font-size: 20px;
+    }
+
+    .grandtotal h5 {
+        float: left;
+        width: 45%;
+        text-align: right;
+        font-weight: 400;
+        font-size: 20px;
+    }
+
+    .grandtotal span {
+        float: right;
+        width: 45%;
+        font-weight: 500;
+        font-size: 25px;
+        color: #fe5252;
+    }

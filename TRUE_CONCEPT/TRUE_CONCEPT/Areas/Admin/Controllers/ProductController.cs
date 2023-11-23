@@ -22,7 +22,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
 
         // GET: Admin/Product
         [HttpGet]
-        public async Task<ActionResult> Index(string inputSearch = "", int searchCategoryId = 0)
+        public ActionResult Index(string inputSearch = "", int searchCategoryId = 0)
         {
             List<Product> list;
             if (searchCategoryId == 0)
@@ -34,7 +34,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                 list = db.Products.Where(x => x.NameProduct.Contains(inputSearch) && x.IDCategory == searchCategoryId).ToList();
             }
 
-          
+
             ViewData["Categories"] = new SelectList(db.Categories.ToList(), "IDCategory", "NameCategory");
             return View(list);
         }
@@ -47,34 +47,73 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Add(Product model)
+        public JsonResult Add(Product model)
         {
-            if (ModelState.IsValid)
+            using (var dbContextTransaction = db.Database.BeginTransaction())
             {
                 try
                 {
-                    model.Img_Url = "/Assets/Image/404-error-not-found.png"; // Đặt giá trị mặc định cho Img_Url
-                    var f = Request.Files["fImage"];
-                    if (f != null && f.ContentLength > 0)
+                    if (ModelState.IsValid)
                     {
-                        string fileName = f.FileName;
-                        string folderName = Server.MapPath("~/Assets/Uploads/" + fileName);
-                        f.SaveAs(folderName);
-                        model.Img_Url = "/Assets/Uploads/" + fileName;
-                    }
+                        System.Diagnostics.Debug.WriteLine("Values: " + model);
+                        // Xử lý hình ảnh ImgDemo ở đây
 
-                    model.CreateAt = DateTime.Now;
-                    db.Products.Add(model);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
+                        model.ImgDemo = addImage(model.ImgDemo) != null ? addImage("fImage") : "/Assets/Image/404-error-not-found.png";
+
+                        // Xử lý danh sách 5 hình ảnh
+                        List<String> images = new List<string>();
+                        foreach(string path in model.PreviewImages)
+                        {
+                            string result = addImage(path);
+                            if (result != null)
+                            {
+                                images.Add(result);
+                                
+                                System.Diagnostics.Debug.WriteLine("Path: " + result);
+                            }
+                        }            
+
+                        model.CreateAt = DateTime.Now;
+                        db.Products.Add(model);
+                        db.SaveChanges();
+
+                        // Thêm các hình ảnh vào bảng IMAGES
+                        foreach (string path in images)
+                        {
+                            db.IMAGES.Add(new IMAGE(model.ID, path));
+                        }
+                        db.SaveChanges();
+
+                        // Commit transaction
+                        dbContextTransaction.Commit();
+                        return Json(true);
+                    }
                 }
                 catch (Exception e)
                 {
-                    Console.WriteLine("Error Add: " + e.ToString());
+                    System.Diagnostics.Debug.WriteLine("Error Add: " + e.ToString());
+              
+                    // Rollback transaction nếu có lỗi xảy ra
+                    dbContextTransaction.Rollback();
                 }
             }
             ViewData["Categories"] = new SelectList(db.Categories.ToList(), "IDCategory", "NameCategory");
-            return View(model);
+            return Json(false);
+        }
+
+        [HttpPost]
+        private string addImage(string name)
+        {
+            var f = Request.Files[name];
+            System.Diagnostics.Debug.WriteLine("F = : " + f);
+            if (f != null && f.ContentLength > 0)
+            {
+                string fileName = DateTime.Now+f.FileName;
+                string folderName = Server.MapPath("~/Assets/Uploads/" + fileName);
+                f.SaveAs(folderName);
+                return "/Assets/Uploads/" + fileName;
+            }
+            return null;
         }
 
         public ActionResult Update(int? id)
@@ -100,7 +139,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                 obj.Unit = product.Unit;
                 obj.Quantity = product.Quantity;
                 obj.Description = product.Description;
-                obj.Img_Url = product.Img_Url;
+                obj.ImgDemo = product.ImgDemo;
                 obj.Status = product.Status;
                 obj.IDCategory = product.IDCategory;
   

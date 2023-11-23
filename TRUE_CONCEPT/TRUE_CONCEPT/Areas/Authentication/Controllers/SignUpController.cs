@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TRUE_CONCEPT.Models;
+using TRUE_CONCEPT.Models.ViewModel;
 
 namespace TRUE_CONCEPT.Areas.Authentication.Controllers
 {
@@ -19,35 +20,39 @@ namespace TRUE_CONCEPT.Areas.Authentication.Controllers
         {
             return View();
         }
-
         [HttpPost]
-        public JsonResult CheckEmail(string userName)
+        public ActionResult Index(Models.ViewModel.SignUpViewModel model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var result = db.Accounts.FirstOrDefault(x => x.UserName == userName);
-                if (result != null)
+                if (model.Password != model.RePassword)
                 {
-                    // Địa chỉ email đã tồn tại trong cơ sở dữ liệu
-                    return Json(new { success = true });
+                    ModelState.AddModelError("RePassword", "Nhập lại mật khẩu không khớp");
+                    return View(model);
                 }
-                else
+                if(db.Accounts.Where(x => x.UserName == model.Email).Count() > 0)
                 {
-                    // Địa chỉ email không tồn tại trong cơ sở dữ liệu
-                    return Json(new { success = false });
+                    ModelState.AddModelError("Email", "Email đã được sử dụng.");
+                    return View(model);
+
                 }
-            }
-            catch (Exception ex)
-            {
-                // Xử lý lỗi và gửi về thông báo lỗi
-                return Json(new { success = false, errorMessage = ex.Message });
+                TempData["SignUpModel"] = model;
+                return RedirectToAction("VerifyEmail");
             }
 
+            return View(model);
+        }
 
+
+        public ActionResult VerifyEmail()
+        {
+            var signUpModel = TempData["SignUpModel"] as SignUpViewModel;
+         
+            return View(signUpModel);
         }
 
         [HttpPost]
-        public JsonResult VerifyEmail(string email, string FullName, string VerificationCode)
+        public JsonResult SendEmail(string email, string FullName, string VerificationCode)
         {
             try
             {
@@ -69,17 +74,18 @@ namespace TRUE_CONCEPT.Areas.Authentication.Controllers
         }
 
         [HttpPost]
-        public JsonResult Register(string FullName, string email, string Password)
+        public JsonResult Register(string FullName, string Email, string Password)
         {
+            string hashingPassword = SHA256HashingPassword.GetSHA256Hash(Password);
             Account a = new Account
             {
-                UserName = email,
-                Password = Password
+                UserName = Email,
+                Password = hashingPassword
             };
             User u = new User
             {
                 FullName = FullName,
-                Email = email
+                Email = Email
             };
 
             using (var transaction = db.Database.BeginTransaction())
@@ -94,14 +100,32 @@ namespace TRUE_CONCEPT.Areas.Authentication.Controllers
                     db.SaveChanges();
 
                     transaction.Commit();
-                    return Json(new { success = true });
+                    return Json(true);
                 }
                 catch (Exception ex)
                 {
                     transaction.Rollback();
-                    return Json(new { success = false, errorMessage = ex.Message });
+                    System.Diagnostics.Debug.WriteLine("Error Add: " + ex.ToString());
+                    return Json(false);
                 }
             }
+        }
+
+        public ActionResult Completed()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// Mục đích không cho quay về trang trước, xóa cache
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult BackToLogin()
+        {
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            
+            return RedirectToAction("Index","TrangChu", new { area = "Client"});
         }
 
     }

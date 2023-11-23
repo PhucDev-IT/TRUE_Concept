@@ -1,0 +1,248 @@
+﻿@model IEnumerable<TRUE_CONCEPT.Models.ViewModel.ItemCartViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Client/Views/Shared/layout-client.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="images/favicon.png">
+    <title>
+        Giỏ hàng
+    </title>
+    <link href="~/Areas/Client/Content/css/Cart.css" rel="stylesheet" />
+
+</head>
+<body>
+    <div class="wrapper">
+        <div class="container_fullwidth">
+            <div class="container shopping-cart">
+                <div class="row">
+                    <div class="col-md-12">
+
+                        <div class="clearfix">
+                        </div>
+                        <table class="shop-table">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th>
+                                        Image
+                                    </th>
+                                    <th>
+                                        Chi tiết
+                                    </th>
+                                    <th>
+                                        Đơn giá
+                                    </th>
+                                    <th>
+                                        Số lượng
+                                    </th>
+                                    <th>
+                                        Tổng tiền
+                                    </th>
+                                    <th>
+                                        Delete
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="trow_@item.IdProduct">
+                                        <td>
+                                            <input type="checkbox" onclick="selectItemCart(this)" data-id="@item.IdProduct" />
+                                        </td>
+                                        <td>
+                                            <img src="@item.ImageDemo" alt="">
+                                        </td>
+                                        <td>
+                                            <div class="shop-details">
+                                                <div class="productname">
+                                                    @item.NameProduct
+                                                </div>
+                                                <p>
+                                                    Đơn vị: @item.unit
+                                                </p>
+
+                                                <p>
+                                                    Phân loại :
+                                                    <strong class="pcode">
+                                                        @item.nameCategory
+                                                    </strong>
+                                                </p>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span id="price-product_id_@item.IdProduct" data-price="@item.currentPrice">
+                                                @Html.FormatValue(item.currentPrice, "{0:#,###}")đ
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <div class="alter-number-order">
+                                                <div data-id="@item.IdProduct" id="reduce" onclick="reduceQuantity(this)"><i class="fa-solid fa-minus"></i></div>
+                                                <div  id="quantity_id_@item.IdProduct" class="solgSP">@item.quantity</div>
+                                                <div data-id="@item.IdProduct" id="increase" onclick="increaseQuantity(this)"><i class="fa-solid fa-plus"></i></div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <h5>
+                                                <strong id="total-money_id_@item.IdProduct"  class="red">
+                                                    @Html.FormatValue(item.currentPrice * item.quantity, "{0:#,###}")đ
+                                                </strong>
+                                            </h5>
+                                        </td>
+                                        <td>
+                                            <p id="remove-product" data-id="@item.IdProduct" onclick="removeCart(this)"> <i class="fa-solid fa-trash-can"></i></p>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                @*KHUNG THANH TOÁN*@
+                <div>
+                    <div>
+                        <span>Tổng thanh toán: </span>
+                        <strong id="total-Money" style="color:red"></strong>
+                    </div>
+                    <button id="payment">Mua hàng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+
+    var selectedCarts = [];
+
+
+    //TĂNG GIẢM SỐ LƯỢNG
+    function reduceQuantity(value) {
+        var idP = $(value).data('id');
+        var quantity = document.getElementById('quantity_id_' + idP).innerText;
+        var priceElement = document.getElementById('price-product_id_' + idP);
+        var price = priceElement.getAttribute('data-price');
+
+
+        if (quantity >= 2) {
+            quantity--;
+            document.getElementById('quantity_id_' + idP).innerText = quantity;
+        }
+        var sum = price * quantity;
+        document.getElementById('total-money_id_' + idP).innerText = formatCurrency(sum);
+    }
+
+
+    function increaseQuantity(value)  {
+        var idP = $(value).data('id');
+        var quantity = document.getElementById('quantity_id_' + idP).innerText;
+        var priceElement = document.getElementById('price-product_id_' + idP);
+        var price = priceElement.getAttribute('data-price');
+
+        quantity++;
+        document.getElementById('quantity_id_' + idP).innerText = quantity;
+        document.getElementById('total-money_id_' + idP).innerText = formatCurrency(price * quantity);
+    };
+
+    function formatCurrency(number) {
+        return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+    }
+
+    //CHỌN SẢN PHẨM
+    function selectItemCart(checkbox) {
+        var idP = $(checkbox).data('id');
+        if (checkbox.checked) {
+            selectedCarts.push(inforCartByID(idP));
+
+        } else {
+            var indexToRemove = selectedCarts.findIndex(product => product.IDProduct === idP);
+            if (indexToRemove !== -1) {
+                selectedCarts.splice(indexToRemove, 1);
+            }
+        }
+        console.log(selectedCarts.length);
+        calculateTotalMoney();
+    }
+
+    //Lấy thông tin giỏ hàng thông qua id
+    function inforCartByID(id) {
+        var total = parseFloat(document.getElementById('quantity_id_' + id).innerText) * parseFloat(document.getElementById('price-product_id_' + id).getAttribute('data-price'));
+        var cart = {
+            IDProduct: id,
+            Quantity: document.getElementById('quantity_id_' + id).innerText,
+            Price: document.getElementById('price-product_id_' + id).getAttribute('data-price'),
+            TotalMoney:total,
+        };
+        return cart;
+    }
+
+    function calculateTotalMoney() {
+        var totalMoney = 0;
+
+        for (var i = 0; i < selectedCarts.length; i++) {
+            totalMoney += selectedCarts[i].TotalMoney;
+        }
+        document.getElementById('total-Money').innerText = formatCurrency(totalMoney);
+
+    }
+
+    //XÓA CART
+    function removeCart(value) {
+        var idP = $(value).data('id');
+
+        $.ajax({
+            url: '/Carts/Remove',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ id: idP }),
+            success: function (result) {
+                if (result.success) {
+                    alert('OK!');
+                    $('#trow_' + idP).remove();
+                } else {
+                    alert('Có lỗi xảy ra!');
+                }
+            },
+            error: function () {
+                alert('Có lỗi xảy ra !');
+            }
+        })
+    }
+
+    //Nhấn thanh toán
+    document.getElementById("payment").addEventListener("click", function () {
+
+        // Sử dụng AJAX để gửi dữ liệu lên server
+        $.ajax({
+            url:  '/Carts/PaymentProducts',
+            type: 'POST',
+            data: JSON.stringify(selectedCarts),
+            contentType: 'application/json; charset=utf-8',
+            success: function (result) {
+                if (result.success) {
+                    alert('OK!');
+
+                } else {
+                    alert('Có lỗi xảy ra!');
+                }
+            },
+            error: function () {
+                alert('Có lỗi xảy ra !');
+            }
+        });
+    });
+
+</script>
+

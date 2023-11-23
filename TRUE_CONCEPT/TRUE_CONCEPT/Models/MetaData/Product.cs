@@ -32,9 +32,9 @@ namespace TRUE_CONCEPT.Models.MetaData
         public string Description { get; set; }
 
         [DisplayName("Ảnh")]
-        public string Img_Url { get; set; }
+        public string ImgDemo { get; set; }
 
-
+        public List<String> PreviewImages { get; set; }
         public string Status { get; set; }
 
         [DisplayName("Danh mục")]

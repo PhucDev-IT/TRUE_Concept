@@ -31,13 +31,22 @@ namespace TRUE_CONCEPT.Areas.Authentication.Controllers
             {
                 try
                 {
-                    Account result = db.Accounts.FirstOrDefault(x => x.UserName == a.UserName && x.Password == a.Password);
+                    string hashingPassword = SHA256HashingPassword.GetSHA256Hash(a.Password);
+                    Account result = db.Accounts.FirstOrDefault(x => x.UserName == a.UserName && x.Password == hashingPassword);
                     if (result != null)
                     {
-                        FormsAuthentication.SetAuthCookie(result.UserName, false);
-                        if (ReturnUrl == null || ReturnUrl == "")
+                        if (result.Decentralization == "Client")
                         {
-                            return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
+                            Session["AccountUserCurrent"] = result;                        
+                            return RedirectToAction("Index", "TrangChu", new { area = "Client" });
+                        }
+                        else
+                        {
+                            FormsAuthentication.SetAuthCookie(result.ID.ToString(), false);
+                            if (ReturnUrl == null || ReturnUrl == "")
+                            {
+                                return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
+                            }
                         }
                         return Redirect(ReturnUrl);
                     }

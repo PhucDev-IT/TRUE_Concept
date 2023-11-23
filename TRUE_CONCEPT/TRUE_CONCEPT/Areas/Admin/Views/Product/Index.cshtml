@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="~/Areas/Admin/Content/css/ProductManager.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -54,7 +55,7 @@
     <table class="table table-sp">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Img_Url)
+                @Html.DisplayNameFor(model => model.ImgDemo)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.NameProduct)
@@ -80,7 +81,7 @@
         {
             <tr class="allow-overflow">
                 <td>
-                    <img class="img_product" src="@Html.DisplayFor(modelItem => item.Img_Url)" />
+                    <img class="img_product" src="@Html.DisplayFor(modelItem => item.ImgDemo)" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.NameProduct)

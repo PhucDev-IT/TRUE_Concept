@@ -51,6 +51,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="IMAGES">
+      <EntityTypeMapping TypeName="TRUE_CONCEPTModel.IMAGE">
+        <MappingFragment StoreEntitySet="IMAGES">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="IdProduct" ColumnName="IdProduct" />
+          <ScalarProperty Name="Img_Url" ColumnName="Img_Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="ItemCarts">
       <EntityTypeMapping TypeName="TRUE_CONCEPTModel.ItemCart">
         <MappingFragment StoreEntitySet="ItemCart">
@@ -94,7 +103,7 @@
           <ScalarProperty Name="CreateAt" ColumnName="CreateAt" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="Img_Url" ColumnName="Img_Url" />
+          <ScalarProperty Name="ImgDemo" ColumnName="ImgDemo" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="IDCategory" ColumnName="IDCategory" />
         </MappingFragment>

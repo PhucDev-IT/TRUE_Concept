@@ -26,42 +26,13 @@
     @*<link rel="stylesheet" href="SanPham.css">
         <link rel="stylesheet" href="Index.css">
         <link rel="stylesheet" href="LayoutClient.css">*@
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- LINK CSS -->
     <link href="~/Areas/Client/Content/css/Products.css" rel="stylesheet" />
 </head>
 <body>
-    @*<div class="header-client container-fluid">
-            <div class="grid-wide">
-                <div class="navbar">
-                    <div class="logo-header">
-                        <img src="IndexImg/SOUL-CONCEPT-LOGO-NEW.png" alt="">
-                    </div>
-                    <ul class="navigation">
-                        <li class="nav-item"><a href="http://127.0.0.1:5501/LayoutClient.html">Trang chủ</a> </li>
-                        <li class="nav-item"><a href="">Về chúng tôi</a> </li>
-                        <li class="nav-item"><a href="http://127.0.0.1:5501/SanPham.html">Sản phẩm</a> </li>
-                        <li class="nav-item"><a href="">Thê dự án</a> </li>
-                        <li class="nav-item"><a href="">Blog</a> </li>
-                        <li class="nav-item"><a href="">Liên hệ</a> </li>
-                    </ul>
-                    <div class="search-cart">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                        <i class="fa-solid fa-cart-shopping"></i>
-                    </div>
-                    <div class="login-regis">
-                        <div class="Login-header d-flex">
-                            <i class="fa-solid fa-right-to-bracket"></i>
-                            <h3>Đăng nhập</h3>
-                        </div>
-                        <div class="Signin-header d-flex">
-                            <i class="fa-regular fa-address-card"></i>
-                            <h3>Đăng kí</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>*@
+  
     <div class="AllPage-product container-fluid">
         <div class="grid-wide-product">
             <div class="Block1-ProductPage d-flex">
@@ -70,8 +41,13 @@
                     <ul class="List-TypeProduct">
                         @foreach (var item in ViewBag.Categories)
                         {
-                            <li class="Product-type"><i class="fa-solid fa-chevron-right"></i><a href="" class="linkProduct-type">@item.NameCategory </a><p class="amount-of-product"> (@item.QuantityProduct)</p></li>
+                            <li class="Product-type">
+                                <i class="fa-solid fa-chevron-right"></i>
+                                <a  href="@Url.Action("Index","Products",new { idCategory = item.IDCategory})"  class="linkProduct-type">@item.NameCategory</a>
+                                <p class="amount-of-product">(@item.QuantityProduct)</p>
+                            </li>
                         }
+
 
                     </ul>
                 </div>
@@ -138,12 +114,22 @@
                         </div>
                         <div class="Number_of_TabSP col-3">
                             <ul>
-                                <li class="number">1</li>
-                                <li class="number">2</li>
-                                <li class="number">3</li>
-                                <li class="number">4</li>
-                                <li class="number">5</li>
-                                <li class="number">6</li>
+                                @if (ViewBag.TotalPage > 0)
+                                {
+                                    for (int i = 1; i < ViewBag.TotalPage; i++)
+                                    {
+                                        if (i == 6)
+                                        {
+                                            break;
+                                        }
+                                        <li  data-id="@i" class="number">
+                                     
+                                            <a href="@Url.Action("Index","Products", new {idCategory=ViewBag.idCategory , page=i  })">@i</a>
+                                        </li>
+                                    }
+                                    <li class="number"><a href="@Url.Action("Index","Products", new {idCategory=ViewBag.idCategory , page=ViewBag.currentPage+1 })">Next</a></li>
+                                }
+
                             </ul>
                         </div>
                     </div>
@@ -152,20 +138,33 @@
                         <!-- đặt vào trong vòng lặp ---- > reder ra list product-->
                         @foreach (var item in Model)
                         {
-                            <div class="product-card col-3">
+                            <div data-id="@item.ID" onclick="clickProduct(this)" class="product-card col-3">
                                 <div class="addPadding-product-card">
-                                    <div class="imgProduct_Wrapper"><img src="@item.Img_Url" alt=""></div>
+                                    <div class="imgProduct_Wrapper"><img src="@item.ImgDemo" alt=""></div>
                                     <h5 class="product-name">@item.NameProduct</h5>
                                     <p class="old-price"> @Html.FormatValue(item.PriceOld, "{0:#,###}")đ</p>
                                     <p class="new-price"> @Html.FormatValue(item.NewPrice, "{0:#,###}")đ</p>
                                     <div class="status-cartIcon">
-                                        <div class="tick-title">
-                                            <i class="fa-solid fa-check"></i>
-                                            <p>Còn hàng</p>
-                                        </div>
-                                        <div class="icon-AddtoCart">
-                                            <i class="fa-solid fa-cart-shopping"></i>
-                                        </div>
+                                        @if (item.Quantity > 0)
+                                        {
+
+
+                                            <div class="tick-title">
+                                                <i class="fa-solid fa-check"></i>
+                                                <p>Còn hàng</p>
+                                            </div>
+                                            <div class="icon-AddtoCart">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </div>
+                                        }
+                                        else
+                                        {
+                                            <div class="tick-title icon2">
+                                                <i class="fa-solid fa-xmark" style="color: #ff0a0a;"></i>
+                                                <p>Tạm hết</p>
+                                            </div>
+                                        }
+
                                     </div>
                                 </div>
                             </div>
@@ -175,15 +174,18 @@
 
                 </div>
             </div>
+
             <div class="Block2-ProductPage">
                 <div class="Block-feel-the-product">
 
                 </div>
-                <div class="DK-get-Email">
-                    <h1>ĐĂNG KÝ NHẬN EMAIL THÔNG BÁO KHUYẾN MẠI HOẶC ĐỂ ĐƯỢC TƯ VẤN MIỄN PHÍ</h1>
-                    <div class="input-submitBtn">
-                        <input type="text" placeholder="Nhập email hoặc số điện thoại của bạn">
-                        <div class="btnSubmit"><a href="">GỬI</a></div>
+                <div class="block-DK-get-Email">
+                    <div class="DK-get-Email">
+                        <h1>ĐĂNG KÝ NHẬN EMAIL THÔNG BÁO KHUYẾN MẠI HOẶC ĐỂ ĐƯỢC TƯ VẤN MIỄN PHÍ</h1>
+                        <div class="input-submitBtn">
+                            <input type="text" placeholder="Nhập email hoặc số điện thoại của bạn">
+                            <div class="btnSubmit"><a href="">GỬI</a></div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -194,3 +196,13 @@
     </div>
 </body>
 </html>
+<script>
+
+
+    //Chọn 1 sản phẩm bất kỳ
+   function clickProduct(value) {
+    var idProduct = $(value).data('id');
+    window.location.href = '/Client/Detail_products/Index?idProduct=' + idProduct;
+}
+
+</script>

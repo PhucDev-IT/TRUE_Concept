@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,5 +14,10 @@ namespace TRUE_CONCEPT
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
         }
+        protected void Session_Start()
+        {
+            // Code khởi tạo Session (nếu cần thiết)
+        }
+
     }
 }

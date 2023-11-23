@@ -184,6 +184,8 @@
     <Content Include="Areas\Authentication\Content\js\main.js" />
     <Content Include="Areas\Authentication\Content\vendor\jquery\jquery-ui.min.js" />
     <Content Include="Areas\Authentication\Content\vendor\jquery\jquery.min.js" />
+    <Content Include="Areas\Client\Content\css\Cart.css" />
+    <Content Include="Areas\Client\Content\css\Detail_Product.css" />
     <Content Include="Areas\Client\Content\css\FontMaps.css" />
     <Content Include="Areas\Client\Content\css\HomePage.css" />
     <Content Include="Areas\Client\Content\css\layout-client.css" />
@@ -199,13 +201,17 @@
     <Content Include="Areas\Client\Content\ImgHomePage\imgNews3.jpg" />
     <Content Include="Areas\Client\Content\ImgHomePage\ing_about01.jpg" />
     <Content Include="Areas\Client\Content\ImgHomePage\ing_about02.jpg" />
+    <Content Include="Areas\Client\Content\ImgHomePage\int_v1_slider01.jpg" />
     <Content Include="Areas\Client\Content\ImgHomePage\service1.jpg" />
     <Content Include="Areas\Client\Content\ImgHomePage\service2.jpg" />
     <Content Include="Areas\Client\Content\ImgHomePage\service3.jpg" />
     <Content Include="Areas\Client\Content\ImgHomePage\service4.jpg" />
     <Content Include="Areas\Client\Content\ImgHomePage\SOUL-CONCEPT-LOGO-NEW.png" />
+    <Content Include="Areas\Client\Content\ImgProductPage\Product01.jpg" />
     <Content Include="Assets\Image\404-error-not-found.png" />
+    <Content Include="Assets\Image\completed.png" />
     <Content Include="Assets\Uploads\gai-xinh.jpg" />
+    <Content Include="Assets\Image\image_send_email.png" />
     <Content Include="Global.asax" />
     <Content Include="Models\TrueConcept.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -232,6 +238,8 @@
     <Compile Include="Areas\Authentication\Controllers\LoginController.cs" />
     <Compile Include="Areas\Authentication\Controllers\SignUpController.cs" />
     <Compile Include="Areas\Client\ClientAreaRegistration.cs" />
+    <Compile Include="Areas\Client\Controllers\CartsController.cs" />
+    <Compile Include="Areas\Client\Controllers\Detail_productsController.cs" />
     <Compile Include="Areas\Client\Controllers\ProductsController.cs" />
     <Compile Include="Areas\Client\Controllers\TrangChuController.cs" />
     <Compile Include="Global.asax.cs">
@@ -259,6 +267,9 @@
     <Compile Include="Models\ChiTietPhieuNhapMetaData.cs" />
     <Compile Include="Models\DbMangager.cs" />
     <Compile Include="Models\HomeViewModel.cs" />
+    <Compile Include="Models\IMAGE.cs">
+      <DependentUpon>TrueConcept.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ItemCart.cs">
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
@@ -312,6 +323,8 @@
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserMetaData.cs" />
+    <Compile Include="Models\ViewModel\ItemCartViewModel.cs" />
+    <Compile Include="Models\ViewModel\SignUpViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -345,16 +358,8 @@
     <Content Include="Areas\Admin\Views\NhapHang\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Orders\Details.cshtml" />
     <Content Include="Areas\Admin\Views\HomeAdmin\Index.cshtml" />
-    <EntityDeploy Include="Models\TrueConcept.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>TrueConcept.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\TrueConcept.edmx.diagram">
-      <DependentUpon>TrueConcept.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\Authentication\Views\web.config" />
     <Content Include="Areas\Authentication\Views\Login\Index.cshtml" />
-    <Content Include="Areas\Authentication\Views\SignUp\Index.cshtml" />
     <Content Include="Areas\Authentication\Content\.sass-cache\21880c0ffe15753a53f8402e9f64e1077e071510\style.scssc" />
     <Content Include="Areas\Authentication\Content\.sass-cache\2866be86c578bb583fbf023501bb9fd24cc3bf22\extend.scssc" />
     <Content Include="Areas\Authentication\Content\.sass-cache\2866be86c578bb583fbf023501bb9fd24cc3bf22\fonts.scssc" />
@@ -448,14 +453,27 @@
     <Content Include="Areas\Authentication\Content\scss\layouts\main.scss" />
     <Content Include="Areas\Authentication\Content\scss\layouts\responsive.scss" />
     <Content Include="Areas\Authentication\Content\scss\style.scss" />
-    <Content Include="Areas\Client\Content\Font\NunitoSans_7pt_SemiCondensed-Medium.woff" />
-    <Content Include="Areas\Client\Content\Font\NunitoSans_7pt_SemiCondensed-Regular.woff" />
-    <Content Include="Areas\Client\Content\Font\NunitoSans_7pt_SemiCondensed-SemiBold.woff" />
-    <Content Include="Areas\Client\Content\Font\NunitoSans_7pt_SemiExpanded-Bold.woff" />
     <Content Include="Areas\Client\Views\Products\Index.cshtml" />
     <Content Include="Areas\Client\Views\Shared\layout-client.cshtml" />
     <Content Include="Areas\Client\Views\TrangChu\Index.cshtml" />
     <Content Include="Areas\Client\Views\web.config" />
+    <Content Include="Areas\Authentication\Views\SignUp\Index.cshtml" />
+    <Content Include="Areas\Authentication\Views\SignUp\VerifyEmail.cshtml" />
+    <Content Include="Areas\Authentication\Views\SignUp\Completed.cshtml" />
+    <Compile Include="Models\SHA256HashingPassword.cs" />
+    <EntityDeploy Include="Models\TrueConcept.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TrueConcept.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\TrueConcept.edmx.diagram">
+      <DependentUpon>TrueConcept.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\Client\Views\Detail_products\Index.cshtml" />
+    <Content Include="Areas\Client\Views\Carts\Index.cshtml" />
+    <Content Include="Areas\Client\Content\Font\NunitoSans_7pt_SemiCondensed-Medium.woff" />
+    <Content Include="Areas\Client\Content\Font\NunitoSans_7pt_SemiCondensed-Regular.woff" />
+    <Content Include="Areas\Client\Content\Font\NunitoSans_7pt_SemiCondensed-SemiBold.woff" />
+    <Content Include="Areas\Client\Content\Font\NunitoSans_7pt_SemiExpanded-Bold.woff" />
     <None Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

@@ -84,7 +84,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                                     ID = o.IDProduct,
                                     NameProduct = p.NameProduct,
                                     Price = o.Price,
-                                    Img_Url = p.Img_Url,
+                                    Img_Url = p.ImgDemo,
                                     Quantity = (double)o.Quantity,
                                     TotalMoney = (double)o.TotalMoney
                                 };

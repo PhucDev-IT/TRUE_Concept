@@ -19,6 +19,7 @@ namespace TRUE_CONCEPT.Models
         {
             this.ChiTietDuAns = new HashSet<ChiTietDuAn>();
             this.ChiTietPhieuNhaps = new HashSet<ChiTietPhieuNhap>();
+            this.IMAGES = new HashSet<IMAGE>();
             this.ItemCarts = new HashSet<ItemCart>();
             this.OrderDetails = new HashSet<OrderDetail>();
         }
@@ -31,8 +32,9 @@ namespace TRUE_CONCEPT.Models
         public Nullable<System.DateTime> CreateAt { get; set; }
         public double Quantity { get; set; }
         public string Description { get; set; }
-        public string Img_Url { get; set; }
+        public string ImgDemo { get; set; }
         public string Status { get; set; }
+        public List<String> PreviewImages { get; set; }
         public Nullable<int> IDCategory { get; set; }
     
         public virtual Category Category { get; set; }
@@ -40,6 +42,8 @@ namespace TRUE_CONCEPT.Models
         public virtual ICollection<ChiTietDuAn> ChiTietDuAns { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<IMAGE> IMAGES { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemCart> ItemCarts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

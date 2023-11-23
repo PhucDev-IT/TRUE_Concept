@@ -88,7 +88,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                                 NameProduct = product.NameProduct,
                                 Price = ctpn.Price,
                                 Quantity = (double)ctpn.Quantity,
-                                Img_Url = product.Img_Url
+                                Img_Url = product.ImgDemo
                             };
                 ViewBag.product = query.ToList();
                 return View(obj);

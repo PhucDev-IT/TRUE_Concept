@@ -32,6 +32,7 @@ namespace TRUE_CONCEPT.Models
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<ChiTietDuAn> ChiTietDuAns { get; set; }
         public virtual DbSet<ChiTietPhieuNhap> ChiTietPhieuNhaps { get; set; }
+        public virtual DbSet<IMAGE> IMAGES { get; set; }
         public virtual DbSet<ItemCart> ItemCarts { get; set; }
         public virtual DbSet<OrderDetail> OrderDetails { get; set; }
         public virtual DbSet<Order> Orders { get; set; }

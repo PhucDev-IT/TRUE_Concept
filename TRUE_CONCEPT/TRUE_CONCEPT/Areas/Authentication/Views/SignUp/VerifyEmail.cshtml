@@ -1,0 +1,157 @@
+﻿@model TRUE_CONCEPT.Models.ViewModel.SignUpViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Xác minh tài khoản</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Main css -->
+    <link href="~/Areas/Authentication/Content/css/style.css" rel="stylesheet" />
+</head>
+<body>
+    <p id="fullname" style="display:none">@Model.FullName</p>
+    <p id="password" style="display:none">@Model.Password</p>
+
+    <div class="container">
+        <div class="verify-content">
+            <div class="verify-form">
+                <h2 class="verify__form-title">Xác minh địa chỉ Email</h2>
+                <img src="~/Assets/Image/image_send_email.png" />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <p>Chúng tôi đã gửi mã xác minh đến địa chỉ Email: <span id="email">@Model.Email</span></p>
+                <p>Vui lòng nhập mã xác minh của bạn để tiếp tục đăng ký tài khoản thành viên</p>
+                <div class="form-group">
+                    <input type="text" name="digital1" id="digital1" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
+                    <input type="text" name="digital2" id="digital2" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
+                    <input type="text" name="digital3" id="digital3" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
+                    <input type="text" name="digital4" id="digital4" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
+                    <input type="text" name="digital5" id="digital5" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
+                    <input type="text" name="digital6" id="digital6" maxlength="1" required oninput="this.value = this.value.replace(/[^0-9]/g, ''); if (this.value.length > 1) this.value = this.value.slice(0, 1);" />
+                </div>
+                <div>
+                    <span>Gửi lại mã xác minh:</span>
+                    @*Cần css click này sống 1 chút, tức là có cảm nhận, nó đơ quá*@
+                    <span id="ReSending" onclick="sendEmail()">Gửi mã</span>
+                    <span id="countdown" />
+                </div>
+                <input type="submit" value="Xác minh" id="btnVerify" />
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+    var email = document.getElementById("email").innerText;
+    var fullname = document.getElementById("fullname").innerText;
+    var password = document.getElementById("password").innerText;
+
+    function countTime() {
+        var countdown = 3; // Thời gian đếm ngược ban đầu là 60 giây
+
+        document.getElementById("countdown").style.display = "inline";
+        document.getElementById("ReSending").style.display = "none";
+
+        var x = setInterval(function () {
+            // Hiển thị thời gian đếm ngược
+            document.getElementById("countdown").innerHTML = countdown + " giây ";
+
+            // Giảm thời gian đếm ngược
+            countdown--;
+
+            // Khi hết thời gian, hiển thị nút "Gửi lại" và dừng đếm ngược
+            if (countdown < 0) {
+                clearInterval(x);
+                document.getElementById("countdown").style.display = "none";
+                document.getElementById("ReSending").style.display = "inline";
+            }
+        }, 1000); // Cập nhật mỗi giây
+    }
+
+    //Gửi EMAIL
+    var VerificationCode = '';
+    function generateRandomNumber() {
+
+        let randomString = '';
+        for (let i = 0; i < 6; i++) {
+            randomString += Math.floor(Math.random() * 10); // Thêm một số ngẫu nhiên từ 0 đến 9 vào chuỗi
+        }
+        return randomString;
+    }
+
+    function sendEmail() {
+
+        countTime();
+        VerificationCode = generateRandomNumber();
+        console.log(VerificationCode)
+        $.ajax({
+            url: '/SignUp/SendEmail', // Đường dẫn đến action xử lý gửi email ở server
+            type: 'POST',
+            data: {
+                email:email,
+                FullName:fullname,
+                VerificationCode: VerificationCode
+            },
+        success: function (response) {
+
+        },
+        error: function (error) {
+            // Xử lý lỗi nếu có
+            alert('Có lỗi xảy ra khi gửi email');
+        }
+    });
+    }
+
+
+
+    //Xác minh code
+    $('#btnVerify').click(function () {
+        var digital1 = document.getElementById("digital1").value;
+        var digital2 = document.getElementById("digital2").value;
+        var digital3 = document.getElementById("digital3").value;
+        var digital4 = document.getElementById("digital4").value;
+        var digital5 = document.getElementById("digital5").value;
+        var digital6 = document.getElementById("digital6").value;
+        var result = '';
+        if (digital1 == "" || digital2 == "" || digital3 == "" || digital4 == "" || digital5 == "" || digital6 == "") {
+            alert('Chưa nhập đủ số');
+        } else {
+            result = digital1 + digital2 + digital3 + digital4 + digital5 + digital6;
+            if (result == VerificationCode) {
+
+                $.ajax({
+                    url: '/SignUp/Register',
+                    type: 'POST',
+                    data: {
+                        FullName: fullname,
+                        Email: email,
+                        Password: password
+                    }, // Truyền dữ liệu cần gửi đi
+                    success: function (response) {
+                        if (response == true) {
+                            window.location.href = '/Authentication/SignUp/Completed';
+                        } else {
+                             alert('Có lỗi xả ra trong quá trình đăng ký');
+                        window.location.href = '@Url.Action("Index","SignUp")';
+                        }
+                    },
+                    error: function (error) {
+                        alert('Có lỗi xả ra trong quá trình đăng ký');
+                        window.location.href = '@Url.Action("Index","SignUp")';
+                    }
+                });
+            } else {
+                alert('Mã xác minh không chính xác');
+            }
+        }
+    });
+
+
+</script>
