@@ -11,11 +11,13 @@ namespace TRUE_CONCEPT.Models.ViewModel
 
         public string NameProduct { get; set; }
 
-        public double quantity { get; set; }
+        public double Quantity { get; set; }
         public double currentPrice { get; set; }
 
         public string ImageDemo { get; set; }
         public string unit { get; set; }
         public string nameCategory { get; set; }
+
+        public double TotalMoney { get; set; }
     }
 }

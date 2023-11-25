@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TRUE_CONCEPT.Models.ViewModel.ItemCartViewModel>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Client/Views/Shared/layout-client.cshtml";
+    Layout = "~/Views/Shared/layout-client.cshtml";
 }
 
 
@@ -15,7 +15,7 @@
     <title>
         Giỏ hàng
     </title>
-    <link href="~/Areas/Client/Content/css/Cart.css" rel="stylesheet" />
+    <link href="~/Content/css/Cart.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -59,18 +59,18 @@
                                             <input type="checkbox" onclick="selectItemCart(this)" data-id="@item.IdProduct" />
                                         </td>
                                         <td>
-                                            <img src="@item.ImageDemo" alt="">
+                                            <img id="img_@item.IdProduct" src="@item.ImageDemo" alt="">
                                         </td>
                                         <td>
                                             <div class="shop-details">
-                                                <div class="productname">
+                                                <div id="name-product_@item.IdProduct" class="productname">
                                                     @item.NameProduct
                                                 </div>
-                                                <p>
+                                                <p id="unit_@item.IdProduct">
                                                     Đơn vị: @item.unit
                                                 </p>
 
-                                                <p>
+                                                <p id="category_@item.IdProduct">
                                                     Phân loại :
                                                     <strong class="pcode">
                                                         @item.nameCategory
@@ -86,14 +86,14 @@
                                         <td>
                                             <div class="alter-number-order">
                                                 <div data-id="@item.IdProduct" id="reduce" onclick="reduceQuantity(this)"><i class="fa-solid fa-minus"></i></div>
-                                                <div  id="quantity_id_@item.IdProduct" class="solgSP">@item.quantity</div>
+                                                <div id="quantity_id_@item.IdProduct" class="solgSP">@item.Quantity</div>
                                                 <div data-id="@item.IdProduct" id="increase" onclick="increaseQuantity(this)"><i class="fa-solid fa-plus"></i></div>
                                             </div>
                                         </td>
                                         <td>
                                             <h5>
-                                                <strong id="total-money_id_@item.IdProduct"  class="red">
-                                                    @Html.FormatValue(item.currentPrice * item.quantity, "{0:#,###}")đ
+                                                <strong id="total-money_id_@item.IdProduct" class="red">
+                                                    @Html.FormatValue(item.currentPrice * item.Quantity, "{0:#,###}")đ
                                                 </strong>
                                             </h5>
                                         </td>
@@ -112,7 +112,7 @@
                 <div>
                     <div>
                         <span>Tổng thanh toán: </span>
-                        <strong id="total-Money" style="color:red"></strong>
+                        <strong id="total-Money" style="color:red">0</strong>
                     </div>
                     <button id="payment">Mua hàng</button>
                 </div>
@@ -126,7 +126,6 @@
 <script>
 
     var selectedCarts = [];
-
 
     //TĂNG GIẢM SỐ LƯỢNG
     function reduceQuantity(value) {
@@ -142,8 +141,24 @@
         }
         var sum = price * quantity;
         document.getElementById('total-money_id_' + idP).innerText = formatCurrency(sum);
+
+        //Thay đổi thành tiền nếu sản phẩm đã được chọn
+        reTotalMoney(idP, quantity);
     }
 
+    //Tính toán lại tiền sau khi cập nhật lại số lượng
+    function reTotalMoney(idP, quantity) {
+        var totalMoney = 0;
+        for (var i = 0; i < selectedCarts.length; i++) {
+            if (selectedCarts[i].IDProduct == idP) {
+                selectedCarts[i].Quantity = quantity;
+                selectedCarts[i].TotalMoney = quantity * selectedCarts[i].currentPrice;
+            }
+            totalMoney += selectedCarts[i].TotalMoney;
+        }
+        document.getElementById('total-Money').innerText = formatCurrency(totalMoney);
+
+    }
 
     function increaseQuantity(value)  {
         var idP = $(value).data('id');
@@ -154,10 +169,20 @@
         quantity++;
         document.getElementById('quantity_id_' + idP).innerText = quantity;
         document.getElementById('total-money_id_' + idP).innerText = formatCurrency(price * quantity);
+
+        reTotalMoney(idP, quantity);
     };
 
     function formatCurrency(number) {
         return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(number);
+    }
+
+    function convertCurrencyToFloat(priceText) {
+        // Loại bỏ ký tự không phải số từ chuỗi tiền tệ
+        let cleanedString = priceText.replace(/[^\d]/g, '');
+        let floatValue = parseFloat(cleanedString);
+
+        return floatValue;
     }
 
     //CHỌN SẢN PHẨM
@@ -172,7 +197,6 @@
                 selectedCarts.splice(indexToRemove, 1);
             }
         }
-        console.log(selectedCarts.length);
         calculateTotalMoney();
     }
 
@@ -181,8 +205,12 @@
         var total = parseFloat(document.getElementById('quantity_id_' + id).innerText) * parseFloat(document.getElementById('price-product_id_' + id).getAttribute('data-price'));
         var cart = {
             IDProduct: id,
+            ImageDemo: document.getElementById('img_' + id).getAttribute('src'),
+            NameProduct: document.getElementById('name-product_' + id).innerText,
+            unit: document.getElementById('unit_' + id).innerText,
+            nameCategory: document.getElementById('category_' + id).innerText,
             Quantity: document.getElementById('quantity_id_' + id).innerText,
-            Price: document.getElementById('price-product_id_' + id).getAttribute('data-price'),
+            currentPrice: document.getElementById('price-product_id_' + id).getAttribute('data-price'),
             TotalMoney:total,
         };
         return cart;
@@ -224,18 +252,24 @@
     //Nhấn thanh toán
     document.getElementById("payment").addEventListener("click", function () {
 
+        if (selectedCarts.length <= 0) {
+            alert("Chọn sản phẩm trước khi mua hàng");
+            return;
+        }
+        var orderViewModel = {
+            ItemCarts: selectedCarts,
+            Total: convertCurrencyToFloat(document.getElementById('total-Money').innerText)
+        }
+
         // Sử dụng AJAX để gửi dữ liệu lên server
         $.ajax({
-            url:  '/Carts/PaymentProducts',
+            url:  '/Carts/ConvertView',
             type: 'POST',
-            data: JSON.stringify(selectedCarts),
+            data: JSON.stringify(orderViewModel),
             contentType: 'application/json; charset=utf-8',
             success: function (result) {
                 if (result.success) {
-                    alert('OK!');
-
-                } else {
-                    alert('Có lỗi xảy ra!');
+                     window.location.href = '@Url.Action("Index","Orders")';
                 }
             },
             error: function () {

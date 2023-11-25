@@ -1,0 +1,84 @@
+﻿@model TRUE_CONCEPT.Models.ViewModel.OrderViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/layout-client.cshtml";
+
+    TRUE_CONCEPT.Models.Account account = Session["AccountUserCurrent"] as TRUE_CONCEPT.Models.Account;
+    TRUE_CONCEPT.Models.User userCurrent = TRUE_CONCEPT.Models.DbMangager.GetInstance().Users.Find(account.ID);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Thanh toán</title>
+</head>
+<body>
+    <h2>Thanh toán</h2>
+    @*SHOW THÔNG TIN NHẬN HÀNG CỦA KHÁCH HÀNG*@
+    <div>
+        <p>Địa chỉ nhận hàng</p> @*THÊM ICON VÀO NHA*@
+        <div>
+            <p>@userCurrent.FullName - @userCurrent.NumberPhone</p>
+            <p>@userCurrent.Address</p>
+            <a href="#">Thay đổi</a>
+        </div>
+    </div>
+
+    @*THÔNG TIN SẢN PHẨM MUỐN MUA*@
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th>Đơn giá</th>
+                    <th>Số lượng</th>
+                    <th>Thành tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.ItemCarts)
+                {
+                    <tr>
+                        <td>
+                            <img src="@item.ImageDemo" />
+                            <div>
+                                <p>@item.NameProduct</p>
+                                <span>Đơn vị: </span><span>@item.unit</span>
+                                <span>Danh mục: </span><p>@item.nameCategory</p>
+                            </div>
+                        </td>
+                        <td>@item.currentPrice</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.TotalMoney</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div>
+        <div>Phương thức thanh toán: Thanh toán khi nhận hàng</div>
+        <div>
+            <div>
+                <span>Tổng tiền hàng: </span>
+                <span>@Html.FormatValue(Model.Total, "{0:#,###}")đ</span>
+            </div>
+            <div>
+                <span>Phí vận chuyển: </span>
+                <span>17.000 đ</span>
+            </div>
+            <div>
+                <span>Tổng thanh toán: </span>
+                <span>@Html.FormatValue(Model.Total + 17000, "{0:#,###}") đ</span>
+            </div>
+        </div>
+        <div>
+            <form method="post" action="@Url.Action("PaymentProducts","Orders")">
+                <input type="submit" value="Mua hàng" />
+            </form>
+        </div>
+    </div>
+</body>
+</html>

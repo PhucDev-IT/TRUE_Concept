@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<TRUE_CONCEPT.Models.Product>
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Client/Views/Shared/layout-client.cshtml";
+    Layout = "~/Views/Shared/layout-client.cshtml";
 }
 
 <!DOCTYPE html>
@@ -29,10 +29,10 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- LINK CSS -->
-    <link href="~/Areas/Client/Content/css/Products.css" rel="stylesheet" />
+    <link href="~/Content/css/Products.css" rel="stylesheet" />
 </head>
 <body>
-  
+
     <div class="AllPage-product container-fluid">
         <div class="grid-wide-product">
             <div class="Block1-ProductPage d-flex">
@@ -43,7 +43,7 @@
                         {
                             <li class="Product-type">
                                 <i class="fa-solid fa-chevron-right"></i>
-                                <a  href="@Url.Action("Index","Products",new { idCategory = item.IDCategory})"  class="linkProduct-type">@item.NameCategory</a>
+                                <a href="@Url.Action("Index","Products",new { idCategory = item.IDCategory})" class="linkProduct-type">@item.NameCategory</a>
                                 <p class="amount-of-product">(@item.QuantityProduct)</p>
                             </li>
                         }
@@ -122,8 +122,8 @@
                                         {
                                             break;
                                         }
-                                        <li  data-id="@i" class="number">
-                                     
+                                        <li data-id="@i" class="number">
+
                                             <a href="@Url.Action("Index","Products", new {idCategory=ViewBag.idCategory , page=i  })">@i</a>
                                         </li>
                                     }
@@ -200,9 +200,9 @@
 
 
     //Chọn 1 sản phẩm bất kỳ
-   function clickProduct(value) {
-    var idProduct = $(value).data('id');
-    window.location.href = '/Client/Detail_products/Index?idProduct=' + idProduct;
-}
+    function clickProduct(value) {
+        var idProduct = $(value).data('id');
+        window.location.href = '/Detail_products/Index?idProduct=' + idProduct;
+    }
 
 </script>

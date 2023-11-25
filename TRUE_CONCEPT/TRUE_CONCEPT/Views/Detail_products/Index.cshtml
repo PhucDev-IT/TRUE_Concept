@@ -1,7 +1,7 @@
 ﻿@model TRUE_CONCEPT.Models.Product
 @{
     ViewBag.Title = "Index";
-    Layout = "~/Areas/Client/Views/Shared/layout-client.cshtml";
+    Layout = "~/Views/Shared/layout-client.cshtml";
 
     var RecommentProducts = TRUE_CONCEPT.Models.DbMangager.GetInstance().Products.Where(x => x.IDCategory == Model.IDCategory).Take(8).ToList();
 }
@@ -15,10 +15,10 @@
 
     <!-- CHANGE THE DIRECTORY OF CSS FILE WHEN MOVE THIS FILE TO SOLUTION IN VISUAL STUDIO !!! -->
     <!-- CSS -->
-    <link rel="stylesheet" href="~/Areas/Client/Content/css/HomePage.css">
-    <link rel="stylesheet" href="~/Areas/Client/Content/css/layout-client.css">
-    <link rel="stylesheet" href="~/Areas/Client/Content/css/Products.css">
-    <link href="~/Areas/Client/Content/css/Detail_Product.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/Content/css/HomePage.css">
+    <link rel="stylesheet" href="~/Content/css/layout-client.css">
+    <link rel="stylesheet" href="~/Content/css/Products.css">
+    <link href="~/Content/css/Detail_Product.css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- BOOSTRAP CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap-grid.min.css" integrity="sha512-ZuRTqfQ3jNAKvJskDAU/hxbX1w25g41bANOVd1Co6GahIe2XjM6uVZ9dh0Nt3KFCOA061amfF2VeL60aJXdwwQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -30,7 +30,7 @@
 </head>
 <body>
     <div id="isCurrentUser" style="display:none">@ViewBag.isCurrentUser</div>
-    <span id="idProduct" style="display:none" >@Model.ID</span>
+    <span id="idProduct" style="display:none">@Model.ID</span>
     <!-- BODY PAGE -->
     <div class="ALL-ProductDetail-Block container-fluid">
         <div class="Grid-wide-product-block">
@@ -58,7 +58,7 @@
 
                                 @*HIỂN THỊ SỐ LƯỢNG TỒN*@
                                 <p>Còn lại: </p><span id="quantity-current">@Model.Quantity</span>
-                         
+
                             </div>
                             <div class="VAT-baohanh">
                                 <p>Giá đã có VAT</p>
@@ -74,7 +74,7 @@
                                     <div id="increase"><i class="fa-solid fa-plus"></i></div>
                                 </div>
                             </div>
-                       
+
                             <div id="Add-to-cart" class="Add-to-cart">
                                 <i class="fa-solid fa-cart-plus"></i>
                                 <p>Thêm vào giỏ hàng</p>
@@ -144,11 +144,11 @@
                                                 <i class="fa-solid fa-check"></i>
                                                 <p>Còn hàng</p>
                                             </div>
-                                        
-                                                <div class="icon-AddtoCart">
-                                                    <i class="fa-solid fa-cart-shopping"></i>
-                                                </div>
-                                            
+
+                                            <div class="icon-AddtoCart">
+                                                <i class="fa-solid fa-cart-shopping"></i>
+                                            </div>
+
                                         }
                                         else
                                         {
@@ -162,7 +162,7 @@
                                 </div>
                             </a>
                         }
-                      
+
                     </div>
                 </div>
                 <div class="container-fluid Block2-ProductPage">
@@ -191,7 +191,7 @@
 <script>
 
     var isLogin = document.getElementById('isCurrentUser').innerText;
-  
+
 
     var quantity = 1; // Khai báo biến quantity ở ngoài hàm để trở thành biến toàn cục
 
@@ -202,16 +202,16 @@
         }
     });
 
-  
-    $('#increase').click(function () {      
-           quantity++;
-            document.getElementById("quantity").innerHTML = quantity;
+
+    $('#increase').click(function () {
+        quantity++;
+        document.getElementById("quantity").innerHTML = quantity;
     });
 
     //Nhấn thêm vào giỏ hàng
     $('#Add-to-cart').click(function () {
 
-   
+
         if (isLogin === 'False') {
             alert('chưa login')
             return;
@@ -227,9 +227,9 @@
                 Quantity: quantity
             };
 
-         
+
             $.ajax({
-                url: '/Detail_products/AddToCart', 
+                url: '/Detail_products/AddToCart',
                 type: 'POST',
                 data: JSON.stringify(itemCart),
                 contentType: 'application/json; charset=utf-8',

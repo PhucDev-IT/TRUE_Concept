@@ -37,8 +37,9 @@ namespace TRUE_CONCEPT.Areas.Authentication.Controllers
                     {
                         if (result.Decentralization == "Client")
                         {
-                            Session["AccountUserCurrent"] = result;                        
-                            return RedirectToAction("Index", "TrangChu", new { area = "Client" });
+                            Session["AccountUserCurrent"] = result;
+                            return RedirectToAction("Index", "TrangChu", new { area = "" });
+
                         }
                         else
                         {

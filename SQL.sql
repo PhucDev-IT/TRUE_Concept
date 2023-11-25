@@ -22,7 +22,7 @@ CREATE TABLE Users
 	FullName NVARCHAR(50),
 	Address NVARCHAR(300),
 	Email VARCHAR(50),
-	NumberPhone VARCHAR(20),
+	NumberPhone VARCHAR(40) DEFAULT '(+84)',
 	PRIMARY KEY(IDCustomer)
 )
 GO
@@ -70,7 +70,9 @@ CREATE TABLE Orders
 (
 	IDOrder INT PRIMARY KEY IDENTITY,
 	IDCustomer INT FOREIGN KEY REFERENCES Users(IDCustomer),
+	InforShipment NVARCHAR(1000),
 	OrderDate DATETIME DEFAULT GETDATE(),
+	FeeShipment FLOAT,
 	Status NVARCHAR(20) DEFAULT N'Chờ xác nhận',
 	ThanhTien FLOAT DEFAULT 0
 )
@@ -81,7 +83,6 @@ CREATE TABLE OrderDetails
 	IDProduct INT FOREIGN KEY REFERENCES Product(ID),
 	Quantity FLOAT,
 	Price FLOAT,
-	VAT FLOAT,
 	TotalMoney FLOAT,
 	PRIMARY KEY(IDOrder,IDProduct)
 )
