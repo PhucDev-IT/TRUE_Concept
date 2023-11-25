@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using TRUE_CONCEPT.Models;
 namespace TRUE_CONCEPT.Areas.Admin.Controllers
 {
+    [Authorize]
     public class ProductController : Controller
     {
         private TRUE_CONCEPTEntities db;

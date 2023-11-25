@@ -18,7 +18,6 @@ namespace TRUE_CONCEPT.Models
         public int IDProduct { get; set; }
         public Nullable<double> Quantity { get; set; }
         public Nullable<double> Price { get; set; }
-        public Nullable<double> VAT { get; set; }
         public Nullable<double> TotalMoney { get; set; }
     
         public virtual Order Order { get; set; }

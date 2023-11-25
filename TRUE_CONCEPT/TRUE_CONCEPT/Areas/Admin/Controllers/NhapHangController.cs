@@ -7,6 +7,7 @@ using TRUE_CONCEPT.Models;
 
 namespace TRUE_CONCEPT.Areas.Admin.Controllers
 {
+    [Authorize]
     public class NhapHangController : Controller
     {
         // GET: Admin/NhapHang

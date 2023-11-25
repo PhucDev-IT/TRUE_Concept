@@ -25,6 +25,7 @@ namespace TRUE_CONCEPT.Models
         }
     
         public int ID { get; set; }
+        public List<String> PreviewImages { get; set; }
         public string NameProduct { get; set; }
         public Nullable<double> PriceOld { get; set; }
         public Nullable<double> NewPrice { get; set; }
@@ -34,7 +35,6 @@ namespace TRUE_CONCEPT.Models
         public string Description { get; set; }
         public string ImgDemo { get; set; }
         public string Status { get; set; }
-        public List<String> PreviewImages { get; set; }
         public Nullable<int> IDCategory { get; set; }
     
         public virtual Category Category { get; set; }

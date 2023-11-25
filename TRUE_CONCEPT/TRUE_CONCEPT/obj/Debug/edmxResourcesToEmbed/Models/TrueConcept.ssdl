@@ -73,7 +73,6 @@
     <Property Name="IDProduct" Type="int" Nullable="false" />
     <Property Name="Quantity" Type="float" />
     <Property Name="Price" Type="float" />
-    <Property Name="VAT" Type="float" />
     <Property Name="TotalMoney" Type="float" />
   </EntityType>
   <EntityType Name="Orders">
@@ -82,7 +81,9 @@
     </Key>
     <Property Name="IDOrder" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IDCustomer" Type="int" />
+    <Property Name="InforShipment" Type="nvarchar" MaxLength="1000" />
     <Property Name="OrderDate" Type="datetime" />
+    <Property Name="FeeShipment" Type="float" />
     <Property Name="Status" Type="nvarchar" MaxLength="20" />
     <Property Name="ThanhTien" Type="float" />
   </EntityType>
@@ -135,9 +136,9 @@
     <Property Name="FullName" Type="nvarchar" MaxLength="50" />
     <Property Name="Address" Type="nvarchar" MaxLength="300" />
     <Property Name="Email" Type="varchar" MaxLength="50" />
-    <Property Name="NumberPhone" Type="varchar" MaxLength="20" />
+    <Property Name="NumberPhone" Type="varchar" MaxLength="40" />
   </EntityType>
-  <Association Name="FK__ChiTietDu__MaDuA__4CA06362">
+  <Association Name="FK__ChiTietDu__MaDuA__4E88ABD4">
     <End Role="ThueDuAn" Type="Self.ThueDuAn" Multiplicity="1" />
     <End Role="ChiTietDuAn" Type="Self.ChiTietDuAn" Multiplicity="*" />
     <ReferentialConstraint>
@@ -149,7 +150,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ChiTietDuA__MaSP__4D94879B">
+  <Association Name="FK__ChiTietDuA__MaSP__4F7CD00D">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="ChiTietDuAn" Type="Self.ChiTietDuAn" Multiplicity="*" />
     <ReferentialConstraint>
@@ -161,7 +162,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ChiTietPh__IDPro__45F365D3">
+  <Association Name="FK__ChiTietPh__IDPro__47DBAE45">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
     <ReferentialConstraint>
@@ -173,7 +174,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ChiTietPh__MaPhi__44FF419A">
+  <Association Name="FK__ChiTietPh__MaPhi__46E78A0C">
     <End Role="BaoCaoNhap" Type="Self.BaoCaoNhap" Multiplicity="1" />
     <End Role="ChiTietPhieuNhap" Type="Self.ChiTietPhieuNhap" Multiplicity="*" />
     <ReferentialConstraint>
@@ -185,7 +186,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__IMAGES__IdProduc__31EC6D26">
+  <Association Name="FK__IMAGES__IdProduc__33D4B598">
     <End Role="Product" Type="Self.Product" Multiplicity="0..1" />
     <End Role="IMAGES" Type="Self.IMAGES" Multiplicity="*" />
     <ReferentialConstraint>
@@ -197,7 +198,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ItemCart__ID__34C8D9D1">
+  <Association Name="FK__ItemCart__ID__36B12243">
     <End Role="Account" Type="Self.Account" Multiplicity="1" />
     <End Role="ItemCart" Type="Self.ItemCart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -209,7 +210,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ItemCart__IDProd__35BCFE0A">
+  <Association Name="FK__ItemCart__IDProd__37A5467C">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="ItemCart" Type="Self.ItemCart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -221,7 +222,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderDeta__IDOrd__3E52440B">
+  <Association Name="FK__OrderDeta__IDOrd__403A8C7D">
     <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
     <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
     <ReferentialConstraint>
@@ -233,7 +234,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderDeta__IDPro__3F466844">
+  <Association Name="FK__OrderDeta__IDPro__412EB0B6">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
     <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
     <ReferentialConstraint>
@@ -245,7 +246,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Orders__IDCustom__38996AB5">
+  <Association Name="FK__Orders__IDCustom__3A81B327">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
     <ReferentialConstraint>
@@ -257,7 +258,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Product__IDCateg__2F10007B">
+  <Association Name="FK__Product__IDCateg__30F848ED">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="Product" Type="Self.Product" Multiplicity="*" />
     <ReferentialConstraint>
@@ -269,7 +270,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThueDuAn__IDCust__48CFD27E">
+  <Association Name="FK__ThueDuAn__IDCust__4AB81AF0">
     <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
     <End Role="ThueDuAn" Type="Self.ThueDuAn" Multiplicity="*" />
     <ReferentialConstraint>
@@ -311,51 +312,51 @@
     <EntitySet Name="Project" EntityType="Self.Project" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ThueDuAn" EntityType="Self.ThueDuAn" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__ChiTietDu__MaDuA__4CA06362" Association="Self.FK__ChiTietDu__MaDuA__4CA06362">
+    <AssociationSet Name="FK__ChiTietDu__MaDuA__4E88ABD4" Association="Self.FK__ChiTietDu__MaDuA__4E88ABD4">
       <End Role="ThueDuAn" EntitySet="ThueDuAn" />
       <End Role="ChiTietDuAn" EntitySet="ChiTietDuAn" />
     </AssociationSet>
-    <AssociationSet Name="FK__ChiTietDuA__MaSP__4D94879B" Association="Self.FK__ChiTietDuA__MaSP__4D94879B">
+    <AssociationSet Name="FK__ChiTietDuA__MaSP__4F7CD00D" Association="Self.FK__ChiTietDuA__MaSP__4F7CD00D">
       <End Role="Product" EntitySet="Product" />
       <End Role="ChiTietDuAn" EntitySet="ChiTietDuAn" />
     </AssociationSet>
-    <AssociationSet Name="FK__ChiTietPh__IDPro__45F365D3" Association="Self.FK__ChiTietPh__IDPro__45F365D3">
+    <AssociationSet Name="FK__ChiTietPh__IDPro__47DBAE45" Association="Self.FK__ChiTietPh__IDPro__47DBAE45">
       <End Role="Product" EntitySet="Product" />
       <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
     </AssociationSet>
-    <AssociationSet Name="FK__ChiTietPh__MaPhi__44FF419A" Association="Self.FK__ChiTietPh__MaPhi__44FF419A">
+    <AssociationSet Name="FK__ChiTietPh__MaPhi__46E78A0C" Association="Self.FK__ChiTietPh__MaPhi__46E78A0C">
       <End Role="BaoCaoNhap" EntitySet="BaoCaoNhap" />
       <End Role="ChiTietPhieuNhap" EntitySet="ChiTietPhieuNhap" />
     </AssociationSet>
-    <AssociationSet Name="FK__IMAGES__IdProduc__31EC6D26" Association="Self.FK__IMAGES__IdProduc__31EC6D26">
+    <AssociationSet Name="FK__IMAGES__IdProduc__33D4B598" Association="Self.FK__IMAGES__IdProduc__33D4B598">
       <End Role="Product" EntitySet="Product" />
       <End Role="IMAGES" EntitySet="IMAGES" />
     </AssociationSet>
-    <AssociationSet Name="FK__ItemCart__ID__34C8D9D1" Association="Self.FK__ItemCart__ID__34C8D9D1">
+    <AssociationSet Name="FK__ItemCart__ID__36B12243" Association="Self.FK__ItemCart__ID__36B12243">
       <End Role="Account" EntitySet="Account" />
       <End Role="ItemCart" EntitySet="ItemCart" />
     </AssociationSet>
-    <AssociationSet Name="FK__ItemCart__IDProd__35BCFE0A" Association="Self.FK__ItemCart__IDProd__35BCFE0A">
+    <AssociationSet Name="FK__ItemCart__IDProd__37A5467C" Association="Self.FK__ItemCart__IDProd__37A5467C">
       <End Role="Product" EntitySet="Product" />
       <End Role="ItemCart" EntitySet="ItemCart" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderDeta__IDOrd__3E52440B" Association="Self.FK__OrderDeta__IDOrd__3E52440B">
+    <AssociationSet Name="FK__OrderDeta__IDOrd__403A8C7D" Association="Self.FK__OrderDeta__IDOrd__403A8C7D">
       <End Role="Orders" EntitySet="Orders" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderDeta__IDPro__3F466844" Association="Self.FK__OrderDeta__IDPro__3F466844">
+    <AssociationSet Name="FK__OrderDeta__IDPro__412EB0B6" Association="Self.FK__OrderDeta__IDPro__412EB0B6">
       <End Role="Product" EntitySet="Product" />
       <End Role="OrderDetails" EntitySet="OrderDetails" />
     </AssociationSet>
-    <AssociationSet Name="FK__Orders__IDCustom__38996AB5" Association="Self.FK__Orders__IDCustom__38996AB5">
+    <AssociationSet Name="FK__Orders__IDCustom__3A81B327" Association="Self.FK__Orders__IDCustom__3A81B327">
       <End Role="Users" EntitySet="Users" />
       <End Role="Orders" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK__Product__IDCateg__2F10007B" Association="Self.FK__Product__IDCateg__2F10007B">
+    <AssociationSet Name="FK__Product__IDCateg__30F848ED" Association="Self.FK__Product__IDCateg__30F848ED">
       <End Role="Category" EntitySet="Category" />
       <End Role="Product" EntitySet="Product" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThueDuAn__IDCust__48CFD27E" Association="Self.FK__ThueDuAn__IDCust__48CFD27E">
+    <AssociationSet Name="FK__ThueDuAn__IDCust__4AB81AF0" Association="Self.FK__ThueDuAn__IDCust__4AB81AF0">
       <End Role="Users" EntitySet="Users" />
       <End Role="ThueDuAn" EntitySet="ThueDuAn" />
     </AssociationSet>

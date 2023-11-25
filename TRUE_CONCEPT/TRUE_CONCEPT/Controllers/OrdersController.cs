@@ -31,13 +31,18 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
     
             Account a = Session["AccountUserCurrent"] as Account;
 
-            if (a == null || ordersViewModel == null) return View(ordersViewModel);
+            User u = Session["UserCurrent"] as User;
+
+
+            if (a == null || ordersViewModel == null || u==null) return View(ordersViewModel);
 
             Order order = new Order()
             {
                 IDCustomer = a.ID,
                 Status = "Chờ xác nhận",
-                ThanhTien = ordersViewModel.Total
+                FeeShipment = 17000,
+                InforShipment = u.Address,
+                ThanhTien = ordersViewModel.Total - 17000
             };
 
             using (var transaction = db.Database.BeginTransaction())

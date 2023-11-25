@@ -76,7 +76,6 @@
           <ScalarProperty Name="IDProduct" ColumnName="IDProduct" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="Price" ColumnName="Price" />
-          <ScalarProperty Name="VAT" ColumnName="VAT" />
           <ScalarProperty Name="TotalMoney" ColumnName="TotalMoney" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -86,7 +85,9 @@
         <MappingFragment StoreEntitySet="Orders">
           <ScalarProperty Name="IDOrder" ColumnName="IDOrder" />
           <ScalarProperty Name="IDCustomer" ColumnName="IDCustomer" />
+          <ScalarProperty Name="InforShipment" ColumnName="InforShipment" />
           <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+          <ScalarProperty Name="FeeShipment" ColumnName="FeeShipment" />
           <ScalarProperty Name="Status" ColumnName="Status" />
           <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
         </MappingFragment>

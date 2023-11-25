@@ -149,6 +149,5 @@ D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.c
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.csproj.CopyComplete
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.dll
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.pdb
-D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.csproj.AssemblyReference.cache
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\bin\Newtonsoft.Json.dll
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\bin\Newtonsoft.Json.xml

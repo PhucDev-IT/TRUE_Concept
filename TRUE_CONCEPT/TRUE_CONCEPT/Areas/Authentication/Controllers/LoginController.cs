@@ -35,8 +35,14 @@ namespace TRUE_CONCEPT.Areas.Authentication.Controllers
                     Account result = db.Accounts.FirstOrDefault(x => x.UserName == a.UserName && x.Password == hashingPassword);
                     if (result != null)
                     {
+                        if(result.Status != "ON")
+                        {
+                            ModelState.AddModelError("", "Tài khoản của bạn hiện đang bị tạm khóa");
+                            return View(a);
+                        }
                         if (result.Decentralization == "Client")
                         {
+                            Session["UserCurrent"] = db.Users.Find(result.ID);
                             Session["AccountUserCurrent"] = result;
                             return RedirectToAction("Index", "TrangChu", new { area = "" });
 

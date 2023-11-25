@@ -461,6 +461,10 @@
     <Content Include="Areas\Authentication\Views\SignUp\VerifyEmail.cshtml" />
     <Content Include="Areas\Authentication\Views\SignUp\Completed.cshtml" />
     <Compile Include="Models\SHA256HashingPassword.cs" />
+    <Content Include="Content\Font\NunitoSans_7pt_SemiCondensed-Medium.woff" />
+    <Content Include="Content\Font\NunitoSans_7pt_SemiCondensed-Regular.woff" />
+    <Content Include="Content\Font\NunitoSans_7pt_SemiCondensed-SemiBold.woff" />
+    <Content Include="Content\Font\NunitoSans_7pt_SemiExpanded-Bold.woff" />
     <EntityDeploy Include="Models\TrueConcept.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>TrueConcept.Designer.cs</LastGenOutput>
@@ -468,10 +472,6 @@
     <Content Include="Models\TrueConcept.edmx.diagram">
       <DependentUpon>TrueConcept.edmx</DependentUpon>
     </Content>
-    <Content Include="Content\Font\NunitoSans_7pt_SemiCondensed-Medium.woff" />
-    <Content Include="Content\Font\NunitoSans_7pt_SemiCondensed-Regular.woff" />
-    <Content Include="Content\Font\NunitoSans_7pt_SemiCondensed-SemiBold.woff" />
-    <Content Include="Content\Font\NunitoSans_7pt_SemiExpanded-Bold.woff" />
     <None Include="packages.config" />
     <Content Include="Views\Carts\Index.cshtml" />
     <Content Include="Views\Detail_products\Index.cshtml" />

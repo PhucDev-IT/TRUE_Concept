@@ -14,16 +14,16 @@ namespace TRUE_CONCEPT.Models
     
     public partial class IMAGE
     {
+
+        public IMAGE(int id,string path)
+        {
+            this.IdProduct = id;
+            this.Img_Url = path;
+        }
         public int ID { get; set; }
         public Nullable<int> IdProduct { get; set; }
         public string Img_Url { get; set; }
     
-
-        public IMAGE(int IDP,string pathImg)
-        {
-            this.IdProduct = IDP;
-                this.Img_Url = pathImg;
-        }
         public virtual Product Product { get; set; }
     }
 }

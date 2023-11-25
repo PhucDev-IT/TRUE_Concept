@@ -19,9 +19,8 @@ namespace TRUE_CONCEPT.Models
         {
             this.Products = new HashSet<Product>();
         }
-    
-        public int IDCategory { get; set; }
         public int QuantityProduct { get; set; }
+        public int IDCategory { get; set; }
         public string NameCategory { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

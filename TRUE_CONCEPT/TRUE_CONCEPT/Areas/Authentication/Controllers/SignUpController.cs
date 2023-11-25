@@ -80,7 +80,9 @@ namespace TRUE_CONCEPT.Areas.Authentication.Controllers
             Account a = new Account
             {
                 UserName = Email,
-                Password = hashingPassword
+                Password = hashingPassword,
+                Decentralization = "Client",
+                Status = "ON"
             };
             User u = new User
             {
@@ -124,8 +126,8 @@ namespace TRUE_CONCEPT.Areas.Authentication.Controllers
         {
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
             Response.Cache.SetNoStore();
-            
-            return RedirectToAction("Index","TrangChu", new { area = "Client"});
+
+            return RedirectToAction("Index", "TrangChu", new { area = "" });
         }
 
     }
