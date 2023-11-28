@@ -151,3 +151,4 @@ D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.d
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.pdb
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\bin\Newtonsoft.Json.dll
 D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\bin\Newtonsoft.Json.xml
+D:\Web nâng cao\TRUE_Concept\TRUE_CONCEPT\TRUE_CONCEPT\obj\Debug\TRUE_CONCEPT.csproj.AssemblyReference.cache

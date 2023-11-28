@@ -56,13 +56,12 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        System.Diagnostics.Debug.WriteLine("Values: " + model);
+             
                         // Xử lý hình ảnh ImgDemo ở đây
-
                         model.ImgDemo = addImage(model.ImgDemo) != null ? addImage("fImage") : "/Assets/Image/404-error-not-found.png";
 
                         // Xử lý danh sách 5 hình ảnh
-                        List<String> images = new List<string>();
+                        List<string> images = new List<string>();
                         foreach(string path in model.PreviewImages)
                         {
                             string result = addImage(path);
@@ -87,7 +86,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
 
                         // Commit transaction
                         dbContextTransaction.Commit();
-                        return Json(true);
+                        return Json(new { success = true });
                     }
                 }
                 catch (Exception e)
@@ -99,14 +98,14 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                 }
             }
             ViewData["Categories"] = new SelectList(db.Categories.ToList(), "IDCategory", "NameCategory");
-            return Json(false);
+            return Json(new { success = false });
         }
 
         [HttpPost]
         private string addImage(string name)
         {
             var f = Request.Files[name];
-            System.Diagnostics.Debug.WriteLine("F = : " + f);
+       
             if (f != null && f.ContentLength > 0)
             {
                 string fileName = DateTime.Now+f.FileName;
@@ -134,13 +133,24 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
             try
             {
                 Product obj = db.Products.Find(product.ID);
+                obj.ImgDemo = "/Assets/Image/404-error-not-found.png";
+
+                var fImage = Request.Files["fImage"];
+                if (fImage != null && fImage.ContentLength > 0)
+                {
+                    string fileName = fImage.FileName;
+                    string folderName = Server.MapPath("~/Assets/Uploads/" + fileName);
+                    fImage.SaveAs(folderName);
+                    obj.ImgDemo = "/Assets/Uploads/" + fileName;
+                }
+
                 obj.NameProduct = product.NameProduct;
                 obj.PriceOld = product.PriceOld;
                 obj.NewPrice = product.NewPrice;
                 obj.Unit = product.Unit;
                 obj.Quantity = product.Quantity;
                 obj.Description = product.Description;
-                obj.ImgDemo = product.ImgDemo;
+          
                 obj.Status = product.Status;
                 obj.IDCategory = product.IDCategory;
   
@@ -155,32 +165,22 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
             }
         }
 
+      
+        [HttpPost]
         public ActionResult Delete(int id)
         {
-
             try
             {
-                Product product = db.Products.Find(id);
-                return View(product);
-            }
-            catch
-            {
-                return View();
-            }
-        }
-        [HttpPost]
-        public ActionResult Delete(Product product)
-        {
-            try
-            {
-                Product obj = db.Products.Find(product.ID);
-                db.Products.Remove(obj);
+                Product obj = db.Products.Find(id);
+                obj.Status = "LOCK";
+     
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Json(new { success = true });
             }
-            catch
+            catch(Exception e)
             {
-                return View();
+                System.Diagnostics.Debug.WriteLine("Error Remove Product: " + e.ToString());
+                return Json(new { success = false });
             }
         }
 

@@ -204,7 +204,7 @@
     document.getElementById("AddPhieuNhap").addEventListener("click", function () {
         // Thu thập dữ liệu từ các trường input
         var customData = {
-            MaPhieuNhap: 7,
+            MaPhieuNhap: null,
             NgayNhap: document.getElementById("inputDate").value,
             TongTien: document.getElementById("tongTien").value,
             GiamGia: document.getElementById("giamGia").value,
@@ -219,10 +219,14 @@
             data: JSON.stringify(customData),
             contentType: 'application/json; charset=utf-8',
             success: function (result) {
-                
+                if (result.success) {
+                    alert('OK!');   
+                } else {
+                    alert('Có lỗi xảy ra!');
+                }
             },
             error: function () {
-                
+                alert('Có lỗi xảy ra !');
             }
         });
     });

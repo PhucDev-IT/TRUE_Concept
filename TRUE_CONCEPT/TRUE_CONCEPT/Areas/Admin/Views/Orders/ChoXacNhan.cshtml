@@ -53,13 +53,14 @@
             <td>
                 <a href="#" id="btn-confirm-order" data-id="@item.IDOrder">Xác nhận</a> |
                 @Html.ActionLink("Chi tiết", "Details", new { idOrder = item.IDOrder }) |
-                <a href="#" onclick="cancelInvoice(this)" data-ido="@item.IDOrder" data-idc="@item.IDCustomer">Hủy</a>
+                <a onclick="showModelConfirm(this)" data-ido="@item.IDOrder" data-idc="@item.IDCustomer">Hủy</a>
 
             </td>
         </tr>
     }
 
 </table>
+@Html.Partial("_ConfirmDeleteModal")
 <script>
     //Xác nhận  hóa đơn đang chờ
 $(document).ready(function () {
@@ -83,10 +84,24 @@ $(document).ready(function () {
 });
 
     //Hủy hóa đơn
+    // Hiển thị modal khi người dùng nhấn nút xóa
+    function showModelConfirm(value) {
+        var ido = $(value).data('ido'); // Lấy ID đơn hàng từ thuộc tính data
+        var idc = $(value).data('idc');
 
-    function cancelInvoice(data) {
-        var ido = $(data).data('ido'); // Lấy ID đơn hàng từ thuộc tính data
-        var idc = $(data).data('idc');
+        // Thiết lập giá trị data-id cho modal
+        $('#confirmDeleteModal').data('idOrder', ido);
+        $('#confirmDeleteModal').data('idCustomer', idc);
+
+        // Mở modal
+        $('#confirmDeleteModal').modal('show');
+    }
+
+
+    // Gọi hành động xóa khi xác nhận
+    $('#confirmDeleteButton').click(function () {
+        var ido = $('#confirmDeleteModal').data('idOrder');
+        var idc = $('#confirmDeleteModal').data('idCustomer');
 
         $.ajax({
             url: '@Url.Action("CancelOrder", "Orders")',
@@ -94,7 +109,7 @@ $(document).ready(function () {
             data: { idOrder: ido, idCustomer: idc },
             success: function (data) {
 
-              $('#trow_' + idO).remove();
+              $('#trow_' + ido).remove();
               alert('Đơn hàng đã bị hủy.');
 
             },
@@ -102,8 +117,8 @@ $(document).ready(function () {
                 alert("Có lỗi xảy ra khi hủy đơn hàng.")
             },
         });
-    }
-
+        $('#confirmDeleteModal').modal('hide');
+    });
 
 
 </script>

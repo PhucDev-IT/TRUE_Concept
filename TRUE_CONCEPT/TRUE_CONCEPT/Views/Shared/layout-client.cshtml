@@ -1,6 +1,7 @@
 ﻿@{
     Layout = null;
     int numberCart =(int)Session["numberCart"];
+    TRUE_CONCEPT.Models.Account accountCurrent = Session["AccountUserCurrent"] as TRUE_CONCEPT.Models.Account;
 }
 
 
@@ -47,20 +48,33 @@
                     <li class="nav-item"><a href="">Liên hệ</a> </li>
                 </ul>
                 <div class="search-cart">
-                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <a href="/Products/Index"> <i class="fa-solid fa-magnifying-glass"></i></a>
+                   
                     <a href="/Carts/Index"><i class="fa-solid fa-cart-shopping"></i></a>
                     <span>@Session["numberCart"]</span>
                 </div>
-                <div class="login-regis">
-                    <div class="Login-header d-flex">
-                        <i class="fa-solid fa-right-to-bracket"></i>
-                        <a href="/Authentication/Login/Index">Đăng nhập</a>
+                @if (accountCurrent == null)
+                {
+                    <div class="login-regis">
+                        <div class="Login-header d-flex">
+                            <i class="fa-solid fa-right-to-bracket"></i>
+                            <a href="/Authentication/Login/Index">Đăng nhập</a>
+                        </div>
+                        <div class="Signin-header d-flex">
+                            <i class="fa-regular fa-address-card"></i>
+                            <a href="/Authentication/SignUp/Index">Đăng ký</a>
+                        </div>
                     </div>
-                    <div class="Signin-header d-flex">
-                        <i class="fa-regular fa-address-card"></i>
-                        <a href="/Authentication/SignUp/Index">Đăng ký</a>
+                }
+                else
+                {
+                    @*Thông tin người dùng sau khi đăng nhập*@
+                    <div>
+                        <h4>@accountCurrent.User.FullName</h4>
                     </div>
-                </div>
+                }
+
+
             </div>
         </div>
     </div>

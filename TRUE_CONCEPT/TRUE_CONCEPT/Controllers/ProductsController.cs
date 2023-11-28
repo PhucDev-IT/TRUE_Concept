@@ -89,7 +89,7 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
 
             //Chia số trang
 
-            ViewBag.TotalPage = 400;//(sumSize / pageSize); ;
+            ViewBag.TotalPage = (sumSize / pageSize); ;
             ViewBag.Categories = categories;
 
             ViewBag.currentPage = page??1;

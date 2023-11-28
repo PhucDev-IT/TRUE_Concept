@@ -20,6 +20,11 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
         // GET: Admin/HomeAdmin
         public ActionResult Index()
         {
+            // Lấy ngày và tháng hiện tại
+            int currentDay = DateTime.Now.Day;
+            int currentMonth = DateTime.Now.Month;
+            int currentYear = DateTime.Now.Year;
+
             HomeViewModel viewModel = new HomeViewModel();
 
             viewModel.QuantityNewOrders = db.Orders.Where(x => x.OrderDate == currentDate).Count();

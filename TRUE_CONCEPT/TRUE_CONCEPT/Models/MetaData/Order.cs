@@ -15,6 +15,8 @@ namespace TRUE_CONCEPT.Models.MetaData
         public Nullable<int> IDCustomer { get; set; }
         [DisplayName("Họ tên")]
         public string nameCustomer { get; set; }
+        public string InforShipment { get; set; }
+        public Nullable<double> FeeShipment { get; set; }
         [DisplayName("Ngày đặt hàng")]
         public Nullable<System.DateTime> OrderDate { get; set; }
         [DisplayName("Trạng thái")]

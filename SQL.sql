@@ -71,7 +71,7 @@ CREATE TABLE Orders
 	IDOrder INT PRIMARY KEY IDENTITY,
 	IDCustomer INT FOREIGN KEY REFERENCES Users(IDCustomer),
 	InforShipment NVARCHAR(1000),
-	OrderDate DATETIME DEFAULT GETDATE(),
+	OrderDate DATE DEFAULT GETDATE(),
 	FeeShipment FLOAT,
 	Status NVARCHAR(20) DEFAULT N'Chờ xác nhận',
 	ThanhTien FLOAT DEFAULT 0
@@ -142,22 +142,25 @@ go
 
 -------------------------- TRIGGER -------------------------
 --Cập nhật thành tiền của Hóa đơn
-CREATE TRIGGER TRIG_UpdateMoney ON OrderDetails
-AFTER INSERT
-AS
-BEGIN
-	UPDATE Orders
-	SET ThanhTien += (SELECT TotalMoney FROM inserted where inserted.IDOrder = Orders.IDOrder)
-	WHERE  IDOrder = (SELECT inserted.IDOrder FROM inserted)
-END
+--CREATE TRIGGER TRIG_UpdateMoney ON OrderDetails
+--AFTER INSERT
+--AS
+--BEGIN
+--	UPDATE Orders
+--	SET ThanhTien += (SELECT TotalMoney FROM inserted where inserted.IDOrder = Orders.IDOrder)
+--	WHERE  IDOrder = (SELECT inserted.IDOrder FROM inserted)
+--END
 
-GO
+--GO
+
+
 ------------------------ INDEX --------------------------------
 CREATE INDEX Product_Index ON Product(ID,NameProduct,Status,IDCategory,CreateAt)
 CREATE INDEX Orders_Index ON Orders(IDOrder,IDCustomer,OrderDate)
 CREATE INDEX Category_Index ON Category(IDCategory)
 CREATE INDEX User_Index ON Users(IDCustomer)
 CREATE INDEX ThueDuAn_Index ON ThueDuAn(MaDuAn,IDCustomer)
+
 GO
 
 -------------------------   PROCEDURE-----------------------------------
@@ -234,22 +237,20 @@ GO
 INSERT INTO Orders(IDCustomer)
 VALUES(5),(6),(2),(5),(5)
 GO
-INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
-VALUES(1,2,3,(SELECT NewPrice FROM Product where ID=3),0.2,62322)
-INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
-VALUES(1,4,3,(SELECT NewPrice*3 FROM Product where ID=4),0.2,94345)
-INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
-VALUES(1,3,3,(SELECT NewPrice*3 FROM Product where ID=4),0.2,94345)
-INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
-VALUES(2,2,3,(SELECT NewPrice*3 FROM Product where ID=2),0.2,622432)
-INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
-VALUES(3,2,3,(SELECT NewPrice*3 FROM Product where ID=2),0.2,3223)
-INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
-VALUES(4,3,4,(SELECT NewPrice*4 FROM Product where ID=3),0.2,3223)
-INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,VAT,TotalMoney)
-VALUES(5,4,12,(SELECT NewPrice*12 FROM Product where ID=4),0.2,3223)
+INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,TotalMoney)
+VALUES(1,2,3,(SELECT NewPrice FROM Product where ID=3),62322)
+INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,TotalMoney)
+VALUES(1,4,3,(SELECT NewPrice*3 FROM Product where ID=4),94345)
+INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,TotalMoney)
+VALUES(1,3,3,(SELECT NewPrice*3 FROM Product where ID=4),94345)
+INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,TotalMoney)
+VALUES(2,2,3,(SELECT NewPrice*3 FROM Product where ID=2),622432)
+INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,TotalMoney)
+VALUES(3,2,3,(SELECT NewPrice*3 FROM Product where ID=2),3223)
+INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,TotalMoney)
+VALUES(4,3,4,(SELECT NewPrice*4 FROM Product where ID=3),3223)
+INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,TotalMoney)
+VALUES(5,4,12,(SELECT NewPrice*12 FROM Product where ID=4),3223)
 
+select * from Account
 
-select * from account
-select * from users
-select * from product

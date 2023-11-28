@@ -269,7 +269,7 @@
             contentType: 'application/json; charset=utf-8',
             success: function (result) {
                 if (result.success) {
-                     window.location.href = '@Url.Action("Index","Orders")';
+                     window.location.href = '@Url.Action("Index", "Invoice", new { area = ""})';
                 }
             },
             error: function () {

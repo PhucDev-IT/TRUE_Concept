@@ -16,8 +16,7 @@ namespace TRUE_CONCEPT.Models.MetaData
         public Nullable<double> Quantity { get; set; }
         [DisplayName("Giá bán")]
         public Nullable<double> Price { get; set; }
-        [DisplayName("Thuế")]
-        public Nullable<double> VAT { get; set; }
+
         [DisplayName("Tổng tiền")]
         public Nullable<double> TotalMoney { get; set; }
     }

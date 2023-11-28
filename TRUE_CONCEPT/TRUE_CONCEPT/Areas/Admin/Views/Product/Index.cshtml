@@ -79,7 +79,7 @@
         </tr>
         @foreach (var item in Model)
         {
-            <tr class="allow-overflow">
+            <tr id="trow_@item.ID" class="allow-overflow">
                 <td>
                     <img class="img_product" src="@Html.DisplayFor(modelItem => item.ImgDemo)" />
                 </td>
@@ -107,13 +107,15 @@
                         @Html.ActionLink("Sửa", "Update", new { id = item.ID }, new { @class = "no-underline" })
                     </p>
                     <p class="btn-function btn_Delete_Product">
-                        @Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "no-underline" })
+                        <input type="submit" value="Xóa" onclick="return showModelConfirm(this);" data-id="@item.ID"/>
+                        @*@Html.ActionLink("Xóa", "Delete", new { id = item.ID }, new { @class = "no-underline" })*@
                     </p>
                 </td>
             </tr>
         }
     </table>
 
+    @Html.Partial("_ConfirmDeleteModal")
 
 </body>
 </html>
@@ -124,4 +126,39 @@
             $('Form').submit();
         })
     });
+
+    // Hiển thị modal khi người dùng nhấn nút xóa
+    function showModelConfirm(value) {
+        var id = $(value).data('id');
+        $('#confirmDeleteModal').data('itemid', id).modal('show');
+    }
+      
+
+        // Gọi hành động xóa khi xác nhận
+        $('#confirmDeleteButton').click(function() {
+            // Thực hiện hành động xóa ở đây
+            // Ví dụ: gửi AJAX request đến server để xóa
+            // Sau đó ẩn modal
+            var itemId = $('#confirmDeleteModal').data('itemid');
+
+            $.ajax({
+                url: '/Admin/Product/Delete',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ id: itemId }),
+                success: function (result) {
+                    if (result.success) {
+                        alert('OK!');
+                        $('#trow_' + itemId).remove();
+                    } else {
+                        alert('Có lỗi xảy ra!');
+                    }
+                },
+                error: function () {
+                    alert('Có lỗi xảy ra !');
+                }
+            })
+            $('#confirmDeleteModal').modal('hide');
+    });
+
 </script>

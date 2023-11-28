@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -7,41 +6,42 @@ using System.Web.Mvc;
 using TRUE_CONCEPT.Models;
 using TRUE_CONCEPT.Models.ViewModel;
 
-namespace TRUE_CONCEPT.Areas.Client.Controllers
+namespace TRUE_CONCEPT.Controllers
 {
-    public class OrdersController : Controller
+    public class InvoiceController : Controller
     {
         private TRUE_CONCEPTEntities db = new TRUE_CONCEPTEntities();
         // GET: Client/Orders
         public ActionResult Index()
         {
-          OrderViewModel item = (OrderViewModel)Session["orders"];
+            OrderViewModel item = (OrderViewModel)Session["orders"];
             TempData["ordersTmp"] = item;
             return View(item);
         }
 
-       
+
 
         //Mua nhiều hàng cùng lúc
         [HttpPost]
-        public ActionResult PaymentProducts()
+        public ActionResult PaymentTheBill()
         {
             OrderViewModel ordersViewModel = (OrderViewModel)TempData["ordersTmp"];
 
-    
+
             Account a = Session["AccountUserCurrent"] as Account;
 
             User u = Session["UserCurrent"] as User;
 
 
-            if (a == null || ordersViewModel == null || u==null) return View(ordersViewModel);
+            if (a == null || ordersViewModel == null || u == null) return RedirectToAction("Index");
 
             Order order = new Order()
             {
                 IDCustomer = a.ID,
                 Status = "Chờ xác nhận",
                 FeeShipment = 17000,
-                InforShipment = u.Address,
+                InforShipment = a.User.Address,
+                OrderDate = DateTime.Now,
                 ThanhTien = ordersViewModel.Total - 17000
             };
 
@@ -62,7 +62,7 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
                             Price = item.currentPrice,
                             TotalMoney = item.TotalMoney
                         });
-                  
+
                     }
                     db.SaveChanges();
 
@@ -79,16 +79,15 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
                     }
                     db.SaveChanges();
 
-                    return RedirectToAction("Index","TrangChu");
+                    return RedirectToAction("Index", "TrangChu",new { area = ""});
                 }
                 catch (Exception e)
                 {
                     transaction.Rollback();
                     System.Diagnostics.Debug.WriteLine("Error Add: " + e.ToString());
-                    return View(ordersViewModel);
+                    return RedirectToAction("Index");
                 }
             }
         }
-
     }
 }
