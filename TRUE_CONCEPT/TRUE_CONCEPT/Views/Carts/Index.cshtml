@@ -16,9 +16,12 @@
         Giỏ hàng
     </title>
     <link href="~/Content/css/Cart.css" rel="stylesheet" />
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <!-- Render Partial success - error -->
+    @Html.Partial("_AlertGroup")
+
     <div class="wrapper">
         <div class="container_fullwidth">
             <div class="container shopping-cart">
@@ -54,23 +57,23 @@
                             <tbody>
                                 @foreach (var item in Model)
                                 {
-                                    <tr id="trow_@item.IdProduct">
+                                    <tr id="trow_@item.product.ID">
                                         <td>
-                                            <input type="checkbox" onclick="selectItemCart(this)" data-id="@item.IdProduct" />
+                                            <input type="checkbox" onclick="selectItemCart(this)" data-id="@item.product.ID" />
                                         </td>
                                         <td>
-                                            <img id="img_@item.IdProduct" src="@item.ImageDemo" alt="">
+                                            <img id="img_@item.product.ID" src="@item.product.ImgDemo" alt="">
                                         </td>
                                         <td>
                                             <div class="shop-details">
-                                                <div id="name-product_@item.IdProduct" class="productname">
-                                                    @item.NameProduct
+                                                <div id="name-product_@item.product.ID" class="productname">
+                                                    @item.product.NameProduct
                                                 </div>
-                                                <p id="unit_@item.IdProduct">
-                                                    Đơn vị: @item.unit
+                                                <p id="unit_@item.product.ID">
+                                                    Đơn vị: @item.product.Unit
                                                 </p>
 
-                                                <p id="category_@item.IdProduct">
+                                                <p id="category_@item.product.ID">
                                                     Phân loại :
                                                     <strong class="pcode">
                                                         @item.nameCategory
@@ -79,26 +82,27 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span id="price-product_id_@item.IdProduct" data-price="@item.currentPrice">
-                                                @Html.FormatValue(item.currentPrice, "{0:#,###}")đ
+                                            <span id="price-product_id_@item.product.ID" data-price="@item.product.NewPrice">
+                                                @Html.FormatValue(item.product.NewPrice, "{0:#,###}")đ
                                             </span>
                                         </td>
                                         <td>
+                                            <span id="SoLuongConLai_@item.product.ID" style="display:none">@item.product.Quantity</span>
                                             <div class="alter-number-order">
-                                                <div data-id="@item.IdProduct" id="reduce" onclick="reduceQuantity(this)"><i class="fa-solid fa-minus"></i></div>
-                                                <div id="quantity_id_@item.IdProduct" class="solgSP">@item.Quantity</div>
-                                                <div data-id="@item.IdProduct" id="increase" onclick="increaseQuantity(this)"><i class="fa-solid fa-plus"></i></div>
+                                                <div data-id="@item.product.ID" id="reduce" onclick="reduceQuantity(this)"><i class="fa-solid fa-minus"></i></div>
+                                                <div id="quantity_id_@item.product.ID" class="solgSP">@item.Quantity</div>
+                                                <div data-id="@item.product.ID" id="increase" onclick="increaseQuantity(this)"><i class="fa-solid fa-plus"></i></div>
                                             </div>
                                         </td>
                                         <td>
                                             <h5>
-                                                <strong id="total-money_id_@item.IdProduct" class="red">
-                                                    @Html.FormatValue(item.currentPrice * item.Quantity, "{0:#,###}")đ
+                                                <strong id="total-money_id_@item.product.ID" class="red">
+                                                    @Html.FormatValue(item.product.NewPrice * item.Quantity, "{0:#,###}")đ
                                                 </strong>
                                             </h5>
                                         </td>
                                         <td>
-                                            <p id="remove-product" data-id="@item.IdProduct" onclick="removeCart(this)"> <i class="fa-solid fa-trash-can"></i></p>
+                                            <p id="remove-product" data-id="@item.product.ID" onclick="removeCart(this)"> <i class="fa-solid fa-trash-can"></i></p>
                                         </td>
                                     </tr>
                                 }
@@ -150,9 +154,9 @@
     function reTotalMoney(idP, quantity) {
         var totalMoney = 0;
         for (var i = 0; i < selectedCarts.length; i++) {
-            if (selectedCarts[i].IDProduct == idP) {
-                selectedCarts[i].Quantity = quantity;
-                selectedCarts[i].TotalMoney = quantity * selectedCarts[i].currentPrice;
+            if (selectedCarts[i].product.ID == idP) {
+                selectedCarts[i].product.Quantity = quantity;
+                selectedCarts[i].TotalMoney = quantity * selectedCarts[i].product.NewPrice;
             }
             totalMoney += selectedCarts[i].TotalMoney;
         }
@@ -162,15 +166,23 @@
 
     function increaseQuantity(value)  {
         var idP = $(value).data('id');
-        var quantity = document.getElementById('quantity_id_' + idP).innerText;
+        var quantity = parseInt(document.getElementById('quantity_id_' + idP).innerText);
         var priceElement = document.getElementById('price-product_id_' + idP);
         var price = priceElement.getAttribute('data-price');
 
-        quantity++;
-        document.getElementById('quantity_id_' + idP).innerText = quantity;
-        document.getElementById('total-money_id_' + idP).innerText = formatCurrency(price * quantity);
+        var soLuongConLai = parseInt(document.getElementById("SoLuongConLai_" + idP).innerHTML);
 
-        reTotalMoney(idP, quantity);
+        quantity++;
+        if (quantity <= soLuongConLai) {
+            document.getElementById('quantity_id_' + idP).innerText = quantity;
+            document.getElementById('total-money_id_' + idP).innerText = formatCurrency(price * quantity);
+
+            reTotalMoney(idP, quantity);
+        } else {
+            //Số lượng còn lại không đủ
+            showAlert("alert-warning", "Không thể thực hiện, sản phẩm này hiện còn " + soLuongConLai +" sản phẩm!");
+        }
+        
     };
 
     function formatCurrency(number) {
@@ -192,7 +204,7 @@
             selectedCarts.push(inforCartByID(idP));
 
         } else {
-            var indexToRemove = selectedCarts.findIndex(product => product.IDProduct === idP);
+            var indexToRemove = selectedCarts.findIndex(products => products.product.ID === idP);
             if (indexToRemove !== -1) {
                 selectedCarts.splice(indexToRemove, 1);
             }
@@ -204,13 +216,15 @@
     function inforCartByID(id) {
         var total = parseFloat(document.getElementById('quantity_id_' + id).innerText) * parseFloat(document.getElementById('price-product_id_' + id).getAttribute('data-price'));
         var cart = {
-            IDProduct: id,
-            ImageDemo: document.getElementById('img_' + id).getAttribute('src'),
-            NameProduct: document.getElementById('name-product_' + id).innerText,
-            unit: document.getElementById('unit_' + id).innerText,
+            product: {
+                ID: id,
+                NameProduct: document.getElementById('name-product_' + id).innerText,
+                ImgDemo: document.getElementById('img_' + id).getAttribute('src'),
+                NewPrice: document.getElementById('price-product_id_' + id).getAttribute('data-price'),
+                Unit: document.getElementById('unit_' + id).innerText
+            },
             nameCategory: document.getElementById('category_' + id).innerText,
             Quantity: document.getElementById('quantity_id_' + id).innerText,
-            currentPrice: document.getElementById('price-product_id_' + id).getAttribute('data-price'),
             TotalMoney:total,
         };
         return cart;
@@ -278,5 +292,19 @@
         });
     });
 
+    function showAlert(typeAlert, content) {
+        var alert = document.getElementById(typeAlert);
+
+       
+        if (content != null) {
+            document.getElementById("content__" + typeAlert).innerText = content;
+        }
+        alert.style.display = "block";
+
+        setTimeout(function () {
+            // Ẩn thông báo thành công sau 5 giây
+            $("#"+typeAlert).fadeOut('slow');
+        }, 5000);
+    }
 </script>
 

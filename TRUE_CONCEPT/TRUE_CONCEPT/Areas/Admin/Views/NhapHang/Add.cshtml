@@ -4,7 +4,7 @@
     ViewBag.Title = "Add";
     Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
 
-    var productList = TRUE_CONCEPT.Models.DbMangager.GetInstance().Products.Select(p => new TRUE_CONCEPT.Models.ProductViewModel
+    var productList = TRUE_CONCEPT.Models.DbMangager.GetInstance().Products.Where(s=>s.Status == "ON").Select(p => new TRUE_CONCEPT.Models.ProductViewModel
     {
         ID = p.ID,
         NameProduct = p.NameProduct,
@@ -151,8 +151,6 @@
                 IDProduct: id,
                 Price: price,
                 Quantity: quantity,
-                VAT: 0,
-                MaPhieuNhap: 0,
                 TONGTIEN: 0,
             });
         } else {
@@ -192,6 +190,7 @@
         for (var i = 0; i < selectedProducts.length; i++) {
             if (selectedProducts[i].IDProduct == productId) {
                 selectedProducts[i].Quantity = quantity;
+                selectedProducts[i].TONGTIEN = quantity * selectedProducts[i].Price;
                 break;
             }
         }
@@ -206,9 +205,9 @@
         var customData = {
             MaPhieuNhap: null,
             NgayNhap: document.getElementById("inputDate").value,
-            TongTien: document.getElementById("tongTien").value,
+            TongTien:0,
             GiamGia: document.getElementById("giamGia").value,
-            ThanhTien: document.getElementById("thanhTien").value,
+            ThanhTien: 0,
             ChiTietPhieuNhaps: selectedProducts
         };
 
@@ -246,6 +245,7 @@
         for (var i = 0; i < selectedProducts.length; i++) {
             if (selectedProducts[i].IDProduct == productId) {
                 selectedProducts[i].Price = price;
+                selectedProducts[i].TONGTIEN = price * selectedProducts[i].Quantity;
                 break;
             }
         }

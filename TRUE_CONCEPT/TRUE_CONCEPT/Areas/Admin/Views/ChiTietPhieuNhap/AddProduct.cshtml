@@ -1,0 +1,171 @@
+﻿@model IEnumerable<TRUE_CONCEPT.Models.ProductViewModel>
+@{
+    ViewBag.Title = "AddProduct";
+    Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết phiếu nhập</title>
+    <link rel="stylesheet" href="~/Areas/Admin/Content/css/nhap_hang.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>Add</h2>
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+     
+   
+        <div class="container-goods">
+
+            <table style="width:98.6%;box-sizing:border-box">
+                <tr>
+                    <th class="tbSelect">Chọn</th>
+                    <th class="tbl-img">Ảnh</th>
+                    <th class="tbl-idSp">Mã sản phẩm</th>
+                    <th class="tbl-nameP">Tên sản phẩm</th>
+                    <th class="tbl-quantity">Số lượng nhập</th>
+                    <th class="tbl-price">Đơn giá</th>
+                </tr>
+            </table>
+
+            @*Hàng có sẵn*@
+            <div class="available_container" style="overflow-y:auto; height:400px">
+                <table class="table" style="width:100%;">
+
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="tbSelect">
+                                <input type="checkbox" onclick="addProductToReport(this)" data-id="@item.ID" data-price="@item.Price" />
+                            </td>
+                            <td class="tbl-img">
+                                <img src="@item.Img_Url" style="width:60px; height:60px;" />
+                            </td>
+                            <td class="tbl-idSp">
+                                @item.ID
+                            </td>
+                            <td class="tbl-nameP">
+                                @item.NameProduct
+                            </td>
+                            <td class="tbl-quantity">
+                                <input type="number" min="1" value="1" oninput="onChangNumber(this)" onchange="onChangNumber(this)"   data-id="@item.ID" />
+                            </td>
+                            <td class="tbl-price">
+                                <input type="number" min="1" value="@item.Price" data-id="@item.ID" onchange="onChangePrice(this)" />
+                            </td>
+                        </tr>
+                    }
+
+                </table>
+            </div>
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Thêm" id="AddPhieuNhap" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+</body>
+</html>
+<script>
+    var selectedProducts = [];
+    var idPhieuNhap = @Html.Raw(Json.Encode(ViewBag.MaPhieuNhap));
+
+    function addProductToReport(checkbox) {
+        var id = $(checkbox).data('id');
+        var price = $(checkbox).data('price');
+        var quantityInput = document.querySelector('.tbl-quantity input[data-id="' + id + '"]');
+        var quantity = parseInt(quantityInput.value, 10) || 0;
+
+        if (checkbox.checked) {
+            // Thêm sản phẩm vào danh sách nếu được chọn
+            selectedProducts.push({
+                MaPhieuNhap: idPhieuNhap,
+                IDProduct: id,
+                Price: price,
+                Quantity: quantity,
+                TONGTIEN: price * quantity,
+            });
+        } else {
+
+            var indexToRemove = selectedProducts.findIndex(product => product.IDProduct === id);
+            if (indexToRemove !== -1) {
+                selectedProducts.splice(indexToRemove, 1);
+            }
+        }
+    }
+
+    //Sau khi chọn lỡ người dùng tăng giảm số lượng hoặc đơn giá
+    function onChangNumber(input) {
+        var productId = $(input).data('id');
+        var quantityInput = document.querySelector('.tbl-quantity input[data-id="' + productId + '"]');
+        var quantity = parseInt(quantityInput.value, 10) || 0;
+
+        for (var i = 0; i < selectedProducts.length; i++) {
+            if (selectedProducts[i].IDProduct == productId) {
+                selectedProducts[i].Quantity = quantity;
+                selectedProducts[i].TONGTIEN = quantity * selectedProducts[i].Price;
+                break;
+            }
+        }
+    }
+
+    function onChangePrice(input) {
+        var productId = $(input).data('id');
+        var priceInput = document.querySelector('.tbl-price input[data-id="' + productId + '"]');
+        var price = parseFloat(priceInput.value, 10) || 0;
+
+        for (var i = 0; i < selectedProducts.length; i++) {
+            if (selectedProducts[i].IDProduct == productId) {
+                selectedProducts[i].Price = price;
+                selectedProducts[i].TONGTIEN = price * selectedProducts[i].Quantity;
+                break;
+            }
+        }
+    }
+
+      document.getElementById("AddPhieuNhap").addEventListener("click", function () {
+
+          if (selectedProducts.length <= 0) {
+              alert("Chọn sản phẩm trước khi thao tác");
+              return;
+          }
+
+        $.ajax({
+            url: '@Url.Action("ThemChiTietPhieuNhap", "ChiTietPhieuNhap")',
+            type: 'POST',
+            data: JSON.stringify(selectedProducts),
+            contentType: 'application/json; charset=utf-8',
+            success: function (result) {
+                if (result.success) {
+                    window.location.href = "/Admin/ChiTietPhieuNhap/Index/" + idPhieuNhap;
+                } else {
+                    alert('Có lỗi xảy ra!');
+                }
+            },
+            error: function () {
+                alert('Có lỗi xảy ra !');
+            }
+        });
+    });
+
+</script>
+

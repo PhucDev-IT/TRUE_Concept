@@ -14,6 +14,10 @@ namespace TRUE_CONCEPT.Controllers
         // GET: Client/Orders
         public ActionResult Index()
         {
+            if(Session["UserCurrent"] as User == null)
+            {
+                return RedirectToAction("Index", "Login", new { area = "Admin" });
+            }
             OrderViewModel item = (OrderViewModel)Session["orders"];
             TempData["ordersTmp"] = item;
             return View(item);
@@ -27,20 +31,18 @@ namespace TRUE_CONCEPT.Controllers
         {
             OrderViewModel ordersViewModel = (OrderViewModel)TempData["ordersTmp"];
 
-
-            Account a = Session["AccountUserCurrent"] as Account;
-
-            User u = Session["UserCurrent"] as User;
-
-
-            if (a == null || ordersViewModel == null || u == null) return RedirectToAction("Index");
-
+             User u = Session["UserCurrent"] as User;
+            if (ordersViewModel == null || u == null || u.FullName == null || u.Address==null || u.NumberPhone == null)
+            {
+                TempData["ErrorMessage"] = "Thông tin nhận hàng chưa đầy đủ!";
+                return RedirectToAction("Index");
+            }
             Order order = new Order()
             {
-                IDCustomer = a.ID,
+                IDCustomer = u.IDCustomer,
                 Status = "Chờ xác nhận",
                 FeeShipment = 17000,
-                InforShipment = a.User.Address,
+                InforShipment = u.Address,
                 OrderDate = DateTime.Now,
                 ThanhTien = ordersViewModel.Total - 17000
             };
@@ -57,9 +59,9 @@ namespace TRUE_CONCEPT.Controllers
                         db.OrderDetails.Add(new OrderDetail()
                         {
                             IDOrder = order.IDOrder,
-                            IDProduct = item.IdProduct,
+                            IDProduct = item.product.ID,
                             Quantity = item.Quantity,
-                            Price = item.currentPrice,
+                            Price = item.product.NewPrice,
                             TotalMoney = item.TotalMoney
                         });
 
@@ -74,7 +76,7 @@ namespace TRUE_CONCEPT.Controllers
                     // Xóa giỏ hàng sau khi mua thành công
                     foreach (ItemCartViewModel item in ordersViewModel.ItemCarts)
                     {
-                        ItemCart obj = db.ItemCarts.FirstOrDefault(c => c.ID == a.ID && c.IDProduct == item.IdProduct);
+                        ItemCart obj = db.ItemCarts.FirstOrDefault(c => c.ID == u.IDCustomer && c.IDProduct == item.product.ID);
                         db.ItemCarts.Remove(obj);
                     }
                     db.SaveChanges();
@@ -85,6 +87,7 @@ namespace TRUE_CONCEPT.Controllers
                 {
                     transaction.Rollback();
                     System.Diagnostics.Debug.WriteLine("Error Add: " + e.ToString());
+                    TempData["ErrorMessage"] = "Có lỗi xảy ra";
                     return RedirectToAction("Index");
                 }
             }

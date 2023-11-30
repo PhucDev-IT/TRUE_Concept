@@ -11,7 +11,8 @@ namespace TRUE_CONCEPT.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.Web;
+
     public partial class Product
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -25,7 +26,7 @@ namespace TRUE_CONCEPT.Models
         }
     
         public int ID { get; set; }
-        public List<String> PreviewImages { get; set; }
+        public List<HttpPostedFileBase> PreviewImages { get; set; }
         public string NameProduct { get; set; }
         public Nullable<double> PriceOld { get; set; }
         public Nullable<double> NewPrice { get; set; }

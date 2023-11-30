@@ -1,4 +1,5 @@
-﻿@model TRUE_CONCEPT.Models.Product
+﻿@using Newtonsoft.Json
+@model TRUE_CONCEPT.Models.Product
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/layout-client.cshtml";
@@ -26,21 +27,36 @@
     <!-- FONTAWESOME CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="isCurrentUser" style="display:none">@ViewBag.isCurrentUser</div>
     <span id="idProduct" style="display:none">@Model.ID</span>
+
+    <div id="alert-success" class="alert alert-success" style="display: none">
+        <strong>Success!</strong> Sản phẩm đã được thêm vào giỏ hàng ♥️...
+    </div>
+
+    <div id="alert-danger" class="alert alert-danger" style="display: none">
+        <strong>Error!</strong> Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng 😢..
+    </div>
+
+    <!-- Render Partial success - error -->
+    @Html.Partial("_AlertGroup")
+
+    <!-- Render Partial View -->
+    @Html.Partial("_RequiredLoginModal")
+
     <!-- BODY PAGE -->
     <div class="ALL-ProductDetail-Block container-fluid">
         <div class="Grid-wide-product-block">
             <div class="main-block-product">
                 <div class="ProductName">
-                    <h1>@Model.NameProduct</h1>
+                    <h1 id="nameProduct">@Model.NameProduct</h1>
                 </div>
                 <div class="Product-Detail-Body">
                     <div class="Product-detail-img col-4">
-                        <img src="@Model.ImgDemo" alt="">
+                        <img id="imgDemo" src="@Model.ImgDemo" alt="">
                     </div>
                     <div class="Product-detail-content col-5">
                         <div class="des-product">
@@ -50,7 +66,7 @@
                         </div>
                         <div class="product-info-price">
                             <div class="Price-Product">
-                                <h2>@Html.FormatValue(Model.NewPrice, "{0:#,###}")đ</h2>
+                                <h2 id="currentPrice" data-id="@Model.NewPrice">@Html.FormatValue(Model.NewPrice, "{0:#,###}")đ</h2>
                                 <h4>@Html.FormatValue(Model.PriceOld, "{0:#,###}")đ</h4>
                                 @{ var tietkiem = Model.PriceOld - Model.NewPrice; }
                                 <p>Tiết kiệm hơn @Html.FormatValue(tietkiem, "{0:#,###}")đ</p>
@@ -81,7 +97,7 @@
                             </div>
                         </div>
 
-                        <div class="btn-order">
+                        <div id="payment-Product" class="btn-order">
                             <span>
                                 <h3>ĐẶT MUA NGAY</h3>
                                 <p>Giao nhanh tận nơi, miễn phí toàn quốc</p>
@@ -192,7 +208,6 @@
 
     var isLogin = document.getElementById('isCurrentUser').innerText;
 
-
     var quantity = 1; // Khai báo biến quantity ở ngoài hàm để trở thành biến toàn cục
 
     $('#reduce').click(function () {
@@ -208,18 +223,22 @@
         document.getElementById("quantity").innerHTML = quantity;
     });
 
+    $(".close_Modal").click(function () {
+        $('#loginModal').modal('hide');
+    })
+
+
     //Nhấn thêm vào giỏ hàng
     $('#Add-to-cart').click(function () {
 
-
         if (isLogin === 'False') {
-            alert('chưa login')
+            $('#loginModal').modal('show');
             return;
         }
         var quantity_current = document.getElementById("quantity-current").innerText;
 
         if (quantity > quantity_current) {
-            alert('Số lượng hàng còn lại không đủ');
+            showAlert("alert-info", "Số lượng còn lại của sản phẩm không đủ");
         } else {
             var itemCart = {
                 ID: null,
@@ -234,17 +253,81 @@
                 data: JSON.stringify(itemCart),
                 contentType: 'application/json; charset=utf-8',
                 success: function (result) {
-                    if (result == true) {
-                        alert('Thêm vào giỏ hàng thành công!');
+                    if (result.success) {
+                        showAlert("alert-success","Sản phẩm đã được thêm vào giỏ hàng");
                     } else {
-                        alert('Thêm vào giỏ hàng thất bại!');
+                        showAlert("alert-danger","Có lỗi xảy ra khi thêm dữ liệu, Thử lại sau!");
                     }
                 },
                 error: function () {
-                    alert('Có lỗi xảy ra khi thêm vào giỏ hàng!');
+                    showAlert("alert-danger", "Có lỗi xảy ra khi thêm dữ liệu, Thử lại sau!");
                 }
             });
         }
     });
+
+
+    //Nhấn mua hàng luôn
+    $('#payment-Product').click(function () {
+        if (isLogin === 'False') {
+            $('#loginModal').modal('show');
+            return;
+        }
+        var quantity_current = document.getElementById("quantity-current").innerText;
+
+        if (quantity > quantity_current) {
+            showAlert("alert-info", "Số lượng còn lại của sản phẩm không đủ");
+        } else {
+           
+            var currentPrice = document.getElementById('currentPrice').getAttribute('data-id')
+
+       
+            var orderViewModel = {
+                ItemCarts: [{
+                    product: {
+                        ID: document.getElementById('idProduct').innerText,
+                        NameProduct: document.getElementById('nameProduct').innerText,
+                        ImgDemo: document.getElementById('imgDemo').getAttribute('src'),
+                        NewPrice: document.getElementById('currentPrice').getAttribute('data-id'),
+                    },
+                    Quantity: quantity,
+                    TotalMoney: quantity * currentPrice,
+                }],
+                Total: currentPrice * quantity
+            };
+
+            // Sử dụng AJAX để gửi dữ liệu lên server
+        $.ajax({
+            url:  '/Carts/ConvertView',
+            type: 'POST',
+            data: JSON.stringify(orderViewModel),
+            contentType: 'application/json; charset=utf-8',
+            success: function (result) {
+                if (result.success) {
+                     window.location.href = '@Url.Action("Index", "Invoice", new { area = ""})';
+                }
+            },
+            error: function () {
+                showAlert('alert-danger', "Có lỗi xảy ra!");
+            }
+        });
+        }
+    });
+
+
+    function showAlert(typeAlert, content) {
+        var alert = document.getElementById(typeAlert);
+
+        if (content != null) {
+            document.getElementById("content__" + typeAlert).innerText = content;
+
+        }
+        alert.style.display = "block";
+
+        setTimeout(function () {
+            // Ẩn thông báo thành công sau 5 giây
+            $("#" + typeAlert).fadeOut('slow');
+        }, 5000);
+    }
 
 </script>

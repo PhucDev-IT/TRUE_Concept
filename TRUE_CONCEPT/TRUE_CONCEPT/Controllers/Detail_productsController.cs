@@ -12,7 +12,6 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
         // GET: Client/Deatail_products
         public ActionResult Index(int idProduct)
         {
-            string userName = Session["User"] as string;
             ViewBag.isCurrentUser = checkCurrentUser();
             return View(db.Products.Find(idProduct));
         }
@@ -23,26 +22,28 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
         {
             try
             {
-                Account a = Session["AccountUserCurrent"] as Account;
+                User a = Session["UserCurrent"] as User;
                 //Kiếm sản phẩm đã có trước đó
-                ItemCart cartFind = db.ItemCarts.FirstOrDefault(c => c.ID == a.ID && c.IDProduct == cart.IDProduct);
+                ItemCart cartFind = db.ItemCarts.FirstOrDefault(c => c.ID == a.IDCustomer && c.IDProduct == cart.IDProduct);
                 if(cartFind != null)
                 {
                     cartFind.Quantity += cart.Quantity;
                 }
                 else
                 {
-                    cart.ID = a.ID;
+                    cart.ID = a.IDCustomer;
                     db.ItemCarts.Add(cart);
                     int count = (int)Session["numberCart"];
                     Session["numberCart"] = count++;
                 }
 
                 db.SaveChanges();
+            
                 return Json(new { success = true });
             }
             catch (Exception e){
                 System.Diagnostics.Debug.WriteLine("Error Add: " + e.ToString());
+              
                 return Json(new { success = false });
 
             }
@@ -52,7 +53,7 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
 
         private bool checkCurrentUser()
         {
-            Account a = Session["AccountUserCurrent"] as Account;
+            User a = Session["UserCurrent"] as User;
             return a!=null;
         }
     }

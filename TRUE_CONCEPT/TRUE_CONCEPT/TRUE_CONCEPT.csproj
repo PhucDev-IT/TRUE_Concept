@@ -191,10 +191,16 @@
     <Content Include="Assets\Image\completed.png" />
     <Content Include="Assets\Uploads\gai-xinh.jpg" />
     <Content Include="Assets\Image\image_send_email.png" />
+    <Content Include="Content\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\css\fileinput.min.css" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Content\bootstrap\js\fileinput.min.js" />
     <Content Include="Content\css\Cart.css" />
     <Content Include="Content\css\Detail_Product.css" />
     <Content Include="Content\css\FontMaps.css" />
     <Content Include="Content\css\HomePage.css" />
+    <Content Include="Content\css\invoice.css" />
     <Content Include="Content\css\layout-client.css" />
     <Content Include="Content\css\Products.css" />
     <Content Include="Content\ImgHomePage\Ds_Ft1.jpg" />
@@ -232,6 +238,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\CategoryController.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChiTietPhieuNhapController.cs" />
     <Compile Include="Areas\Admin\Controllers\HomeAdminController.cs" />
     <Compile Include="Areas\Admin\Controllers\NhapHangController.cs" />
     <Compile Include="Areas\Admin\Controllers\OrdersController.cs" />
@@ -244,6 +251,7 @@
     <Compile Include="Controllers\Detail_productsController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Controllers\TrangChuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -326,6 +334,7 @@
       <DependentUpon>TrueConcept.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\UserMetaData.cs" />
+    <Compile Include="Models\ViewModel\CTPNViewModel.cs" />
     <Compile Include="Models\ViewModel\ItemCartViewModel.cs" />
     <Compile Include="Models\ViewModel\OrderViewModel.cs" />
     <Compile Include="Models\ViewModel\SignUpViewModel.cs" />
@@ -473,6 +482,12 @@
       <DependentUpon>TrueConcept.edmx</DependentUpon>
     </Content>
     <Content Include="Areas\Admin\Views\Shared\_ConfirmDeleteModal.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietPhieuNhap\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\ChiTietPhieuNhap\AddProduct.cshtml" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Content\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Carts\Index.cshtml" />
     <Content Include="Views\Detail_products\Index.cshtml" />
@@ -480,6 +495,9 @@
     <Content Include="Views\Shared\layout-client.cshtml" />
     <Content Include="Views\TrangChu\Index.cshtml" />
     <Content Include="Views\Invoice\Index.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
+    <Content Include="Views\Shared\_RequiredLoginModal.cshtml" />
+    <Content Include="Views\Shared\_AlertGroup.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

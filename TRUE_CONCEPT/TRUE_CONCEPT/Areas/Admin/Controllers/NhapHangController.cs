@@ -59,6 +59,9 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
             return Json(new { success = true });
         }
 
+
+       
+
         public ActionResult Update(int? id)
         {
             if (id == null) return View();

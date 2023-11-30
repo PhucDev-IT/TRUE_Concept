@@ -34,7 +34,7 @@ namespace TRUE_CONCEPT.Models.MetaData
         [DisplayName("Ảnh")]
         public string ImgDemo { get; set; }
 
-        public List<string> PreviewImages { get; set; }
+        public List<HttpPostedFileBase> PreviewImages { get; set; }
         public string Status { get; set; }
 
         [DisplayName("Danh mục")]

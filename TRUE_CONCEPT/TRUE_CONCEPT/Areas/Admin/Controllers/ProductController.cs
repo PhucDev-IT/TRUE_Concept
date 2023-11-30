@@ -12,7 +12,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
     public class ProductController : Controller
     {
         private TRUE_CONCEPTEntities db;
-        private List<ChiTietPhieuNhap> listPhieuNhaps = new List<ChiTietPhieuNhap>();
+  
  
 
         public ProductController()
@@ -28,11 +28,11 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
             List<Product> list;
             if (searchCategoryId == 0)
             {
-                list = db.Products.Where(x => x.NameProduct.Contains(inputSearch)).ToList();
+                list = db.Products.Where(x => x.NameProduct.Contains(inputSearch) && x.Status == "ON").ToList();
             }
             else
             {
-                list = db.Products.Where(x => x.NameProduct.Contains(inputSearch) && x.IDCategory == searchCategoryId).ToList();
+                list = db.Products.Where(x => x.NameProduct.Contains(inputSearch) && x.IDCategory == searchCategoryId && x.Status == "ON").ToList();
             }
 
 
@@ -48,7 +48,8 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
             return View();
         }
         [HttpPost]
-        public JsonResult Add(Product model)
+        [ValidateAntiForgeryToken]
+        public ActionResult Add(Product model)
         {
             using (var dbContextTransaction = db.Database.BeginTransaction())
             {
@@ -56,23 +57,25 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-             
-                        // Xử lý hình ảnh ImgDemo ở đây
-                        model.ImgDemo = addImage(model.ImgDemo) != null ? addImage("fImage") : "/Assets/Image/404-error-not-found.png";
+      
+                        // Xử lý hình ảnh ImgDemo
+                        string imgDemo = addImage("fImage_1");
+                        
+                        model.ImgDemo = imgDemo != null ? imgDemo : "/Assets/Image/404-error-not-found.png";
 
-                        // Xử lý danh sách 5 hình ảnh
                         List<string> images = new List<string>();
-                        foreach(string path in model.PreviewImages)
+                        for (int i = 1;i<= 5; i++)
                         {
-                            string result = addImage(path);
-                            if (result != null)
+                     
+                            string name = "fImage_" + i;
+                            string result = addImage(name);
+                            if(result != null)
                             {
                                 images.Add(result);
-                                
                                 System.Diagnostics.Debug.WriteLine("Path: " + result);
                             }
-                        }            
-
+                        }
+                        
                         model.CreateAt = DateTime.Now;
                         db.Products.Add(model);
                         db.SaveChanges();
@@ -86,32 +89,41 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
 
                         // Commit transaction
                         dbContextTransaction.Commit();
-                        return Json(new { success = true });
+
+                        ViewData["Categories"] = new SelectList(db.Categories.ToList(), "IDCategory", "NameCategory");
+                        return View();
                     }
                 }
                 catch (Exception e)
                 {
                     System.Diagnostics.Debug.WriteLine("Error Add: " + e.ToString());
-              
+                    ModelState.AddModelError("", "Có lỗi xảy ra");
                     // Rollback transaction nếu có lỗi xảy ra
                     dbContextTransaction.Rollback();
                 }
             }
             ViewData["Categories"] = new SelectList(db.Categories.ToList(), "IDCategory", "NameCategory");
-            return Json(new { success = false });
+            return View(model);
         }
 
         [HttpPost]
         private string addImage(string name)
         {
-            var f = Request.Files[name];
-       
-            if (f != null && f.ContentLength > 0)
+            try
             {
-                string fileName = DateTime.Now+f.FileName;
-                string folderName = Server.MapPath("~/Assets/Uploads/" + fileName);
-                f.SaveAs(folderName);
-                return "/Assets/Uploads/" + fileName;
+                var f = Request.Files[name];
+
+                if (f != null && f.ContentLength > 0)
+                {
+                    string fileName = f.FileName;
+                    string folderName = Server.MapPath("~/Assets/Uploads/" + fileName);
+                    f.SaveAs(folderName);
+                    return "/Assets/Uploads/" + fileName;
+                }
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine("Error Uploads image: " + e.ToString());     
             }
             return null;
         }
@@ -160,7 +172,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error Update: " + e.ToString());
+                System.Diagnostics.Debug.WriteLine("Error  update: " + e.ToString());
                 return View();
             }
         }
@@ -193,7 +205,37 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
             return allowedExtensions.Contains(fileExtension);
         }
 
-       
+        [HttpPost]
+        public ActionResult Upload()
+        {
+         
+            string nameProduct = Request.Form["NameProduct"];
+            string priceOld = Request.Form["PriceOld"];
+            System.Diagnostics.Debug.WriteLine("Name: " + nameProduct);
+            // Lấy danh sách các files ảnh từ FormData
+            var files = Request.Files;
+            List<string> imagePaths = new List<string>();
+
+            for (int i = 0; i < files.Count; i++)
+            {
+                var file = files[i];
+                if (file.ContentLength > 0)
+                {
+                    // Xử lý file ở đây, ví dụ lưu vào thư mục hoặc làm các thao tác cần thiết
+                    string fileName = file.FileName;
+                    string folderName = Server.MapPath("~/Assets/Uploads/" + fileName);
+                    file.SaveAs(folderName);
+                    imagePaths.Add("/Assets/Uploads/" + fileName); // Lưu đường dẫn của file
+                }
+            }
+
+            // Sử dụng các giá trị và danh sách file đã lấy được ở đây để thực hiện các thao tác tiếp theo
+
+            return Json(new { success = true });
+        }
+
+
+
 
     }
 }

@@ -154,6 +154,31 @@ go
 --GO
 
 
+CREATE TRIGGER TRIG_UpdateMoney_PhieuNhap ON CHITIETPHIEUNHAP
+AFTER INSERT,UPDATE,DELETE
+AS
+BEGIN
+	IF EXISTS (SELECT * FROM inserted)
+	BEGIN
+		DECLARE @IdPhieuNhap INT = (SELECT MaPhieuNhap from inserted)
+		UPDATE BaoCaoNhap
+		SET TongTien = (SELECT SUM(TONGTIEN) FROM ChiTietPhieuNhap WHERE MaPhieuNhap = @IdPhieuNhap)
+		WHERE MaPhieuNhap = @IdPhieuNhap
+
+		UPDATE BaoCaoNhap
+		SET ThanhTien = TongTien - GiamGia	
+	END
+	ELSE IF EXISTS (SELECT * FROM deleted)
+	BEGIN
+		UPDATE BaoCaoNhap
+		SET TongTien -= (SELECT TONGTIEN FROM deleted)
+		WHERE MaPhieuNhap = (SELECT MaPhieuNhap FROM deleted)
+
+		UPDATE BaoCaoNhap
+		SET ThanhTien = TongTien - GiamGia 
+	END
+END
+GO
 ------------------------ INDEX --------------------------------
 CREATE INDEX Product_Index ON Product(ID,NameProduct,Status,IDCategory,CreateAt)
 CREATE INDEX Orders_Index ON Orders(IDOrder,IDCustomer,OrderDate)
@@ -252,5 +277,5 @@ VALUES(4,3,4,(SELECT NewPrice*4 FROM Product where ID=3),3223)
 INSERT INTO OrderDetails(IDOrder,IDProduct,Quantity,Price,TotalMoney)
 VALUES(5,4,12,(SELECT NewPrice*12 FROM Product where ID=4),3223)
 
-select * from Account
+select * from Orders
 

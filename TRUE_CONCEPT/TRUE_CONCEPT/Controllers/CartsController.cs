@@ -15,41 +15,52 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
         // GET: Client/Carts
         public ActionResult Index()
         {
-            Account a = Session["AccountUserCurrent"] as Account;
+            User a = Session["UserCurrent"] as User;
+            Session["orders"] = null;
+            if (a == null)
+            {
+                return RedirectToAction("Index", "Login", new { area = "Admin" });
+            }
+
             List<ItemCartViewModel> itemCarts = new List<ItemCartViewModel>();
 
-            var query = (from c in db.ItemCarts.Where(c => c.ID == a.ID)
-                             join p in db.Products
-                             on c.IDProduct equals p.ID
-                             join g in db.Categories
-                             on p.IDCategory equals g.IDCategory
-                             select new
-                             {
-                                 IdProduct = c.IDProduct,
-                                 quantity = c.Quantity,
-                                 NameProduct = p.NameProduct,
-                                 currentPrice = p.NewPrice,
-                                 ImageDemo = p.ImgDemo,
-                                 unit = p.Unit,
-                                 nameCategory = g.NameCategory
-                             });
+            var query = (from c in db.ItemCarts.Where(c => c.ID == a.IDCustomer)
+                         join p in db.Products.Where(m => m.Status == "ON")
+                         on c.IDProduct equals p.ID
+                         join g in db.Categories
+                         on p.IDCategory equals g.IDCategory
+                         select new
+                         {
+                             c.IDProduct,
+                             p.NameProduct,
+                             ConLai = p.Quantity,
+                             p.NewPrice,
+                             p.Unit,
+                             p.ImgDemo,
+                             c.Quantity,
+                             g.NameCategory
+                         });
 
             if (query.Any())
             {
-                itemCarts = query.ToList()
-               .Select(item => new ItemCartViewModel
-               {
-                   IdProduct = item.IdProduct,
-                   Quantity = (double)item.quantity,
-                   NameProduct = item.NameProduct,
-                   currentPrice = (double)item.currentPrice,
-                   ImageDemo = item.ImageDemo,
-                   unit = item.unit,
-                   nameCategory = item.nameCategory,
-               }).ToList();
-            }
+                 itemCarts = query.ToList()
+                            .Select(item => new ItemCartViewModel
+                            {
+                               product = new Product
+                               {
+                                   ID = item.IDProduct,
+                                   Quantity = (double)item.ConLai,
+                                   NameProduct = item.NameProduct,
+                                   NewPrice = item.NewPrice,
+                                   Unit = item.Unit,
+                                   ImgDemo = item.ImgDemo
+                               },
+                               nameCategory = item.NameCategory,
+                               Quantity = (int)item.Quantity
+                           }).ToList();
+                            }
 
-            
+
             return View(itemCarts);
         }
 
@@ -57,13 +68,13 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
         [HttpPost]
         public JsonResult Remove(int? id)
         {
-            Account a = Session["AccountUserCurrent"] as Account;
+            User a = Session["UserCurrent"] as User;
 
             try
             {
                 if (a != null && id != null)
                 {
-                    ItemCart itemCart = db.ItemCarts.FirstOrDefault(c => c.ID == a.ID && c.IDProduct == id);
+                    ItemCart itemCart = db.ItemCarts.FirstOrDefault(c => c.ID == a.IDCustomer && c.IDProduct == id);
                     db.ItemCarts.Remove(itemCart);
                     db.SaveChanges();
                     return Json(new { success = true });
@@ -85,7 +96,7 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
         }
 
 
-        
+
 
     }
 }

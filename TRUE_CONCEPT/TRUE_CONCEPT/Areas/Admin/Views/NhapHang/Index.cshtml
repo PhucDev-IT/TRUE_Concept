@@ -60,7 +60,8 @@
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.MaPhieuNhap }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.MaPhieuNhap }) |
+                    <a href="/Admin/ChiTietPhieuNhap/Index/@item.MaPhieuNhap">Chi tiết</a>|
+               
                     @Html.ActionLink("Delete", "Delete", new { id = item.MaPhieuNhap })
                 </td>
             </tr>

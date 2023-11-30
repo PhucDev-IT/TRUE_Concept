@@ -40,105 +40,103 @@
 </head>
 <body>
     <h2 class="title-addProduct">Thêm sản phẩm</h2>
-    @using (Html.BeginForm(null, null, FormMethod.Post, new { enctype = "multipart/form-data" }))
-    {
-        @Html.AntiForgeryToken();
-        <div class="All-Add-Product">
+    <form method="post" action="" enctype="multipart/form-data">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken();
+            <div class="All-Add-Product">
 
-            <div class="form-horizontal">
+                <div class="form-horizontal">
 
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(model => model.NameProduct, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.NameProduct, new { htmlAttributes = new { @class = "form-control", id = "NameProduct" } })
-                        @Html.ValidationMessageFor(model => model.NameProduct, "", new { @class = "text-danger" })
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NameProduct, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NameProduct, new { htmlAttributes = new { @class = "form-control", id = "NameProduct" } })
+                            @Html.ValidationMessageFor(model => model.NameProduct, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.PriceOld, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.PriceOld, new { htmlAttributes = new { @class = "form-control", id = "PriceOld" } })
-                        @Html.ValidationMessageFor(model => model.PriceOld, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PriceOld, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.PriceOld, new { htmlAttributes = new { @class = "form-control", id = "PriceOld" } })
+                            @Html.ValidationMessageFor(model => model.PriceOld, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.NewPrice, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.NewPrice, new { htmlAttributes = new { @class = "form-control", id = "NewPrice" } })
-                        @Html.ValidationMessageFor(model => model.NewPrice, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.NewPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.NewPrice, new { htmlAttributes = new { @class = "form-control", id = "NewPrice" } })
+                            @Html.ValidationMessageFor(model => model.NewPrice, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control", id = "Unit" } })
-                        @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Unit, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Unit, new { htmlAttributes = new { @class = "form-control", id = "Unit" } })
+                            @Html.ValidationMessageFor(model => model.Unit, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", id = "Quantity" } })
-                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", id = "Quantity" } })
+                            @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", id = "Description" } })
-                        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control", id = "Description" } })
+                            @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.ImgDemo, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @*  @Html.EditorFor(model => model.ImgDemo, new { htmlAttributes = new { @class = "form-control"} })*@
-                        <input type="file" id="ImgDemo" name="fImage" class="form-control" />
-                        @Html.ValidationMessageFor(model => model.ImgDemo, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ImgDemo, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <input type="file" id="ImgDemo" name="fImage" class="form-control" />
+                            @Html.ValidationMessageFor(model => model.ImgDemo, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.IDCategory, "IDCategory", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IDCategory, "IDCategory", htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
 
-                        @Html.DropDownListFor(model => model.IDCategory, (IEnumerable<SelectListItem>)ViewData["Categories"], null, new { @class = "form-control", id = "IDCategory" })
+                            @Html.DropDownListFor(model => model.IDCategory, (IEnumerable<SelectListItem>)ViewData["Categories"], null, new { @class = "form-control", id = "IDCategory" })
 
-                        @Html.ValidationMessageFor(model => model.IDCategory, "", new { @class = "text-danger" })
+                            @Html.ValidationMessageFor(model => model.IDCategory, "", new { @class = "text-danger" })
+                        </div>
                     </div>
-                </div>
 
+                    <div class="form-group">
 
-                <div class="form-group">
-                    <span>Demo</span>
-                    <div class="col-md-10">
-                        @for (int i = 1; i <= 5; i++)
+                        @for (int i = 0; i < 5; i++)
                         {
                             <div class="img-container" id="image_@i" onclick="chooseFile(@i)">
-                                <input class="img" type="file" id="imageInput_@i" name="fImage_@i" style="display: none;" accept="image/*" onchange="displayImage(this,@i)">
+                                <input class="img" type="file" id="imageInput_@i" name="fImage_@i" style="display: none;" accept="image/*" onchange="onInputChange(event,@i)">
                                 @i/5
                             </div>
 
                         }
 
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <div class="btn-add-product">
-                        <input type="submit" id="submitProduct" onclick="addProduct()" value="Thêm sản phẩm" class="btn btn-default" />
+                    <div class="form-group">
+                        <div class="btn-add-product">
+                            <input type="submit" id="submitProduct"  value="Thêm sản phẩm" class="btn btn-default" />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </div>
-    }
+            </div>
+        }
+    </form>
 
     <div class="back-to-list">
         <i class="fa-solid fa-caret-left"></i>
@@ -154,23 +152,24 @@
         document.getElementById('imageInput_' + index).click();
     }
 
-    function displayImage(input, index) {
+    function onInputChange(event,index) {
+        const fileInput = event.target;
+        const selectedFile = fileInput.files[0];
         const imageContainer = document.getElementById('image_' + index);
 
-        if (input.files && input.files[0]) {
+        if (selectedFile) {
             const reader = new FileReader();
-
             reader.onload = function (e) {
                 imageContainer.style.backgroundImage = `url('${e.target.result}')`;
                 imageContainer.textContent = ''; // Xóa văn bản mặc định trong thẻ div
-
-                imagePaths.push(e.target.result); // Lưu đường dẫn vào mảng
-
             };
 
-            reader.readAsDataURL(input.files[0]);
+            reader.readAsDataURL(selectedFile);
+            imagePaths.push(selectedFile);
         }
     }
+
+  
     function deleteImage(index) {
         // Xóa ảnh khỏi giao diện
         const imageContainer = document.getElementById('image_' + index);
@@ -181,40 +180,46 @@
         delete imagePaths[index];
     }
 
-    //Thêm sản phẩm
+    // 
     function addProduct() {
+        const formData = new FormData();
+@*
+        for (let i = 0; i < imagePaths.length; i++) {
+            formData.append("PreviewImages", imagePaths[i]); // Thêm từng file vào FormData
+        }*@
+
+
         var customData = {
-            PreviewImages: imagePaths,
             NameProduct: document.getElementById("NameProduct").value,
             PriceOld: document.getElementById("PriceOld").value,
             NewPrice: document.getElementById("NewPrice").value,
             Unit: document.getElementById("Unit").value,
             Quantity: document.getElementById("Quantity").value,
             Description: document.getElementById("Description").value,
-            ImgDemo: document.getElementById("ImgDemo").value,
+           
             IDCategory: document.getElementById("IDCategory").value,
-
+            PreviewImages: imagePaths
         };
 
-        console.log(customData);
-        return;
-
+      @*  for (const key in customData) {
+            formData.append(key, customData[key]);
+        }
+     *@
         $.ajax({
-            url: '/Product/Add', 
+            url: '/Product/Add', // Đường dẫn đến action trong controller
             type: 'POST',
             data: JSON.stringify(customData),
             contentType: 'application/json; charset=utf-8',
-            success: function (result) {
-                if (result.success) {
-                    alert('OK!');
-                } else {
-                    alert('Có lỗi xảy ra!');
-                }
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                console.log("Files uploaded successfully!");
             },
             error: function () {
-                alert('Có lỗi xảy ra !');
+                console.log("Error uploading files!");
             }
         });
+
     }
 
 </script>

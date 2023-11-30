@@ -7,17 +7,13 @@ namespace TRUE_CONCEPT.Models.ViewModel
 {
     public class ItemCartViewModel
     {
-        public int IdProduct { get; set; }
-
-        public string NameProduct { get; set; }
-
-        public double Quantity { get; set; }
-        public double currentPrice { get; set; }
-
-        public string ImageDemo { get; set; }
-        public string unit { get; set; }
+        public Product product { get; set; }
+      
+        public int Quantity { get; set; }
+      
         public string nameCategory { get; set; }
 
         public double TotalMoney { get; set; }
+
     }
 }

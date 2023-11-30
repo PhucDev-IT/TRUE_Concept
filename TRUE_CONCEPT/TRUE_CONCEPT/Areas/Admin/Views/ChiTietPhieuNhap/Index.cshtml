@@ -1,0 +1,81 @@
+﻿@model IEnumerable<TRUE_CONCEPT.Models.ViewModel.CTPNViewModel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/layout-admin.cshtml";
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="~/Areas/Admin/Content/css/nhap_hang.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <h2>Chi tiết nhập hàng</h2>
+
+    @Html.AntiForgeryToken()
+
+    <a href="@Url.Action("AddProduct","ChiTietPhieuNhap",new { area = "Admin", MaPhieuNhap = ViewBag.MaPhieuNhap})">Thêm mới</a>
+
+    <div class="form-horizontal">
+     
+        <div class="container-goods">
+
+            <table style="width:98.6%;box-sizing:border-box">
+                <tr>
+                    <th>STT</th>
+                    <th>Ảnh</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Số lượng</th>
+                    <th>Đơn giá</th>
+                    <th>Tổng tiền</th>
+                    <th></th>
+                </tr>
+                <tbody>
+                    @{
+                        int i = 1;
+                        foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@i</td>
+                                <td>
+                                    <img src="@item.ImgDemoProduct" style="width:80px; height:80px"/>
+                                </td>
+                                <td>
+                                    @item.NameProduct
+                                </td>
+                                <td>
+                                    @item.Quantity
+                                </td>
+                                <td>
+                                    <strong style="color:red">@Html.FormatValue(item.Price, "{0:#,###}") đ</strong>
+                                </td>
+                                <td>
+                                    <strong style="color:red">@Html.FormatValue(item.TotalMoney, "{0:#,###}") đ</strong>
+                                </td>
+                                <td>
+                                    <a> <i class="fa-solid fa-pen-nib" style="color: #06a235;"></i></a>
+                                    <i class="fa-solid fa-trash" style="color: #ff0a0a;"></i>
+                                </td>
+                            </tr>
+                            i++;
+                        }
+                    }
+
+                </tbody>
+            </table>
+
+        
+        </div>
+    </div>
+
+
+</body>
+</html>
+
