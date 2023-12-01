@@ -179,6 +179,17 @@ BEGIN
 	END
 END
 GO
+
+-- GIẢM SỐ LƯỢNG SẢN PHẨM SAU KHI MUA
+CREATE TRIGGER TRIG_Update_Quantity_Product ON OrderDetails
+AFTER INSERT 
+AS
+BEGIN
+	UPDATE Product
+	SET Quantity -= (SELECT Quantity FROM inserted)
+	WHERE ID = (SELECT IDProduct FROM inserted)
+END
+GO
 ------------------------ INDEX --------------------------------
 CREATE INDEX Product_Index ON Product(ID,NameProduct,Status,IDCategory,CreateAt)
 CREATE INDEX Orders_Index ON Orders(IDOrder,IDCustomer,OrderDate)
@@ -225,11 +236,11 @@ Kiểu dáng: Mặt bàn lượn cong
 Độ mới: 100%',N'https://noithatphongphu.com/wp-content/uploads/2019/10/ban-giam-doc-1m8-BGD808-final.jpg', 6,GETDATE()),
 		(N'Bàn Ăn 1m6 Gỗ Cao Su', 1900000, 1680000,N'Cái', 23,N'Không có gì để nói',N'https://noithatvannam.com/wp-content/uploads/2022/05/banghean16-1.jpg',3,GETDATE())
 
-	/*	(N'', , ,N'', ,N'',N'', , ),
+		(N'Ghế chân quỳ Felix F302D', 8400000, 5000000,N'Cái', ,N'',N'', , ),
 		(N'', , ,N'', ,N'',N'', , ),
 		(N'', , ,N'', ,N'',N'', , ),
 
-		*/
+		
 GO
 ---Thêm tài khoản
 INSERT INTO Account(UserName,Password)

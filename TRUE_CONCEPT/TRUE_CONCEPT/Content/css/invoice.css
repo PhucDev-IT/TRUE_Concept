@@ -246,3 +246,12 @@ a {
     font-size: 13px;
     font-weight: 500
 }
+
+#btnPayment {
+    width: 100px;
+    height: 40px;
+    background-color: #FF9900;
+    color:white;
+    font-weight:600;
+    border-radius:10px;
+}

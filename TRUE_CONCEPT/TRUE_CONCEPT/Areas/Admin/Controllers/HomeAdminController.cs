@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using TRUE_CONCEPT.Models;
 
 namespace TRUE_CONCEPT.Areas.Admin.Controllers
@@ -33,6 +34,7 @@ namespace TRUE_CONCEPT.Areas.Admin.Controllers
 
             viewModel.newsProducts = db.Products.OrderByDescending(x => x.CreateAt).Take(4).ToList();
 
+           
             return View(viewModel);
         }
 

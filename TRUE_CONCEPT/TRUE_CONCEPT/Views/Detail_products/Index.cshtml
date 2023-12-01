@@ -27,19 +27,10 @@
     <!-- FONTAWESOME CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div id="isCurrentUser" style="display:none">@ViewBag.isCurrentUser</div>
     <span id="idProduct" style="display:none">@Model.ID</span>
-
-    <div id="alert-success" class="alert alert-success" style="display: none">
-        <strong>Success!</strong> Sản phẩm đã được thêm vào giỏ hàng ♥️...
-    </div>
-
-    <div id="alert-danger" class="alert alert-danger" style="display: none">
-        <strong>Error!</strong> Có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng 😢..
-    </div>
 
     <!-- Render Partial success - error -->
     @Html.Partial("_AlertGroup")
@@ -224,7 +215,8 @@
     });
 
     $(".close_Modal").click(function () {
-        $('#loginModal').modal('hide');
+        var modal = document.getElementById("loginModal");
+        modal.style.display = "none";
     })
 
 
@@ -232,7 +224,8 @@
     $('#Add-to-cart').click(function () {
 
         if (isLogin === 'False') {
-            $('#loginModal').modal('show');
+            var modal = document.getElementById("loginModal");
+            modal.style.display = "block";
             return;
         }
         var quantity_current = document.getElementById("quantity-current").innerText;
@@ -270,7 +263,8 @@
     //Nhấn mua hàng luôn
     $('#payment-Product').click(function () {
         if (isLogin === 'False') {
-            $('#loginModal').modal('show');
+            var modal = document.getElementById("loginModal");
+            modal.style.display = "block";
             return;
         }
         var quantity_current = document.getElementById("quantity-current").innerText;

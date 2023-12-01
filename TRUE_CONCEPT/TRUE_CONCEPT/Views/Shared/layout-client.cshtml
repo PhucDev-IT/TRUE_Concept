@@ -1,6 +1,6 @@
 ﻿@{
     Layout = null;
-    int numberCart =(int)Session["numberCart"];
+ 
     TRUE_CONCEPT.Models.Account accountCurrent = Session["AccountUserCurrent"] as TRUE_CONCEPT.Models.Account;
 }
 
@@ -50,7 +50,7 @@
                     <a href="/Products/Index"> <i class="fa-solid fa-magnifying-glass"></i></a>
                    
                     <a href="/Carts/Index"><i class="fa-solid fa-cart-shopping"></i></a>
-                    <span>@Session["numberCart"]</span>
+                  
                 </div>
                 @if (accountCurrent == null)
                 {

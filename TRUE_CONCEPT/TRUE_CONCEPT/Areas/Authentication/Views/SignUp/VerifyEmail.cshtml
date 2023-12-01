@@ -1,7 +1,5 @@
 ﻿@model TRUE_CONCEPT.Models.ViewModel.SignUpViewModel
-@{
-    Layout = null;
-}
+@{ Layout = null; }
 
 <!DOCTYPE html>
 
@@ -13,6 +11,7 @@
 
     <!-- Main css -->
     <link href="~/Areas/Authentication/Content/css/style.css" rel="stylesheet" />
+    <link href="~/Areas/Authentication/Content/css/SignUp.css" rel="stylesheet" />
 </head>
 <body>
     <p id="fullname" style="display:none">@Model.FullName</p>
@@ -91,7 +90,7 @@
         countTime();
         VerificationCode = generateRandomNumber();
         console.log(VerificationCode)
-        $.ajax({
+        /*$.ajax({
             url: '/SignUp/SendEmail', // Đường dẫn đến action xử lý gửi email ở server
             type: 'POST',
             data: {
@@ -106,7 +105,7 @@
             // Xử lý lỗi nếu có
             alert('Có lỗi xảy ra khi gửi email');
         }
-    });
+    });*/
     }
 
 

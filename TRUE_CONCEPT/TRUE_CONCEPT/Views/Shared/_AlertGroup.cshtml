@@ -1,16 +1,41 @@
 ﻿
-<div id="alert-success" class="alert alert-success" style="display: none">
+<div id="alert-success" class="alertC alert-success" style="display: none">
     <strong>Success!</strong> <span id="content__alert-success">Đã hoàn thành tác vụ ♥️...</span>
 </div>
 
-<div id="alert-danger" class="alert alert-danger" style="display: none">
+<div id="alert-danger" class="alertC alert-danger" style="display: none">
     <strong>Error!</strong> <span id="content__alert-danger"> Có lỗi xảy ra ! 😢..</span>
 </div>
 
-<div id="alert-warning" class="alert alert-warning" style="display: none">
+<div id="alert-warning" class="alertC alert-warning" style="display: none">
     <strong>Warning!</strong> <span id="content__alert-warning">Bạn cần lưu ý nhé</span>
 </div>
 
-<div id="alert-info" class="alert alert-info" style="display: none">
+<div id="alert-info" class="alertC alert-info" style="display: none">
     <strong>Info!</strong> <span id="content__alert-info">This alert box could indicate a neutral informative change or action.</span>
 </div>
+
+<style>
+    .alertC {
+        padding: 20px;
+        color: white;
+        opacity: 0.83;
+        transition: opacity 0.6s;
+    }
+
+    .alert-success {
+        background-color: #04AA6D;
+    }
+
+    .alert-danger {
+        background-color: #f44336;
+    }
+
+    .alert-warning {
+        background-color: #ff9800;
+    }
+
+    .alert-info {
+        background-color: #2196F3;
+    }
+</style>

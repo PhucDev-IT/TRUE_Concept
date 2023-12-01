@@ -37,52 +37,9 @@
                 <div class="card">
                     <div class="card-body">
                         <ol class="activity-checkout mb-0 px-4 mt-3">
-                            @*<li class="checkout-item">
-                                                            <div class="avatar checkout-icon p-1">
-                                                                <div class="avatar-title rounded-circle bg-primary">
-                                                                    <i class="bx bxs-receipt text-white font-size-20"></i>
-                                                                </div>
-                                                            </div>
-                                                            <div class="feed-item-list">
-                                                                <div>
-                                                                    <h5 class="font-size-16 mb-1">Thông tin thanh toán</h5>
-                                                                    <p class="text-muted text-truncate mb-4">Sed ut perspiciatis unde omnis iste</p>
-                                                                    <div class="mb-3">
-                                                                        <form>
-                                                                            <div>
-                                                                                <div class="row">
-                                                                                    <div class="col-lg-4">
-                                                                                        <div class="mb-3">
-                                                                                            <label class="form-label" for="billing-name">Name</label>
-                                                                                            <input type="text" class="form-control" id="billing-name" placeholder="Enter name">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-4">
-                                                                                        <div class="mb-3">
-                                                                                            <label class="form-label" for="billing-email-address">Email Address</label>
-                                                                                            <input type="email" class="form-control" id="billing-email-address" placeholder="Enter email">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="col-lg-4">
-                                                                                        <div class="mb-3">
-                                                                                            <label class="form-label" for="billing-phone">Phone</label>
-                                                                                            <input type="text" class="form-control" id="billing-phone" placeholder="Enter Phone no.">
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="mb-3">
-                                                                                    <label class="form-label" for="billing-address">Address</label>
-                            <textarea class="form-control" id="billing-address" rows="3" placeholder="Enter full address"></textarea>
-                                                                                </div>
-
-                                                                            </div>
-                                                                        </form>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </li>*@
+                   
                             <li class="checkout-item">
-                                <div class="avatar checkout-icon p-1">
+                                <div class="avatar checkout-icon p-1" >
                                     <div class="avatar-title rounded-circle bg-primary">
                                         <i class="bx bxs-truck text-white font-size-20"></i>
                                     </div>
@@ -183,7 +140,7 @@
                     <div class="col">
                         <div>
                             <form action="@Url.Action("PaymentTheBill","Invoice")" method="post">
-                                <input type="submit" value="Mua hàng" />
+                                <input id="btnPayment" type="submit" value="Mua hàng" />
                             </form>
                         </div>
                     </div>
@@ -211,7 +168,7 @@
                                             <th scope="row"><img src="@item.product.ImgDemo" alt="product-img" title="product-img" class="avatar-lg rounded"></th>
                                             <td>
                                                 <h5 class="font-size-16 text-truncate"><a href="#" class="text-dark">@item.product.NameProduct</a></h5>
-                                                <span>Danh mục: </span><p>@item.nameCategory</p>
+                                                <p>@item.nameCategory</p>
                                                 <p class="text-muted mb-0 mt-1">@Html.FormatValue(item.product.NewPrice, "{0:#,###}") x @item.Quantity</p>
                                             </td>
                                             <td>@Html.FormatValue(item.TotalMoney, "{0:#,###}")</td>

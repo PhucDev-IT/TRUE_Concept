@@ -1,7 +1,5 @@
 ﻿
-@{
-    Layout = null;
-}
+@{ Layout = null; }
 
 <!DOCTYPE html>
 
@@ -9,15 +7,19 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Completed</title>
+    <link href="~/Areas/Authentication/Content/css/LoginForm.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&family=Nunito+Sans:opsz@6..12&family=Open+Sans&family=Roboto&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <div> 
-        <img style="width:100px;height:100px" src="~/Assets/Image/completed.png"/>
-        <h3>Hoàn thành</h3>
-        <p>Cảm ơn bạn đã đăng ký True Concept</p>
-        <p>Quay trở về đăng nhập để trải nghiệm gian hàng của chúng tôi!</p>
-
-        <a href="@Url.Action("BackToLogin","SignUp")">Quay về đăng nhập</a>
+    <div class="All-Page-Complete">
+        <div class="Notification-box">
+            <img style="width:100px;height:100px" src="~/Assets/Image/completed.png" />
+            <h3>HOÀN THÀNH ĐĂNG KÝ</h3>
+            <p>Cảm ơn bạn đã đăng ký True Concept</p>
+            <p>Quay trở về đăng nhập để trải nghiệm gian hàng của chúng tôi!</p>
+            <a href="@Url.Action("BackToLogin","SignUp")">Quay về đăng nhập</a>
+        </div>
     </div>
 </body>
 </html>

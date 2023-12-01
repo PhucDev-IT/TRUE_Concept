@@ -13,8 +13,7 @@ namespace TRUE_CONCEPT.Areas.Client.Controllers
         // GET: Client/TrangChu
         public ActionResult Index()
         {
-            Session["numberCart"] = db.ItemCarts.Count();
-            System.Diagnostics.Debug.WriteLine("Nunber cart: " + (int)Session["numberCart"]);
+         
             return View();
         }
     }

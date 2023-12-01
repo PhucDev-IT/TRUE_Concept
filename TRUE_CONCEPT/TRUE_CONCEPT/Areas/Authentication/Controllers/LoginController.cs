@@ -40,18 +40,21 @@ namespace TRUE_CONCEPT.Areas.Authentication.Controllers
                             ModelState.AddModelError("", "Tài khoản của bạn hiện đang bị tạm khóa");
                             return View(a);
                         }
+
+                        Session["UserCurrent"] = db.Users.Find(result.ID);
+
                         if (result.Decentralization == "Client")
                         {
-                            Session["UserCurrent"] = db.Users.Find(result.ID);
+                            
                             Session["AccountUserCurrent"] = result;
                             return RedirectToAction("Index", "TrangChu", new { area = "" });
-
                         }
                         else
                         {
                             FormsAuthentication.SetAuthCookie(result.ID.ToString(), false);
                             if (ReturnUrl == null || ReturnUrl == "")
                             {
+                               
                                 return RedirectToAction("Index", "HomeAdmin", new { area = "Admin" });
                             }
                         }

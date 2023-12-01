@@ -104,6 +104,7 @@
     <Content Include="Areas\Admin\Content\bootstrap\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Areas\Admin\Content\bootstrap\js\bootstrap.min.js" />
     <Content Include="Areas\Admin\Content\bootstrap\js\fileinput.min.js" />
+    <Content Include="Areas\Admin\Content\css\layout_main.css" />
     <Content Include="Areas\Admin\Content\css\nhap_hang.css" />
     <Content Include="Areas\Admin\Content\css\orders.css" />
     <Content Include="Areas\Admin\Content\css\ProductManager.css" />
@@ -162,6 +163,8 @@
     <Content Include="Areas\Admin\Content\plugins\select2\select2.full.min.js" />
     <Content Include="Areas\Admin\Content\plugins\select2\select2.min.css" />
     <Content Include="Areas\Admin\Content\plugins\slimScroll\jquery.slimscroll.min.js" />
+    <Content Include="Areas\Authentication\Content\css\LoginForm.css" />
+    <Content Include="Areas\Authentication\Content\css\SignUp.css" />
     <Content Include="Areas\Authentication\Content\css\style.css" />
     <Content Include="Areas\Authentication\Content\fonts\material-icon\css\material-design-iconic-font.css" />
     <Content Include="Areas\Authentication\Content\fonts\material-icon\css\material-design-iconic-font.min.css" />
